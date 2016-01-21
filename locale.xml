@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locales>
+    <groups name="quiqqer/discount" datatype="php,js">
+        <locale name="menu.erp.title">
+            <de><![CDATA[ERP]]></de>
+            <en><![CDATA[ERP]]></en>
+        </locale>
+        <locale name="menu.erp.discount.title">
+            <de><![CDATA[Rabatte]]></de>
+            <en><![CDATA[Discounts]]></en>
+        </locale>
+    </groups>
+
+    <groups name="quiqqer/discount" datatype="js">
+    </groups>
+
+</locales>

@@ -1,0 +1,12 @@
+
+<permissions>
+    <permission name="quiqqer.discount.create" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+    <permission name="quiqqer.discount.edit" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+    <permission name="quiqqer.discount.delete" type="bool">
+        <defaultvalue>1</defaultvalue>
+    </permission>
+</permissions>

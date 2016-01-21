@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <item parent="/extras/"
+          name="erp"
+          icon="icon-sun"
+    >
+        <locale group="quiqqer/discount" var="menu.erp.title" />
+    </item>
+    <item parent="/extras/erp/"
+          name="discounts"
+          require="package/quiqqer/discount/bin/controls/Discounts"
+          icon="fa fa-cart-arrow-down"
+    >
+        <locale group="quiqqer/discount" var="menu.erp.discount.title" />
+    </item>
+
+</menu>

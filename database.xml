@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <global>
+        <table name="discounts">
+            <field type="INT( 10 ) NOT NULL PRIMARY KEY">id</field>
+            <field type="INT( 1 )">active</field>
+            <field type="text">discount</field>
+            <field type="text">date_from</field>
+            <field type="text">data_to</field>
+            <field type="INT( 10 )">purchase_quantity</field>
+            <field type="text">purchase_value</field>
+
+            <field type="text">areas</field>
+            <field type="text">articles</field>
+            <field type="text">categories</field>
+            <field type="text">user_groups</field>
+            <field type="text">combined</field>
+
+            <auto_increment>id</auto_increment>
+        </table>
+    </global>
+</database>
