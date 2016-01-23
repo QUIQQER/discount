@@ -7,6 +7,8 @@ namespace QUI\ERP\Discount;
 
 use QUI;
 use QUI\Users\User;
+use QUI\Rights\Permission;
+use QUI\Utils\Security\Orthos;
 
 /**
  * Class Discount
@@ -14,6 +16,73 @@ use QUI\Users\User;
  */
 class Discount extends QUI\CRUD\Child
 {
+    /**
+     * Discount constructor.
+     * @param int $id
+     * @param Handler $Factory
+     */
+    public function __construct($id, Handler $Factory)
+    {
+        parent::__construct($id, $Factory);
+
+        $this->Events->addEvent('onDeleteBegin', function () {
+            Permission::checkPermission('quiqqer.areas.area.delete');
+        });
+
+        $this->Events->addEvent('onDeleteEnd', function () {
+            QUI\Translator::delete(
+                'quiqqer/discount',
+                'discount.' . $this->getId() . '.title'
+            );
+        });
+
+        $this->Events->addEvent('onSaveBegin', function () {
+            Permission::checkPermission('quiqqer.areas.area.edit');
+
+            if ($this->getAttribute('date_from')
+                && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_from'))
+            ) {
+                throw new QUI\Exception(array(
+                    'quiqqer/discount',
+                    'exception.discount.date.wrong'
+                ));
+            }
+
+            if ($this->getAttribute('date_until')
+                && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_until'))
+            ) {
+                throw new QUI\Exception(array(
+                    'quiqqer/discount',
+                    'exception.discount.date.wrong'
+                ));
+            }
+
+
+            QUI\System\Log::writeRecursive($this->getAttributes());
+
+        });
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return QUI::getLocale()->get(
+            'quiqqer/discount',
+            'discount.' . $this->getId() . '.title'
+        );
+    }
+
+    /**
+     * Return the discount status
+     *
+     * @return boolean
+     */
+    public function isActive()
+    {
+        return $this->getAttribute('active') ? true : false;
+    }
 
     /**
      * Is the discount combinable with another discount?
@@ -52,6 +121,10 @@ class Discount extends QUI\CRUD\Child
      */
     public function canUsedBy(User $User)
     {
+        if ($this->isActive() === false) {
+            return false;
+        }
+
         $userGroups = QUI\UsersGroups\Utils::parseUsersGroupsString(
             $this->getAttribute('user_groups')
         );

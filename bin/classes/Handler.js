@@ -64,20 +64,6 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         },
 
         /**
-         * Return all unassigned countries
-         *
-         * @returns {Promise}
-         */
-        getUnAssignedCountries: function () {
-            return new Promise(function (resolve, reject) {
-                Ajax.get('package_quiqqer_discount_ajax_getUnAssignedCountries', resolve, {
-                    'package': 'quiqqer/discount',
-                    onError  : reject
-                });
-            });
-        },
-
-        /**
          * Create a new Discount
          *
          * @params {Array} [params] - Discount attributes
@@ -140,7 +126,7 @@ define('package/quiqqer/discount/bin/classes/Handler', [
          * @param {Number} discountId
          * @param {Object} data - Discount attributes
          */
-        save: function (discountId, data) {
+        update: function (discountId, data) {
             return new Promise(function (resolve, reject) {
                 Ajax.post('package_quiqqer_discount_ajax_update', resolve, {
                     'package' : 'quiqqer/discount',
@@ -148,6 +134,60 @@ define('package/quiqqer/discount/bin/classes/Handler', [
                     discountId: discountId,
                     params    : JSON.encode(data)
                 });
+            });
+        },
+
+        /**
+         * Toggle the status from the discount
+         *
+         * @param {Number} discountId
+         * @returns {Promise}
+         */
+        toggleStatus: function (discountId) {
+            return new Promise(function (resolve, reject) {
+                Ajax.post(
+                    'package_quiqqer_discount_ajax_toggle',
+                    resolve, {
+                        'package' : 'quiqqer/discount',
+                        discountId: discountId,
+                        onError   : reject
+                    });
+            });
+        },
+
+        /**
+         * Activate the discount
+         *
+         * @param {Number} discountId
+         * @returns {Promise}
+         */
+        activate: function (discountId) {
+            return new Promise(function (resolve, reject) {
+                Ajax.post(
+                    'package_quiqqer_discount_ajax_activate',
+                    resolve, {
+                        'package' : 'quiqqer/discount',
+                        discountId: discountId,
+                        onError   : reject
+                    });
+            });
+        },
+
+        /**
+         * Deactivate the discount
+         *
+         * @param {Number} discountId
+         * @returns {Promise}
+         */
+        deactivate: function (discountId) {
+            return new Promise(function (resolve, reject) {
+                Ajax.post(
+                    'package_quiqqer_discount_ajax_deactivate',
+                    resolve, {
+                        'package' : 'quiqqer/discount',
+                        discountId: discountId,
+                        onError   : reject
+                    });
             });
         }
     });

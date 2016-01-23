@@ -14,7 +14,12 @@ QUI::$Ajax->registerFunction(
     function ($params) {
         $params    = json_decode($params, true);
         $Discounts = new QUI\ERP\Discount\Handler();
-        $Discount  = $Discounts->createChild($params);
+
+        if (!isset($params['active'])) {
+            $params['active'] = 0;
+        }
+
+        $Discount = $Discounts->createChild($params);
 
         return $Discount->getId();
     },

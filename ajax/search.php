@@ -23,11 +23,17 @@ QUI::$Ajax->registerFunction(
         );
 
         foreach ($data as $entry) {
-            $result[] = array(
-                'id' => $entry['id'],
-                'title' => $Locale->getPartsOfLocaleString($entry['title']),
-                'text' => $Locale->parseLocaleString($entry['title'])
+            $entry['title'] = array(
+                'quiqqer/discount',
+                'discount.' . $entry['id'] . '.title'
             );
+
+            $entry['text'] = $Locale->get(
+                'quiqqer/discount',
+                'discount.' . $entry['id'] . '.title'
+            );
+
+            $result[] = $entry;
         }
 
         usort($result, function ($a, $b) {

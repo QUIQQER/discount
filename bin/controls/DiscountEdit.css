@@ -1,0 +1,8 @@
+
+.discount-edit td {
+    width: 50%;
+}
+
+.field-container-item:first-child {
+    width: 170px !important;
+}

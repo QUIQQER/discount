@@ -39,10 +39,16 @@ class Handler extends QUI\CRUD\Factory
                 $title = QUI::getLocale()->get($parts[0], $parts[1]);
             }
 
-            QUI\Translator::addUserVar('quiqqer/discount', $newVar, array(
-                $current => $title,
-                'datatype' => 'php,js'
-            ));
+            try {
+                QUI\Translator::addUserVar('quiqqer/discount', $newVar, array(
+                    $current => $title,
+                    'datatype' => 'php,js'
+                ));
+            } catch (QUI\Exception $Exception) {
+                QUI::getMessagesHandler()->addAttention(
+                    $Exception->getMessage()
+                );
+            }
         });
     }
 
@@ -77,12 +83,14 @@ class Handler extends QUI\CRUD\Factory
             'active',
             'discount',
             'date_from',
-            'data_to',
-            'purchase_quantity',
-            'purchase_value',
-            'area',
-            'article',
-            'category',
+            'date_until',
+            'purchase_quantity_from',
+            'purchase_quantity_until',
+            'purchase_value_from',
+            'purchase_value_until',
+            'areas',
+            'articles',
+            'categories',
             'user_groups',
             'combined'
         );

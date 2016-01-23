@@ -12,6 +12,50 @@
     </groups>
 
     <groups name="quiqqer/discount" datatype="js">
+        <locale name="discount.panel.title">
+            <de><![CDATA[Rabatte]]></de>
+            <en><![CDATA[Discounts]]></en>
+        </locale>
+        <locale name="discount.grid.discount">
+            <de><![CDATA[Rabatt]]></de>
+            <en><![CDATA[Discount]]></en>
+        </locale>
+        <locale name="discount.grid.date_from">
+            <de><![CDATA[Nutzbar von]]></de>
+            <en><![CDATA[Available from]]></en>
+        </locale>
+        <locale name="discount.grid.date_until">
+            <de><![CDATA[Nutzbar bis]]></de>
+            <en><![CDATA[Available until]]></en>
+        </locale>
+        <locale name="discount.grid.areas">
+            <de><![CDATA[Zugewiesene Zonen]]></de>
+            <en><![CDATA[Assigned Areas]]></en>
+        </locale>
+        <locale name="discount.grid.purchase_quantity">
+            <de><![CDATA[Einkaufsmenge]]></de>
+            <en><![CDATA[Purchase quantity]]></en>
+        </locale>
+        <locale name="discount.grid.purchase_value">
+            <de><![CDATA[Einkaufswert]]></de>
+            <en><![CDATA[Purchase value]]></en>
+        </locale>
+        <locale name="discount.grid.articles">
+            <de><![CDATA[Zugewiesene Artikel]]></de>
+            <en><![CDATA[Assigned products]]></en>
+        </locale>
+        <locale name="discount.grid.categories">
+            <de><![CDATA[Zugewiesene Kategorien]]></de>
+            <en><![CDATA[Assigned categories]]></en>
+        </locale>
+        <locale name="discount.grid.user_groups">
+            <de><![CDATA[Zugewiesene Benutzer und Gruppen]]></de>
+            <en><![CDATA[Assigned users and groups]]></en>
+        </locale>
+        <locale name="discount.grid.combined">
+            <de><![CDATA[Kombinierbar mit]]></de>
+            <en><![CDATA[Combined with]]></en>
+        </locale>
     </groups>
 
 </locales>
