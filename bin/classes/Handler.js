@@ -2,6 +2,7 @@
  * Discount handler
  * Create and edit discounts
  *
+ * @module package/quiqqer/discount/bin/classes/Handler
  * @author www.pcsg.de (Henning Leutz)
  *
  * @require qui/QUI
@@ -25,16 +26,19 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         /**
          * Search discounts
          *
+         * @param {Object} [fields] - fields to search
          * @param {Object} [params] - query params
          * @returns {Promise}
          */
-        search: function (params) {
+        search: function (fields, params) {
+            fields = fields || {};
             params = params || {};
 
             return new Promise(function (resolve, reject) {
                 Ajax.get('package_quiqqer_discount_ajax_search', resolve, {
                     'package': 'quiqqer/discount',
                     onError  : reject,
+                    fields   : JSON.encode(fields),
                     params   : JSON.encode(params)
                 });
             });

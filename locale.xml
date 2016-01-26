@@ -11,6 +11,35 @@
         </locale>
     </groups>
 
+
+    <groups name="quiqqer/discount" datatype="php">
+        <locale name="exception.discount.date_from.wrong">
+            <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Nutzbar von' an]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="exception.discount.date_until.wrong">
+            <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Nutzbar bis' an]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="exception.discount.purchase_quantity_from.wrong">
+            <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufsmenge von' an]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="exception.discount.purchase_quantity_until.wrong">
+            <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufsmenge bis' an]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="exception.discount.purchase_value_from.wrong">
+            <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufswert von' an]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+        <locale name="exception.discount.purchase_value_until.wrong">
+            <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufswert bis' an]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
+
+    </groups>
+
     <groups name="quiqqer/discount" datatype="js">
         <locale name="discount.panel.title">
             <de><![CDATA[Rabatte]]></de>
@@ -55,6 +84,19 @@
         <locale name="discount.grid.combined">
             <de><![CDATA[Kombinierbar mit]]></de>
             <en><![CDATA[Combined with]]></en>
+        </locale>
+
+        <locale name="control.select.search.placeholder">
+            <de><![CDATA[Suche nach einem Rabatt ...]]></de>
+            <en><![CDATA[Search for a discount ...]]></en>
+        </locale>
+        <locale name="control.window.button.search">
+            <de><![CDATA[Suche starten]]></de>
+            <en><![CDATA[Start search]]></en>
+        </locale>
+        <locale name="control.window.button.back">
+            <de><![CDATA[Zur Suche]]></de>
+            <en><![CDATA[Back to search]]></en>
         </locale>
     </groups>
 

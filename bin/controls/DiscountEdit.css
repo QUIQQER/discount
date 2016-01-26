@@ -4,5 +4,9 @@
 }
 
 .field-container-item:first-child {
-    width: 170px !important;
+    min-width: 150px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
+

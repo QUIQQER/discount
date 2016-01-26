@@ -1,0 +1,120 @@
+<form>
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th colspan="2">
+                Rabatt
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        ID
+                    </span>
+                    <input type="text" name="id"
+                           class="field-container-field"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        Rabatt
+                    </span>
+                    <input type="text" name="discount"
+                           class="field-container-field"/>
+                    <select name="discount_type"
+                            class="field-container-item"
+                            style="width: 100px;"
+                    >
+                        <option value="%">%</option>
+                        <option value="currency">€</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="data-table data-table-flexbox">
+        <thead>
+        <tr>
+            <th colspan="2">
+                Nutzung definieren
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        <span class="fa fa-calendar"></span>
+                        Nutzbar von
+                    </span>
+                    <input type="datetime" name="date_from"
+                           class="field-container-field"/>
+                </label>
+            </td>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        <span class="fa fa-calendar"></span>
+                        Nutzbar bis
+                    </span>
+                    <input type="datetime" name="date_until"
+                           class="field-container-field"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        Einkaufsmenge von
+                    </span>
+                    <input type="number" min="0" name="purchase_quantity_from"
+                           class="field-container-field"/>
+                </label>
+            </td>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        Einkaufsmenge bis
+                    </span>
+                    <input type="number" min="0" name="purchase_quantity_until"
+                           class="field-container-field"/>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        <span class="fa fa-money"></span>
+                        Einkaufswert von
+                    </span>
+                    <input type="number" min="0" name="purchase_value_from"
+                           class="field-container-field"/>
+                </label>
+            </td>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        <span class="fa fa-money"></span>
+                        Einkaufswert bis
+                    </span>
+                    <input type="number" min="0" name="purchase_value_until"
+                           class="field-container-field"/>
+                </label>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

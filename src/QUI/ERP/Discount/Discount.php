@@ -44,7 +44,7 @@ class Discount extends QUI\CRUD\Child
             ) {
                 throw new QUI\Exception(array(
                     'quiqqer/discount',
-                    'exception.discount.date.wrong'
+                    'exception.discount.date_from.wrong'
                 ));
             }
 
@@ -53,12 +53,53 @@ class Discount extends QUI\CRUD\Child
             ) {
                 throw new QUI\Exception(array(
                     'quiqqer/discount',
-                    'exception.discount.date.wrong'
+                    'exception.discount.date_until.wrong'
                 ));
             }
 
+            $purchaseQuantityFrom  = $this->getAttribute('purchase_quantity_from');
+            $purchaseQuantityUntil = $this->getAttribute('purchase_quantity_until');
+            $purchaseValueFrom     = $this->getAttribute('purchase_value_from');
+            $purchaseValueUntil    = $this->getAttribute('purchase_value_until');
 
+
+            if ($purchaseQuantityFrom === false
+                || $purchaseQuantityFrom < 0
+            ) {
+                throw new QUI\Exception(array(
+                    'quiqqer/discount',
+                    'exception.discount.purchase_quantity_from.wrong'
+                ));
+            }
             QUI\System\Log::writeRecursive($this->getAttributes());
+
+
+            if ($purchaseQuantityUntil === false
+                || $purchaseQuantityUntil < 0
+            ) {
+                throw new QUI\Exception(array(
+                    'quiqqer/discount',
+                    'exception.discount.purchase_quantity_until.wrong'
+                ));
+            }
+
+            if ($purchaseValueFrom === false
+                || $purchaseValueFrom < 0
+            ) {
+                throw new QUI\Exception(array(
+                    'quiqqer/discount',
+                    'exception.discount.purchase_value_from.wrong'
+                ));
+            }
+
+            if ($purchaseValueUntil === false
+                || $purchaseValueUntil < 0
+            ) {
+                throw new QUI\Exception(array(
+                    'quiqqer/discount',
+                    'exception.discount.purchase_value_until.wrong'
+                ));
+            }
 
         });
     }

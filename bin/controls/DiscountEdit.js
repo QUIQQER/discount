@@ -65,6 +65,11 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
             this.$Elm.set('html', template);
             this.$Elm.set('class', 'discount-edit');
 
+            this.$Elm.setStyles({
+                overflow: 'hidden',
+                opacity : 0
+            });
+
             return this.$Elm;
         },
 
@@ -77,17 +82,17 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
             require([
                 'utils/Controls'
             ], function (Utils) {
-                QUI.parse(self.$Elm).then(
-                    Utils.parse(self.$Elm)
-                ).then(function () {
-                    return Discounts.getChild(self.getAttribute('discountId'));
-                }).then(function (data) {
 
-                    var Elm  = self.getElm(),
-                        Form = Elm.getElement('form');
+                var Elm  = self.getElm(),
+                    Form = Elm.getElement('form');
+
+                Discounts.getChild(
+                    self.getAttribute('discountId')
+                ).then(function (data) {
+                    QUIFormUtils.setDataToForm(data, Form);
 
                     new Translation({
-                        'group': 'quiqqer/discount',
+                        'group': lg,
                         'var'  : 'discount.' + data.id + '.title'
                     }).inject(
                         Elm.getElement('.discount-title')
@@ -97,10 +102,25 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                         'html',
                         '#' + self.getAttribute('discountId')
                     );
-console.log(data);
-                    QUIFormUtils.setDataToForm(data, Form);
+                }).then(function () {
+                    return QUI.parse(self.$Elm);
 
-                    self.fireEvent('loaded');
+                }).then(function () {
+                    return Utils.parse(self.$Elm);
+
+                }).then(function () {
+
+                    self.$Elm.setStyles({
+                        overflow: null
+                    });
+
+                    moofx(self.$Elm).animate({
+                        opacity: 1
+                    }, {
+                        callback: function () {
+                            self.fireEvent('loaded');
+                        }
+                    });
                 });
             });
         },
@@ -117,7 +137,7 @@ console.log(data);
                     Form = Elm.getElement('form');
 
                 var data = QUIFormUtils.getFormData(Form);
-console.warn(data);
+
                 Discounts.update(
                     self.getAttribute('discountId'),
                     data

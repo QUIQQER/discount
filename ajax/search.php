@@ -13,14 +13,44 @@
  */
 QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_search',
-    function ($params) {
+    function ($fields, $params) {
         $Discounts = new QUI\ERP\Discount\Handler();
         $result    = array();
         $Locale    = QUI::getLocale();
 
-        $data = $Discounts->getChildrenData(
-            json_decode($params, true)
-        );
+        $allowedFields = $Discounts->getChildAttributes();
+
+        $query  = array();
+        $params = json_decode($params, true);
+        $fields = json_decode($fields, true);
+
+        if (!is_array($fields)) {
+            $fields = array();
+        }
+
+        if (isset($params['order'])) {
+            $query['order'] = $params['order'];
+        }
+
+        if (isset($params['limit'])) {
+            $query['limit'] = $params['limit'];
+        }
+
+        $allowedFields = array_flip($allowedFields);
+
+        foreach ($fields as $field => $value) {
+            if (!isset($allowedFields[$field]) && $field != 'id') {
+                continue;
+            }
+
+            $query['where_or'][$field] = array(
+                'type' => '%LIKE%',
+                'value' => $value
+            );
+        }
+
+        // search
+        $data = $Discounts->getChildrenData($query);
 
         foreach ($data as $entry) {
             $entry['title'] = array(
@@ -42,6 +72,6 @@ QUI::$Ajax->registerFunction(
 
         return $result;
     },
-    array('params'),
+    array('fields', 'params'),
     'Permission::checkAdminUser'
 );
