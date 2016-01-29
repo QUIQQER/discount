@@ -71,8 +71,7 @@ class Discount extends QUI\CRUD\Child
                     'exception.discount.purchase_quantity_from.wrong'
                 ));
             }
-            QUI\System\Log::writeRecursive($this->getAttributes());
-
+            
 
             if ($purchaseQuantityUntil === false
                 || $purchaseQuantityUntil < 0

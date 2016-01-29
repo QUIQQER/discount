@@ -222,7 +222,9 @@ define('package/quiqqer/discount/bin/controls/Select', [
 
             // load values
             if (this.$Input.value || this.$Input.value !== '') {
-                this.addDiscount(this.$Input.value);
+                this.$Input.value.split(',').each(function (discountId) {
+                    self.addDiscount(discountId);
+                });
             }
 
             return this.$Elm;

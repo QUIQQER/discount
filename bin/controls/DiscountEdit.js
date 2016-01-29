@@ -21,7 +21,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
     'qui/utils/Form',
     'Locale',
     'package/quiqqer/discount/bin/classes/Handler',
-    'package/quiqqer/translator/bin/controls/VariableTranslation',
+    'package/quiqqer/translator/bin/controls/Update',
 
     'text!package/quiqqer/discount/bin/controls/DiscountEdit.html',
     'css!package/quiqqer/discount/bin/controls/DiscountEdit.css'
@@ -65,6 +65,8 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
             this.$Elm.set('html', template);
             this.$Elm.set('class', 'discount-edit');
 
+            this.$Translate = null;
+
             this.$Elm.setStyles({
                 overflow: 'hidden',
                 opacity : 0
@@ -91,7 +93,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 ).then(function (data) {
                     QUIFormUtils.setDataToForm(data, Form);
 
-                    new Translation({
+                    self.$Translate = new Translation({
                         'group': lg,
                         'var'  : 'discount.' + data.id + '.title'
                     }).inject(
@@ -132,18 +134,24 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
          */
         save: function () {
             var self = this;
+
             return new Promise(function (resolve, reject) {
+
                 var Elm  = self.getElm(),
                     Form = Elm.getElement('form');
 
                 var data = QUIFormUtils.getFormData(Form);
 
-                Discounts.update(
-                    self.getAttribute('discountId'),
-                    data
-                ).then(function () {
+                self.$Translate.save().then(function () {
+                    return Discounts.update(
+                        self.getAttribute('discountId'),
+                        data
+                    );
+                }).then(function () {
                     resolve();
+
                 }).catch(reject);
+
             });
         }
     });
