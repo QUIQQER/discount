@@ -57,7 +57,7 @@ define('package/quiqqer/discount/bin/controls/SelectItem', [
                 'class': 'quiqqer-discount-display smooth',
                 html   : '<span class="quiqqer-discount-display-icon fa fa-percent"></span>' +
                          '<span class="quiqqer-discount-display-text">&nbsp;</span>' +
-                         '<span class="quiqqer-discount-display-destroy fa fa-remove icon-remove"></span>'
+                         '<span class="quiqqer-discount-display-destroy fa fa-remove"></span>'
             });
 
             this.$Icon    = Elm.getElement('.quiqqer-discount-display-icon');
@@ -78,7 +78,7 @@ define('package/quiqqer/discount/bin/controls/SelectItem', [
             var self = this;
 
             this.$Text.set({
-                html: '<span class="icon-spinner icon-spin fa fa-spinner fa-spin"></span>'
+                html: '<span class="fa fa-spinner fa-spin"></span>'
             });
 
             Discounts.getChild(

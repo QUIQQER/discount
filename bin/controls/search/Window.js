@@ -36,12 +36,12 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
             maxHeight: 600,
             maxWidth : 800,
             icon     : 'fa fa-percent',
-            title    : 'Rabattsuche',
+            title    : 'Rabattsuche', // #locale
             autoclose: false,
 
             cancel_button: {
                 text     : QUILocale.get('quiqqer/system', 'cancel'),
-                textimage: 'icon-remove fa fa-remove'
+                textimage: 'fa fa-remove'
             },
             ok_button    : {
                 text     : QUILocale.get(lg, 'control.window.button.search'),

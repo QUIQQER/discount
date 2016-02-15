@@ -73,7 +73,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
             this.addButton({
                 name     : 'add',
                 text     : QUILocale.get('quiqqer/system', 'add'),
-                textimage: 'icon-plus fa fa-plus',
+                textimage: 'fa fa-plus',
                 events   : {
                     onClick: this.createChild
                 }
@@ -82,7 +82,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
             this.addButton({
                 name     : 'edit',
                 text     : QUILocale.get('quiqqer/system', 'edit'),
-                textimage: 'icon-edit fa fa-edit',
+                textimage: 'fa fa-edit',
                 disabled : true,
                 events   : {
                     onClick: function () {
@@ -100,7 +100,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
             this.addButton({
                 name     : 'delete',
                 text     : QUILocale.get('quiqqer/system', 'delete'),
-                textimage: 'icon-trash fa fa-trash',
+                textimage: 'fa fa-trash',
                 disabled : true,
                 events   : {
                     onClick: function () {
@@ -259,7 +259,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
 
                     if (active) {
                         entry.status = {
-                            icon      : 'icon-ok fa fa-ok',
+                            icon      : 'fa fa-check',
                             discountId: entry.id,
                             styles    : {
                                 lineHeight: 16
@@ -270,7 +270,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                         };
                     } else {
                         entry.status = {
-                            icon      : 'icon-remove fa fa-remove',
+                            icon      : 'fa fa-remove',
                             discountId: entry.id,
                             styles    : {
                                 lineHeight: 16
@@ -352,7 +352,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                                         'quiqqer/system',
                                         'save'
                                     ),
-                                    textimage: 'icon-save',
+                                    textimage: 'fa fa-save',
                                     events   : {
                                         click: function () {
                                             self.Loader.show();
@@ -390,8 +390,8 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                 information: QUILocale.get(lg, 'discount.window.delete.information', {
                     ids: str
                 }),
-                icon       : 'icon-trash fa fa-trash',
-                textimage  : 'icon-trash fa fa-trash',
+                icon       : 'fa fa-trash',
+                textimage  : 'fa fa-trash',
                 maxHeight  : 300,
                 maxWidth   : 450,
                 autoclose  : false,
@@ -416,7 +416,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
         $toggleStatus: function (Button) {
             Button.setAttribute(
                 'icon',
-                'icon-spinner icon-spin fa fa-spinner fa-spin'
+                'fa fa-spinner fa-spin'
             );
 
             Discounts.toggleStatus(
@@ -434,11 +434,11 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
          */
         $setTaxEntryButtonStatus: function (Button, status) {
             if (status) {
-                Button.setAttribute('icon', 'icon-ok');
+                Button.setAttribute('icon', 'fa fa-check');
                 return;
             }
 
-            Button.setAttribute('icon', 'icon-remove');
+            Button.setAttribute('icon', 'fa fa-remove');
         }
     });
 });

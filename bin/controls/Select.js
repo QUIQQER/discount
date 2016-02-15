@@ -158,7 +158,7 @@ define('package/quiqqer/discount/bin/controls/Select', [
             }).inject(this.$Elm);
 
             this.$SearchButton = new QUIButton({
-                icon  : 'icon-search fa fa-search',
+                icon  : 'fa fa-search',
                 styles: {
                     width: 50
                 },
@@ -182,7 +182,7 @@ define('package/quiqqer/discount/bin/controls/Select', [
                                 }
                             }).open();
 
-                            Btn.setAttribute('icon', 'icon-search fa fa-search');
+                            Btn.setAttribute('icon', 'fa fa-search');
                         });
                     }
                 }
@@ -257,7 +257,7 @@ define('package/quiqqer/discount/bin/controls/Select', [
             this.cancelSearch();
 
             this.$DropDown.set({
-                html  : '<span class="icon-spinner icon-spin fa fa-spinner fa-spin"></span>',
+                html  : '<span class="fa fa-spinner fa-spin"></span>',
                 styles: {
                     display: '',
                     top    : this.$Search.getPosition().y + this.$Search.getSize().y,
