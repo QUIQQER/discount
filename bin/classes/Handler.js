@@ -60,11 +60,21 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         },
 
         /**
+         * Return a discount list for a grid
          *
+         * @params {Object} params - grid params
          * @returns {Promise}
          */
-        getList: function () {
-            return this.search();
+        getList: function (params) {
+            params = params || {};
+
+            return new Promise(function (resolve, reject) {
+                Ajax.get('package_quiqqer_discount_ajax_list', resolve, {
+                    'package': 'quiqqer/discount',
+                    onError  : reject,
+                    params   : JSON.encode(params)
+                });
+            });
         },
 
         /**

@@ -123,6 +123,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
 
             this.$Grid = new Grid(Container, {
                 multipleSelection: true,
+                pagination       : true,
                 columnModel      : [{
                     header   : QUILocale.get('quiqqer/system', 'id'),
                     dataIndex: 'id',
@@ -249,13 +250,15 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
             this.getButtons('edit').disable();
             this.parent();
 
-            return Discounts.getList().then(function (data) {
-                var i, len, active, entry,
-                    gridData = [];
+            return Discounts.getList({
+                perPage: this.$Grid.options.perPage,
+                page   : this.$Grid.options.page
+            }).then(function (result) {
+                var i, len, active, entry;
 
-                for (i = 0, len = data.length; i < len; i++) {
-                    entry  = data[i];
-                    active = parseInt(data[i].active);
+                for (i = 0, len = result.data.length; i < len; i++) {
+                    entry  = result.data[i];
+                    active = parseInt(result.data[i].active);
 
                     if (active) {
                         entry.status = {
@@ -281,13 +284,10 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                         };
                     }
 
-                    gridData.push(entry);
+                    result.data[i] = entry;
                 }
 
-                self.$Grid.setData({
-                    data: gridData
-                });
-
+                self.$Grid.setData(result);
                 self.Loader.hide();
             });
         },
