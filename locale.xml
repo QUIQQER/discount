@@ -98,6 +98,29 @@
             <de><![CDATA[Zur Suche]]></de>
             <en><![CDATA[Back to search]]></en>
         </locale>
+
+        <locale name="discount.window.delete.title">
+            <de><![CDATA[Rabatt löschen?]]></de>
+            <en><![CDATA[Delete the discount?]]></en>
+        </locale>
+        <locale name="discount.window.delete.text">
+            <de><![CDATA[Rabatt löschen?]]></de>
+            <en><![CDATA[Delete the discount?]]></en>
+        </locale>
+        <locale name="discount.window.delete.information">
+            <de><![CDATA[Folgende Rabatte werden gelöscht: [ids]]]></de>
+            <en><![CDATA[The following discount IDs would be deleted: [ids]]]></en>
+        </locale>
+
+        <locale name="discount.window.create.title">
+            <de><![CDATA[Neuen Rabatt anlegen]]></de>
+            <en><![CDATA[Create new discount]]></en>
+        </locale>
+        <locale name="discount.window.create.information">
+            <de><![CDATA[Bitte geben Sie einen neuen Titel für den Rabett an]]></de>
+            <en><![CDATA[Please insert a new discount title]]></en>
+        </locale>
+
     </groups>
 
 </locales>

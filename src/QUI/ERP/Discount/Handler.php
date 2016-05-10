@@ -27,12 +27,16 @@ class Handler extends QUI\CRUD\Factory
         });
 
         // create new translation var for the discount
-        $this->Events->addEvent('onCreateEnd', function ($New) {
+        $this->Events->addEvent('onCreateEnd', function ($New, $data) {
             /* @var $New QUI\ERP\Discount\Discount */
             $newVar  = 'discount.' . $New->getId() . '.title';
             $current = QUI::getLocale()->getCurrent();
 
             $title = $New->getAttribute('title');
+
+            if (!$title && isset($data['title'])) {
+                $title = QUI\Utils\Security\Orthos::clear($data['title']);
+            }
 
             if (QUI::getLocale()->isLocaleString($title)) {
                 $parts = QUI::getLocale()->getPartsOfLocaleString($title);

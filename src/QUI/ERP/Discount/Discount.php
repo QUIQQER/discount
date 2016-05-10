@@ -18,6 +18,7 @@ class Discount extends QUI\CRUD\Child
 {
     /**
      * Discount constructor.
+     *
      * @param int $id
      * @param Handler $Factory
      */
@@ -42,7 +43,7 @@ class Discount extends QUI\CRUD\Child
             if ($this->getAttribute('date_from')
                 && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_from'))
             ) {
-                throw new QUI\Exception(array(
+                throw new QUI\ERP\Discount\Exception(array(
                     'quiqqer/discount',
                     'exception.discount.date_from.wrong'
                 ));
@@ -51,7 +52,7 @@ class Discount extends QUI\CRUD\Child
             if ($this->getAttribute('date_until')
                 && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_until'))
             ) {
-                throw new QUI\Exception(array(
+                throw new QUI\ERP\Discount\Exception(array(
                     'quiqqer/discount',
                     'exception.discount.date_until.wrong'
                 ));
@@ -66,17 +67,17 @@ class Discount extends QUI\CRUD\Child
             if ($purchaseQuantityFrom === false
                 || $purchaseQuantityFrom < 0
             ) {
-                throw new QUI\Exception(array(
+                throw new QUI\ERP\Discount\Exception(array(
                     'quiqqer/discount',
                     'exception.discount.purchase_quantity_from.wrong'
                 ));
             }
-            
+
 
             if ($purchaseQuantityUntil === false
                 || $purchaseQuantityUntil < 0
             ) {
-                throw new QUI\Exception(array(
+                throw new QUI\ERP\Discount\Exception(array(
                     'quiqqer/discount',
                     'exception.discount.purchase_quantity_until.wrong'
                 ));
@@ -85,7 +86,7 @@ class Discount extends QUI\CRUD\Child
             if ($purchaseValueFrom === false
                 || $purchaseValueFrom < 0
             ) {
-                throw new QUI\Exception(array(
+                throw new QUI\ERP\Discount\Exception(array(
                     'quiqqer/discount',
                     'exception.discount.purchase_value_from.wrong'
                 ));
@@ -94,7 +95,7 @@ class Discount extends QUI\CRUD\Child
             if ($purchaseValueUntil === false
                 || $purchaseValueUntil < 0
             ) {
-                throw new QUI\Exception(array(
+                throw new QUI\ERP\Discount\Exception(array(
                     'quiqqer/discount',
                     'exception.discount.purchase_value_until.wrong'
                 ));
@@ -198,12 +199,12 @@ class Discount extends QUI\CRUD\Child
      * Verify the combination between the discounts
      *
      * @param Discount $Discount
-     * @throws QUI\Exception
+     * @throws QUI\ERP\Discount\Exception
      */
     public function verifyCombinationWith(Discount $Discount)
     {
         if ($this->canCombinedWith($Discount) === false) {
-            throw new QUI\Exception(array(
+            throw new QUI\ERP\Discount\Exception(array(
                 'quiqqer/discount',
                 'exception.discount.not.combinable',
                 array(
@@ -218,12 +219,12 @@ class Discount extends QUI\CRUD\Child
      * Verify the usage of the discount by the user
      *
      * @param User $User
-     * @throws QUI\Exception
+     * @throws QUI\ERP\Discount\Exception
      */
     public function verifyUser(User $User)
     {
         if ($this->canUsedBy($User) === false) {
-            throw new QUI\Exception(array(
+            throw new QUI\ERP\Discount\Exception(array(
                 'quiqqer/discount',
                 'exception.discount.user.cant.use.discount',
                 array(

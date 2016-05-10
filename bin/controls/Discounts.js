@@ -9,6 +9,7 @@
  * @require qui/controls/desktop/Panel
  * @require qui/controls/buttons/Button
  * @require qui/controls/windows/Confirm
+ * @require qui/controls/windows/Prompt
  * @require controls/grid/Grid
  * @require Locale
  * @require package/quiqqer/discount/bin/classes/Handler
@@ -19,11 +20,12 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
     'qui/controls/desktop/Panel',
     'qui/controls/buttons/Button',
     'qui/controls/windows/Confirm',
+    'qui/controls/windows/Prompt',
     'controls/grid/Grid',
     'Locale',
     'package/quiqqer/discount/bin/classes/Handler'
 
-], function (QUI, QUIPanel, QUIButton, QUIConfirm, Grid, QUILocale, Handler) {
+], function (QUI, QUIPanel, QUIButton, QUIConfirm, QUIPrompt, Grid, QUILocale, Handler) {
     "use strict";
 
     var lg = 'quiqqer/discount';
@@ -300,15 +302,39 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
         createChild: function () {
             var self = this;
 
-            this.Loader.show();
+            // this.Loader.show();
+            new QUIPrompt({
+                title      : QUILocale.get(lg, 'discount.window.create.title'),
+                titleicon  : 'fa fa-plus',
+                icon       : false,
+                information: QUILocale.get(lg, 'discount.window.create.information'),
+                autoclose  : false,
+                maxHeight  : 300,
+                maxWidth   : 450,
+                events     : {
+                    onSubmit: function (value, Win) {
+                        Win.Loader.show();
 
-            return Discounts.createChild().then(function (discountId) {
-
-                return self.refresh().then(function () {
-                    self.Loader.hide();
-                    return self.editChild(discountId);
-                });
-            });
+                        Discounts.createChild({
+                            title: value
+                        }).then(function (discountId) {
+                            require([
+                                'package/quiqqer/translator/bin/classes/Translator'
+                            ], function (Translator) {
+                                new Translator().publish(lg).then(function () {
+                                    return self.refresh();
+                                }).then(function () {
+                                    Win.close();
+                                    self.editChild(discountId);
+                                });
+                            });
+                        }, function () {
+                            // reject
+                            Win.Loader.hide();
+                        });
+                    }
+                }
+            }).open();
         },
 
         /**
