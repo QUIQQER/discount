@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th colspan="2">
-                Rabatt
+                {{header}}
             </th>
         </tr>
         </thead>
@@ -13,7 +13,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        ID
+                        {{id}}
                     </span>
                     <div class="field-container-field field-id"></div>
                 </label>
@@ -23,7 +23,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Titel
+                        {{title}}
                     </span>
                     <div class="field-container-field discount-title"></div>
                 </label>
@@ -33,7 +33,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Rabatt
+                        {{discount}}
                     </span>
                     <input type="text" name="discount" class="field-container-field"/>
                     <select name="discount_type"
@@ -46,6 +46,20 @@
                 </label>
             </td>
         </tr>
+        <tr class="even">
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item" title="{{calculationBasis}}">
+                        {{calculationBasis}}
+                    </span>
+                    <select type="text" name="price_calculation_basis"
+                            class="field-container-field">
+                        <option value="1">{{calculationBasisNetto}}</option>
+                        <option value="2">{{calculationBasisCalcPrice}}</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
         </tbody>
     </table>
 
@@ -53,7 +67,7 @@
         <thead>
         <tr>
             <th colspan="2">
-                Nutzung definieren
+                {{usageHeader}}
             </th>
         </tr>
         </thead>
@@ -64,7 +78,7 @@
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-calendar"></span>
-                        Nutzbar von
+                        {{usageFrom}}
                     </span>
                     <input type="datetime" name="date_from"
                            class="field-container-field"/>
@@ -74,7 +88,7 @@
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-calendar"></span>
-                        Nutzbar bis
+                        {{usageTo}}
                     </span>
                     <input type="datetime" name="date_until"
                            class="field-container-field"/>
@@ -85,7 +99,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Einkaufsmenge von
+                        {{usageAmountOf}}
                     </span>
                     <input type="number" min="0" name="purchase_quantity_from"
                            class="field-container-field"/>
@@ -94,7 +108,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Einkaufsmenge bis
+                        {{usageAmountTo}}
                     </span>
                     <input type="number" min="0" name="purchase_quantity_until"
                            class="field-container-field"/>
@@ -106,7 +120,7 @@
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-money"></span>
-                        Einkaufswert von
+                        {{usageValueOf}}
                     </span>
                     <input type="number" min="0" name="purchase_value_from"
                            class="field-container-field"/>
@@ -116,7 +130,7 @@
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-money"></span>
-                        Einkaufswert bis
+                        {{usageValueTo}}
                     </span>
                     <input type="number" min="0" name="purchase_value_until"
                            class="field-container-field"/>
@@ -130,7 +144,7 @@
         <thead>
         <tr>
             <th colspan="2">
-                Zuweisung
+                {{usageAssignment}}
             </th>
         </tr>
         </thead>
@@ -140,13 +154,13 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Artikel
+                        {{usageAssignmentProduct}}
                     </span>
-                    <div class="field-container-field field-container-field-no-padding">
+                    <span class="field-container-field field-container-field-no-padding">
                         <input type="text" name="articles"
                                data-qui="package/quiqqer/products/bin/controls/products/Select"
                         />
-                    </div>
+                    </span>
                 </label>
             </td>
         </tr>
@@ -154,13 +168,13 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Kategorien
+                        {{usageAssignmentCategory}}
                     </span>
-                    <div class="field-container-field field-container-field-no-padding">
+                    <span class="field-container-field field-container-field-no-padding">
                         <input type="text" name="categories"
                                data-qui="package/quiqqer/products/bin/controls/categories/Select"
                         />
-                    </div>
+                    </span>
                 </label>
             </td>
         </tr>
@@ -168,14 +182,14 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Benutzer
+                        {{usageAssignmentUser}}
                     </span>
-                    <div class="field-container-field field-container-field-no-padding">
+                    <span class="field-container-field field-container-field-no-padding">
                         <input type="text" name="user_groups"
                                class="users_and_groups"
                                data-qui="controls/usersAndGroups/Input"
                         />
-                    </div>
+                    </span>
                 </label>
             </td>
         </tr>
@@ -183,13 +197,13 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Kombinerbar mit
+                        {{usageAssignmentCombine}}
                     </span>
-                    <div class="field-container-field field-container-field-no-padding">
+                    <span class="field-container-field field-container-field-no-padding">
                         <input type="text" name="combined"
                                data-qui="package/quiqqer/discount/bin/controls/Select"
                         />
-                    </div>
+                    </span>
                 </label>
             </td>
         </tr>

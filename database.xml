@@ -11,6 +11,7 @@
             <field type="INT( 10 )">purchase_quantity_until</field>
             <field type="text">purchase_value_from</field>
             <field type="text">purchase_value_until</field>
+            <field type="INT( 1 )">price_calculation_basis</field>
 
             <field type="text">areas</field>
             <field type="text">articles</field>

@@ -88,6 +88,7 @@ class Handler extends QUI\CRUD\Factory
             'discount',
             'date_from',
             'date_until',
+            'price_calculation_basis',
             'purchase_quantity_from',
             'purchase_quantity_until',
             'purchase_value_from',
@@ -96,7 +97,8 @@ class Handler extends QUI\CRUD\Factory
             'articles',
             'categories',
             'user_groups',
-            'combined'
+            'combined',
+
         );
     }
 

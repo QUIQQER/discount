@@ -86,6 +86,84 @@
             <en><![CDATA[Combined with]]></en>
         </locale>
 
+
+        <locale name="control.edit.template.header">
+            <de><![CDATA[Rabatt]]></de>
+            <en><![CDATA[Discount]]></en>
+        </locale>
+        <locale name="control.edit.template.id">
+            <de><![CDATA[ID]]></de>
+            <en><![CDATA[ID]]></en>
+        </locale>
+        <locale name="control.edit.template.title">
+            <de><![CDATA[Titel]]></de>
+            <en><![CDATA[Title]]></en>
+        </locale>
+        <locale name="control.edit.template.discount">
+            <de><![CDATA[Rabatt]]></de>
+            <en><![CDATA[Discount]]></en>
+        </locale>
+        <locale name="control.edit.template.calculationBasis">
+            <de><![CDATA[Berechnungs-Grundlage]]></de>
+            <en><![CDATA[Calculation basis]]></en>
+        </locale>
+        <locale name="control.edit.template.calculationBasis.netto">
+            <de><![CDATA[Netto]]></de>
+            <en><![CDATA[Netto]]></en>
+        </locale>
+        <locale name="control.edit.template.calculationBasis.calculationBasisCalcPrice">
+            <de><![CDATA[Kalkulierter Preis]]></de>
+            <en><![CDATA[Calculated price]]></en>
+        </locale>
+        <locale name="control.edit.template.usage">
+            <de><![CDATA[Nutzung definieren]]></de>
+            <en><![CDATA[Defining Terms]]></en>
+        </locale>
+        <locale name="control.edit.template.usage.from">
+            <de><![CDATA[Nutzbar von]]></de>
+            <en><![CDATA[Usage from]]></en>
+        </locale>
+        <locale name="control.edit.template.usage.to">
+            <de><![CDATA[Nutzbar bis]]></de>
+            <en><![CDATA[Usage to]]></en>
+        </locale>
+        <locale name="control.edit.template.shopping.amount.of">
+            <de><![CDATA[Einkaufsmenge von]]></de>
+            <en><![CDATA[Shopping amount of]]></en>
+        </locale>
+        <locale name="control.edit.template.shopping.amount.to">
+            <de><![CDATA[Einkaufsmenge bis]]></de>
+            <en><![CDATA[Shopping amount to]]></en>
+        </locale>
+        <locale name="control.edit.template.purchase.value.of">
+            <de><![CDATA[Einkaufswert von]]></de>
+            <en><![CDATA[Purchase value of]]></en>
+        </locale>
+        <locale name="control.edit.template.purchase.value.to">
+            <de><![CDATA[Einkaufswert bis]]></de>
+            <en><![CDATA[Purchase value to]]></en>
+        </locale>
+        <locale name="control.edit.template.assignment">
+            <de><![CDATA[Zuweisung]]></de>
+            <en><![CDATA[Assignment]]></en>
+        </locale>
+        <locale name="control.edit.template.assignment.product">
+            <de><![CDATA[Produkt]]></de>
+            <en><![CDATA[Product]]></en>
+        </locale>
+        <locale name="control.edit.template.assignment.category">
+            <de><![CDATA[Kategorie]]></de>
+            <en><![CDATA[Category]]></en>
+        </locale>
+        <locale name="control.edit.template.assignment.user">
+            <de><![CDATA[Benutzer]]></de>
+            <en><![CDATA[User]]></en>
+        </locale>
+        <locale name="control.edit.template.assignment.combine">
+            <de><![CDATA[Kombinierbar mit]]></de>
+            <en><![CDATA[Combined with]]></en>
+        </locale>
+
         <locale name="control.select.search.placeholder">
             <de><![CDATA[Suche nach einem Rabatt ...]]></de>
             <en><![CDATA[Search for a discount ...]]></en>
