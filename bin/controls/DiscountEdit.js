@@ -66,18 +66,19 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
             this.$Elm.set('class', 'discount-edit');
 
             this.$Elm.set('html', Mustache.render(template, {
-                header         : QUILocale.get(lg, 'control.edit.template.title'),
-                id             : QUILocale.get(lg, 'control.edit.template.id'),
-                title          : QUILocale.get(lg, 'control.edit.template.title'),
-                discount       : QUILocale.get(lg, 'control.edit.template.discount'),
-                usageHeader    : QUILocale.get(lg, 'control.edit.template.usage'),
-                usageFrom      : QUILocale.get(lg, 'control.edit.template.usage.from'),
-                usageTo        : QUILocale.get(lg, 'control.edit.template.usage.to'),
-                usageAmountOf  : QUILocale.get(lg, 'control.edit.template.shopping.amount.of'),
-                usageAmountTo  : QUILocale.get(lg, 'control.edit.template.shopping.amount.to'),
-                usageValueOf   : QUILocale.get(lg, 'control.edit.template.purchase.value.of'),
-                usageValueTo   : QUILocale.get(lg, 'control.edit.template.purchase.value.to'),
-                usageAssignment: QUILocale.get(lg, 'control.edit.template.assignment'),
+                header              : QUILocale.get(lg, 'control.edit.template.title'),
+                id                  : QUILocale.get(lg, 'control.edit.template.id'),
+                title               : QUILocale.get(lg, 'control.edit.template.title'),
+                discount            : QUILocale.get(lg, 'control.edit.template.discount'),
+                usageHeader         : QUILocale.get(lg, 'control.edit.template.usage'),
+                usageFrom           : QUILocale.get(lg, 'control.edit.template.usage.from'),
+                usageTo             : QUILocale.get(lg, 'control.edit.template.usage.to'),
+                usageAmountOf       : QUILocale.get(lg, 'control.edit.template.shopping.amount.of'),
+                usageAmountTo       : QUILocale.get(lg, 'control.edit.template.shopping.amount.to'),
+                usageValueOf        : QUILocale.get(lg, 'control.edit.template.purchase.value.of'),
+                usageValueTo        : QUILocale.get(lg, 'control.edit.template.purchase.value.to'),
+                usageAssignment     : QUILocale.get(lg, 'control.edit.template.assignment'),
+                usageAssignmentAreas: QUILocale.get(lg, 'control.edit.template.areas'),
 
                 calculationBasis         : QUILocale.get(lg, 'control.edit.template.calculationBasis'),
                 calculationBasisNetto    : QUILocale.get(lg, 'control.edit.template.calculationBasis.netto'),
@@ -106,9 +107,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
         $onInject: function () {
             var self = this;
 
-            require([
-                'utils/Controls'
-            ], function (Utils) {
+            require(['utils/Controls'], function (Utils) {
 
                 var Elm  = self.getElm(),
                     Form = Elm.getElement('form');

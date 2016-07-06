@@ -23,9 +23,25 @@ class EventHandling
      * @param PriceFactors $List
      * @param UniqueProduct $Product
      */
-    public static function onQuiqqerProductsPriceFactorsInit(PriceFactors $List, UniqueProduct $Product)
+    public static function onQuiqqerProductsCalcListProduct(PriceFactors $List, UniqueProduct $Product)
     {
-//        QUI\System\Log::writeRecursive(1);
+        QUI\System\Log::writeRecursive("onQuiqqerProductsCalcListProduct");
 //        QUI\System\Log::writeRecursive($Product->getId());
+
+
+    }
+
+    /**
+     * event - on price factor init
+     *
+     * @param PriceFactors $List
+     * @param UniqueProduct $Product
+     */
+    public static function onQuiqqerProductsCalcList(PriceFactors $List)
+    {
+        QUI\System\Log::writeRecursive("onQuiqqerProductsCalcList");
+//        QUI\System\Log::writeRecursive($Product->getId());
+
+
     }
 }

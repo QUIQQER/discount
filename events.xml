@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <events>
-    <event on="onQuiqqerProductsPriceFactorsInit" fire="\QUI\ERP\Discount\EventHandling::onQuiqqerProductsPriceFactorsInit"/>
+    <event on="onQuiqqerProductsCalcListProduct" fire="\QUI\ERP\Discount\EventHandling::onQuiqqerProductsCalcListProduct"/>
+    <event on="onQuiqqerProductsCalcList" fire="\QUI\ERP\Discount\EventHandling::onQuiqqerProductsCalcList"/>
 </events>

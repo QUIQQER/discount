@@ -163,6 +163,10 @@
             <de><![CDATA[Kombinierbar mit]]></de>
             <en><![CDATA[Combined with]]></en>
         </locale>
+        <locale name="control.edit.template.areas">
+            <de><![CDATA[Zonen]]></de>
+            <en><![CDATA[Areas]]></en>
+        </locale>
 
         <locale name="control.select.search.placeholder">
             <de><![CDATA[Suche nach einem Rabatt ...]]></de>
