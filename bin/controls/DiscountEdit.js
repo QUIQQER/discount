@@ -186,7 +186,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     Form = Elm.getElement('form');
 
                 var data = QUIFormUtils.getFormData(Form);
-console.log(data);
+
                 self.$Translate.save().then(function () {
                     return Discounts.update(
                         self.getAttribute('discountId'),
