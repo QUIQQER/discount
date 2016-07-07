@@ -74,7 +74,7 @@
             <en><![CDATA[Purchase value]]></en>
         </locale>
         <locale name="discount.grid.articles">
-            <de><![CDATA[Zugewiesene Artikel]]></de>
+            <de><![CDATA[Zugewiesene Produkte]]></de>
             <en><![CDATA[Assigned products]]></en>
         </locale>
         <locale name="discount.grid.categories">

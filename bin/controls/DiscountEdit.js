@@ -129,8 +129,6 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                             data.discount_type = Discounts.DISCOUNT_TYPE_PERCENT;
                     }
 
-                    console.log(data);
-
                     QUIFormUtils.setDataToForm(data, Form);
 
                     self.$Translate = new Translation({

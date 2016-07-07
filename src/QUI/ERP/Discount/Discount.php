@@ -9,6 +9,7 @@ use QUI;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
+use QUI\ERP\Areas\Utils as AreaUtils;
 
 /**
  * Class Discount
@@ -114,6 +115,27 @@ class Discount extends QUI\CRUD\Child
                 ));
             }
 
+
+            // cleanup user group save
+            $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
+            $cleanup = implode(',', $cleanup);
+
+            if (!empty($cleanup)) {
+                $cleanup = ',' . $cleanup . ',';
+            }
+
+            $this->setAttribute('user_groups', $cleanup);
+
+
+            // cleanup product(s)
+            $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
+            $cleanup = implode(',', $cleanup);
+
+            if (!empty($cleanup)) {
+                $cleanup = ',' . $cleanup . ',';
+            }
+
+            $this->setAttribute('articles', $cleanup);
         });
     }
 
@@ -170,12 +192,25 @@ class Discount extends QUI\CRUD\Child
     /**
      * is the user allowed to use the discount
      *
-     * @param User $User
+     * @param QUI\Interfaces\Users\User $User
      * @return boolean
      */
-    public function canUsedBy(User $User)
+    public function canUsedBy(QUI\Interfaces\Users\User $User)
     {
         if ($this->isActive() === false) {
+            return false;
+        }
+
+        $userGroupValue = $this->getAttribute('user_groups');
+        $areasValue     = $this->getAttribute('areas');
+
+        // if groups and areas are empty, everbody is allowed
+        if (empty($userGroupValue) && empty($areasValue)) {
+            return true;
+        }
+
+        // not in area
+        if (!empty($areasValue) && !AreaUtils::isUserInAreas($User, $areasValue)) {
             return false;
         }
 
