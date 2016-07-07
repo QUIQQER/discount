@@ -26,6 +26,21 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_TYPE_CURRENCY = 2;
 
     /**
+     * discount scope -> discount is for every product
+     */
+    const DISCOUNT_SCOPE_EVERY_PRODUCT = 1;
+
+    /**
+     * discount scope -> discount is for all products (for the complete order)
+     */
+    const DISCOUNT_SCOPE_TOTAL = 2;
+
+    /**
+     * discount scope -> unique is for one product
+     */
+    const DISCOUNT_SCOPE_UNIQUE = 3;
+
+    /**
      * Handler constructor.
      */
     public function __construct()
@@ -109,7 +124,9 @@ class Handler extends QUI\CRUD\Factory
             'categories',
             'user_groups',
             'combined',
-            'priority'
+            'priority',
+            'scope',
+            'lastDiscount'
         );
     }
 

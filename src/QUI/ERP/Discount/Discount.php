@@ -39,6 +39,64 @@ class Discount extends QUI\CRUD\Child
                 break;
         }
 
+        $scope = (int)$this->getAttribute('scope');
+
+        switch ($scope) {
+            case Handler::DISCOUNT_SCOPE_EVERY_PRODUCT:
+            case Handler::DISCOUNT_SCOPE_TOTAL:
+            case Handler::DISCOUNT_SCOPE_UNIQUE:
+                $this->setAttribute('scope', $scope);
+                break;
+
+            default:
+                $this->setAttribute('scope', 0);
+        }
+
+
+        // cleanup user group save
+        $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
+        $cleanup = implode(',', $cleanup);
+
+        if (!empty($cleanup)) {
+            $cleanup = ',' . $cleanup . ',';
+        }
+
+        $this->setAttribute('user_groups', $cleanup);
+
+
+        // cleanup product(s)
+        $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
+        $cleanup = implode(',', $cleanup);
+
+        if (!empty($cleanup)) {
+            $cleanup = ',' . $cleanup . ',';
+        }
+
+        $this->setAttribute('articles', $cleanup);
+
+
+        // cleanup user group save
+        $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
+        $cleanup = implode(',', $cleanup);
+
+        if (!empty($cleanup)) {
+            $cleanup = ',' . $cleanup . ',';
+        }
+
+        $this->setAttribute('user_groups', $cleanup);
+
+
+        // cleanup product(s)
+        $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
+        $cleanup = implode(',', $cleanup);
+
+        if (!empty($cleanup)) {
+            $cleanup = ',' . $cleanup . ',';
+        }
+
+        $this->setAttribute('articles', $cleanup);
+
+
         // events
         $this->Events->addEvent('onDeleteBegin', function () {
             Permission::checkPermission('quiqqer.areas.area.delete');
@@ -114,28 +172,6 @@ class Discount extends QUI\CRUD\Child
                     'exception.discount.purchase_value_until.wrong'
                 ));
             }
-
-
-            // cleanup user group save
-            $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
-            $cleanup = implode(',', $cleanup);
-
-            if (!empty($cleanup)) {
-                $cleanup = ',' . $cleanup . ',';
-            }
-
-            $this->setAttribute('user_groups', $cleanup);
-
-
-            // cleanup product(s)
-            $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
-            $cleanup = implode(',', $cleanup);
-
-            if (!empty($cleanup)) {
-                $cleanup = ',' . $cleanup . ',';
-            }
-
-            $this->setAttribute('articles', $cleanup);
         });
     }
 

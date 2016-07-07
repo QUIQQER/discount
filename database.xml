@@ -15,6 +15,7 @@
             <field type="INT( 1 )">price_calculation_basis</field>
             <field type="INT( 4 )">priority</field>
             <field type="INT( 1 )">lastDiscount</field>
+            <field type="INT( 1 )">scope</field>
 
             <field type="text">areas</field>
             <field type="text">articles</field>

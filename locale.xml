@@ -138,6 +138,32 @@
             <de><![CDATA[Nutzbar bis]]></de>
             <en><![CDATA[Usage to]]></en>
         </locale>
+        <locale name="control.edit.template.usageLastDiscount">
+            <de><![CDATA[Letzter Rabatt]]></de>
+            <en><![CDATA[Last discount]]></en>
+        </locale>
+        <locale name="control.edit.template.usageLastDiscountDesc">
+            <de><![CDATA[Keinen weiteren Rabatt nach diesem Rabatt anwenden.]]></de>
+            <en><![CDATA[Do not apply a further discount after this discount.]]></en>
+        </locale>
+
+        <locale name="control.edit.template.usageScope">
+            <de><![CDATA[Geltungsbereich]]></de>
+            <en><![CDATA[Scope]]></en>
+        </locale>
+        <locale name="control.edit.template.usageScopeEvery">
+            <de><![CDATA[Für jedes Produkt]]></de>
+            <en><![CDATA[For each product]]></en>
+        </locale>
+        <locale name="control.edit.template.usageScopeTotal">
+            <de><![CDATA[Gesamt]]></de>
+            <en><![CDATA[Total]]></en>
+        </locale>
+        <locale name="control.edit.template.usageScopeUnique">
+            <de><![CDATA[Einmalig]]></de>
+            <en><![CDATA[Unique]]></en>
+        </locale>
+
         <locale name="control.edit.template.shopping.amount.of">
             <de><![CDATA[Einkaufsmenge von]]></de>
             <en><![CDATA[Shopping amount of]]></en>
