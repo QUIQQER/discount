@@ -24,6 +24,16 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         Type   : 'package/quiqqer/discount/bin/classes/Handler',
 
         /**
+         * discount type -> percent
+         */
+        DISCOUNT_TYPE_PERCENT: 1,
+
+        /**
+         * discount type -> crrency
+         */
+        DISCOUNT_TYPE_CURRENCY: 2,
+
+        /**
          * Search discounts
          *
          * @param {Object} [fields] - fields to search

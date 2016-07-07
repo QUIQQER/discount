@@ -16,6 +16,16 @@ use QUI\Permissions\Permission;
 class Handler extends QUI\CRUD\Factory
 {
     /**
+     * discount type -> percent
+     */
+    const DISCOUNT_TYPE_PERCENT = 1;
+
+    /**
+     * discount type -> crrency
+     */
+    const DISCOUNT_TYPE_CURRENCY = 2;
+
+    /**
      * Handler constructor.
      */
     public function __construct()
@@ -86,6 +96,7 @@ class Handler extends QUI\CRUD\Factory
         return array(
             'active',
             'discount',
+            'discount_type',
             'date_from',
             'date_until',
             'price_calculation_basis',
@@ -98,19 +109,23 @@ class Handler extends QUI\CRUD\Factory
             'categories',
             'user_groups',
             'combined',
-
+            'priority'
         );
     }
 
     /**
-     * Return a Discount
+     * Return the children
+     * If you want only the data, please use getChildrenData
      *
-     * @param int $id - Discount-ID
-     * @return QUI\ERP\Discount\Discount
-     * @throws QUI\Exception
+     * @param array $queryParams
+     * @return array - [Child, Child, Child]
      */
-    public function getChild($id)
+    public function getChildrenData($queryParams = array())
     {
-        return parent::getChild($id);
+        if (!isset($queryParams['order'])) {
+            $queryParams['order'] = 'priority ASC';
+        }
+
+        return parent::getChildrenData($queryParams);
     }
 }

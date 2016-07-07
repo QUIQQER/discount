@@ -83,6 +83,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 calculationBasis         : QUILocale.get(lg, 'control.edit.template.calculationBasis'),
                 calculationBasisNetto    : QUILocale.get(lg, 'control.edit.template.calculationBasis.netto'),
                 calculationBasisCalcPrice: QUILocale.get(lg, 'control.edit.template.calculationBasis.calculationBasisCalcPrice'),
+                calculationPriority      : QUILocale.get(lg, 'control.edit.template.calculationPriority'),
 
                 usageAssignmentProduct : QUILocale.get(lg, 'control.edit.template.assignment.product'),
                 usageAssignmentCategory: QUILocale.get(lg, 'control.edit.template.assignment.category'),
@@ -115,6 +116,21 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 Discounts.getChild(
                     self.getAttribute('discountId')
                 ).then(function (data) {
+
+                    data.discount_type = parseInt(data.discount_type);
+                    data.priority      = parseInt(data.priority);
+
+                    switch (data.discount_type) {
+                        case Discounts.DISCOUNT_TYPE_PERCENT:
+                        case Discounts.DISCOUNT_TYPE_CURRENCY:
+                            break;
+
+                        default:
+                            data.discount_type = Discounts.DISCOUNT_TYPE_PERCENT;
+                    }
+
+                    console.log(data);
+
                     QUIFormUtils.setDataToForm(data, Form);
 
                     self.$Translate = new Translation({

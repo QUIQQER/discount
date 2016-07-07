@@ -7,7 +7,7 @@ namespace QUI\ERP\Discount;
 
 use QUI;
 use QUI\Users\User;
-use QUI\Rights\Permission;
+use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
 
 /**
@@ -26,6 +26,19 @@ class Discount extends QUI\CRUD\Child
     {
         parent::__construct($id, $Factory);
 
+
+        // attributes
+        switch ($this->getAttribute('discount_type')) {
+            case Handler::DISCOUNT_TYPE_CURRENCY:
+            case Handler::DISCOUNT_TYPE_PERCENT:
+                break;
+
+            default:
+                $this->setAttribute('discount_type', Handler::DISCOUNT_TYPE_PERCENT);
+                break;
+        }
+
+        // events
         $this->Events->addEvent('onDeleteBegin', function () {
             Permission::checkPermission('quiqqer.areas.area.delete');
         });
@@ -166,7 +179,7 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
-        $userGroups = QUI\UsersGroups\Utils::parseUsersGroupsString(
+        $userGroups = QUI\Utils\UserGroups::parseUsersGroupsString(
             $this->getAttribute('user_groups')
         );
 
@@ -208,7 +221,7 @@ class Discount extends QUI\CRUD\Child
                 'quiqqer/discount',
                 'exception.discount.not.combinable',
                 array(
-                    'id' => $this->getId(),
+                    'id'         => $this->getId(),
                     'discountId' => $Discount->getId()
                 )
             ));
@@ -228,7 +241,7 @@ class Discount extends QUI\CRUD\Child
                 'quiqqer/discount',
                 'exception.discount.user.cant.use.discount',
                 array(
-                    'id' => $this->getId(),
+                    'id'     => $this->getId(),
                     'userId' => $User->getId()
                 )
             ));

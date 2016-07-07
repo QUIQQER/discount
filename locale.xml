@@ -49,6 +49,10 @@
             <de><![CDATA[Rabatt]]></de>
             <en><![CDATA[Discount]]></en>
         </locale>
+        <locale name="discount.grid.discount_type">
+            <de><![CDATA[Rabatt-Art]]></de>
+            <en><![CDATA[Discount Type]]></en>
+        </locale>
         <locale name="discount.grid.date_from">
             <de><![CDATA[Nutzbar von]]></de>
             <en><![CDATA[Available from]]></en>
@@ -85,7 +89,10 @@
             <de><![CDATA[Kombinierbar mit]]></de>
             <en><![CDATA[Combined with]]></en>
         </locale>
-
+        <locale name="discount.grid.priority">
+            <de><![CDATA[Priorität]]></de>
+            <en><![CDATA[Priority]]></en>
+        </locale>
 
         <locale name="control.edit.template.header">
             <de><![CDATA[Rabatt]]></de>
@@ -114,6 +121,10 @@
         <locale name="control.edit.template.calculationBasis.calculationBasisCalcPrice">
             <de><![CDATA[Kalkulierter Preis]]></de>
             <en><![CDATA[Calculated price]]></en>
+        </locale>
+        <locale name="control.edit.template.calculationPriority">
+            <de><![CDATA[Priorität]]></de>
+            <en><![CDATA[Priority]]></en>
         </locale>
         <locale name="control.edit.template.usage">
             <de><![CDATA[Nutzung definieren]]></de>
@@ -202,6 +213,12 @@
             <de><![CDATA[Bitte geben Sie einen neuen Titel für den Rabett an]]></de>
             <en><![CDATA[Please insert a new discount title]]></en>
         </locale>
+
+        <locale name="discount.edit.sheet.title">
+            <de><![CDATA[Rabatt [id] bearbeiten]]></de>
+            <en><![CDATA[Edit discount [id]]]></en>
+        </locale>
+
 
     </groups>
 

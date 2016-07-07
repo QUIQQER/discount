@@ -142,10 +142,20 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                     dataType : 'number',
                     width    : 100
                 }, {
+                    header   : QUILocale.get(lg, 'discount.grid.discount_type'),
+                    dataIndex: 'discountTypeText',
+                    dataType : 'string',
+                    width    : 30
+                }, {
                     header   : QUILocale.get('quiqqer/system', 'title'),
                     dataIndex: 'text',
                     dataType : 'string',
                     width    : 200
+                }, {
+                    header   : QUILocale.get(lg, 'discount.grid.priority'),
+                    dataIndex: 'priority',
+                    dataType : 'number',
+                    width    : 30
                 }, {
                     header   : QUILocale.get(lg, 'discount.grid.date_from'),
                     dataIndex: 'date_from',
@@ -256,11 +266,13 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                 perPage: this.$Grid.options.perPage,
                 page   : this.$Grid.options.page
             }).then(function (result) {
-                var i, len, active, entry;
+                var i, len, active, entry, discountType;
 
                 for (i = 0, len = result.data.length; i < len; i++) {
                     entry  = result.data[i];
                     active = parseInt(result.data[i].active);
+
+                    discountType = parseInt(result.data[i].discount_type);
 
                     if (active) {
                         entry.status = {
@@ -284,6 +296,12 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                                 onClick: self.$toggleStatus
                             }
                         };
+                    }
+
+                    entry.discountTypeText = '%';
+
+                    if (parseInt(entry.discount_type) == Discounts.DISCOUNT_TYPE_CURRENCY) {
+                        entry.discountTypeText = '€';
                     }
 
                     result.data[i] = entry;
@@ -350,6 +368,10 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
 
             return new Promise(function (resolve) {
                 self.createSheet({
+                    title : QUILocale.get(lg, 'discount.edit.sheet.title', {
+                        id: discountId
+                    }),
+                    icon  : 'fa fa-cart-arrow-down',
                     events: {
                         onShow: function (Sheet) {
 

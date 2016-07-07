@@ -35,12 +35,21 @@ QUI::$Ajax->registerFunction(
                 'discount.' . $entry['id'] . '.title'
             );
 
+            $type = (int)$entry['discount_type'];
+
+            // attributes
+            switch ($type) {
+                case QUI\ERP\Discount\Handler::DISCOUNT_TYPE_CURRENCY:
+                case QUI\ERP\Discount\Handler::DISCOUNT_TYPE_PERCENT:
+                    break;
+
+                default:
+                    $entry['discount_type'] = QUI\ERP\Discount\Handler::DISCOUNT_TYPE_PERCENT;
+                    break;
+            }
+
             $result[] = $entry;
         }
-
-        usort($result, function ($a, $b) {
-            return $a['text'] > $b['text'];
-        });
 
         return $Grid->parseResult($result, $Discounts->countChildren());
     },
