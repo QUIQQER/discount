@@ -9,6 +9,8 @@ use QUI;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
+use QUI\ERP\Products\Utils\Calc;
+
 use QUI\ERP\Areas\Utils as AreaUtils;
 
 /**
@@ -317,5 +319,42 @@ class Discount extends QUI\CRUD\Child
                 )
             ));
         }
+    }
+
+    /**
+     * Parse the discount to a price factor
+     *
+     * @return QUI\ERP\Products\Utils\PriceFactor
+     */
+    public function toPriceFactor()
+    {
+        switch ($this->getAttribute('discount_type')) {
+            case Calc::CALCULATION_PERCENTAGE:
+                $calculation = Calc::CALCULATION_PERCENTAGE;
+                break;
+
+            default:
+            case Calc::CALCULATION_COMPLEMENT:
+                $calculation = Calc::CALCULATION_COMPLEMENT;
+                break;
+        }
+
+        switch ($this->getAttribute('price_calculation_basis')) {
+            case Calc::CALCULATION_BASIS_NETTO:
+                $basis = Calc::CALCULATION_BASIS_NETTO;
+                break;
+
+            default:
+                $basis = Calc::CALCULATION_BASIS_CURRENTPRICE;
+        }
+
+        return new QUI\ERP\Products\Utils\PriceFactor(array(
+            'title'       => $this->getTitle(),
+            'description' => '',
+            'priority'    => (int)$this->getAttribute('priority'),
+            'calculation' => $calculation,
+            'basis'       => $basis,
+            'value'       => $this->getAttribute('discount') * -1
+        ));
     }
 }
