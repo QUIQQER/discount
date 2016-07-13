@@ -178,11 +178,18 @@ class Discount extends QUI\CRUD\Child
     }
 
     /**
+     * Return the discount title
+     *
+     * @param null|QUI\Locale $Locale - optional, locale object
      * @return string
      */
-    public function getTitle()
+    public function getTitle($Locale = null)
     {
-        return QUI::getLocale()->get(
+        if (!$Locale) {
+            $Locale = QUI::getLocale();
+        }
+
+        return $Locale->get(
             'quiqqer/discount',
             'discount.' . $this->getId() . '.title'
         );
@@ -324,9 +331,10 @@ class Discount extends QUI\CRUD\Child
     /**
      * Parse the discount to a price factor
      *
+     * @param null|QUI\Locale $Locale - optional, locale object
      * @return QUI\ERP\Products\Utils\PriceFactor
      */
-    public function toPriceFactor()
+    public function toPriceFactor($Locale = null)
     {
         switch ($this->getAttribute('discount_type')) {
             case Calc::CALCULATION_PERCENTAGE:
@@ -349,7 +357,7 @@ class Discount extends QUI\CRUD\Child
         }
 
         return new QUI\ERP\Products\Utils\PriceFactor(array(
-            'title'       => $this->getTitle(),
+            'title'       => $this->getTitle($Locale),
             'description' => '',
             'priority'    => (int)$this->getAttribute('priority'),
             'calculation' => $calculation,

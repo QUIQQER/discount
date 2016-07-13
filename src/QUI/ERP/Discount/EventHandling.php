@@ -46,7 +46,7 @@ class EventHandling
      * Return the discounts for the user
      *
      * @param QUI\Interfaces\Users\User $User
-     * @return mixed
+     * @return array
      */
     protected static function getUserDiscounts(QUI\Interfaces\Users\User $User)
     {
@@ -73,15 +73,26 @@ class EventHandling
     ) {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
+        if (!is_array($userDiscounts)) {
+            return;
+        }
+
         $userDiscounts = array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
             return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_EVERY_PRODUCT;
         });
 
+        if (!is_array($userDiscounts)) {
+            return;
+        }
 
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
-            $Product->getPriceFactors()->addToEnd($Discount->toPriceFactor());
+            $Product->getPriceFactors()->addToEnd(
+                $Discount->toPriceFactor(
+                    $Calc->getUser()->getLocale()
+                )
+            );
         }
     }
 
@@ -97,15 +108,26 @@ class EventHandling
     ) {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
+        if (!is_array($userDiscounts)) {
+            return;
+        }
+
         $userDiscounts = array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
             return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL;
         });
 
+        if (!is_array($userDiscounts)) {
+            return;
+        }
 
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
-            $List->getPriceFactors()->addToEnd($Discount->toPriceFactor());
+            $List->getPriceFactors()->addToEnd(
+                $Discount->toPriceFactor(
+                    $Calc->getUser()->getLocale()
+                )
+            );
         }
     }
 }
