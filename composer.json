@@ -23,8 +23,9 @@
     "quiqqer/products": "*"
   },
   "autoload": {
-    "psr-0": {
-      "QUI": "src/"
+    "psr-4": {
+      "QUI\\ERP\\Discount\\": "src/QUI/ERP/Discount",
+      "QUITests\\ERP\\Discount\\": "tests/QUITests/ERP/Discount"
     }
   }
 }
