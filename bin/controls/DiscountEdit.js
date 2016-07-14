@@ -87,10 +87,11 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 usageScopeTotal : QUILocale.get(lg, 'control.edit.template.usageScopeTotal'),
                 usageScopeUnique: QUILocale.get(lg, 'control.edit.template.usageScopeUnique'),
 
-                calculationBasis         : QUILocale.get(lg, 'control.edit.template.calculationBasis'),
-                calculationBasisNetto    : QUILocale.get(lg, 'control.edit.template.calculationBasis.netto'),
-                calculationBasisCalcPrice: QUILocale.get(lg, 'control.edit.template.calculationBasis.calculationBasisCalcPrice'),
-                calculationPriority      : QUILocale.get(lg, 'control.edit.template.calculationPriority'),
+                calculationBasis          : QUILocale.get(lg, 'control.edit.template.calculationBasis'),
+                calculationBasisNetto     : QUILocale.get(lg, 'control.edit.template.calculationBasis.netto'),
+                calculationBasisCalcPrice : QUILocale.get(lg, 'control.edit.template.calculationBasis.calculationBasisCalcPrice'),
+                calculationBasisCalcBrutto: QUILocale.get(lg, 'control.edit.template.calculationBasis.calculationBasisCalcBrutto'),
+                calculationPriority       : QUILocale.get(lg, 'control.edit.template.calculationPriority'),
 
                 usageAssignmentProduct : QUILocale.get(lg, 'control.edit.template.assignment.product'),
                 usageAssignmentCategory: QUILocale.get(lg, 'control.edit.template.assignment.category'),

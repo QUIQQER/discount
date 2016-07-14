@@ -122,6 +122,14 @@
             <de><![CDATA[Kalkulierter Preis]]></de>
             <en><![CDATA[Calculated price]]></en>
         </locale>
+        <locale name="control.edit.template.calculationBasis.calculationBasisCalcBrutto">
+            <de><![CDATA[
+            Kalkulierter Brutto Preis (Geht von dem Nettopreis aus, welcher alle Preisfaktoren beinhaltet, wie z.B. Auswahllisten)
+            ]]></de>
+            <en><![CDATA[
+            Calculated brutto price (Expects from the netto price which includes all price factors, like attribute lists)
+            ]]></en>
+        </locale>
         <locale name="control.edit.template.calculationPriority">
             <de><![CDATA[Priorität]]></de>
             <en><![CDATA[Priority]]></en>

@@ -53,9 +53,10 @@
                         {{calculationBasis}}
                     </span>
                     <select type="text" name="price_calculation_basis"
-                            class="field-container-field">
+                            class="field-container-field" style="width: 100%">
                         <option value="1">{{calculationBasisNetto}}</option>
                         <option value="2">{{calculationBasisCalcPrice}}</option>
+                        <option value="3">{{calculationBasisCalcBrutto}}</option>
                     </select>
                 </label>
             </td>
@@ -169,7 +170,7 @@
                         {{usageLastDiscount}}
                     </span>
                     <div class="field-container-field">
-                        <input type="checkbox" name="lastDiscount" />
+                        <input type="checkbox" name="lastDiscount"/>
                         {{usageLastDiscountDesc}}
                     </div>
                 </label>
