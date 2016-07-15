@@ -356,13 +356,19 @@ class Discount extends QUI\CRUD\Child
                 $basis = Calc::CALCULATION_BASIS_CURRENTPRICE;
         }
 
+        $Plugin = QUI::getPackage('quiqqer/products');
+        $Config = $Plugin->getConfig();
+
+        $hideDiscounts = (int)$Config->getValue('products', 'hideDiscounts');
+
         return new QUI\ERP\Products\Utils\PriceFactor(array(
             'title'       => $this->getTitle($Locale),
             'description' => '',
             'priority'    => (int)$this->getAttribute('priority'),
             'calculation' => $calculation,
             'basis'       => $basis,
-            'value'       => $this->getAttribute('discount') * -1
+            'value'       => $this->getAttribute('discount') * -1,
+            'visible'     => $hideDiscounts ? false : true
         ));
     }
 }
