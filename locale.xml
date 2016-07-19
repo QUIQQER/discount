@@ -146,13 +146,23 @@
             <de><![CDATA[Nutzbar bis]]></de>
             <en><![CDATA[Usage to]]></en>
         </locale>
-        <locale name="control.edit.template.usageLastDiscount">
-            <de><![CDATA[Letzter Rabatt]]></de>
-            <en><![CDATA[Last discount]]></en>
+
+        <locale name="control.edit.template.usageLastSumDiscount">
+            <de><![CDATA[Letzter Gesamtrabatt]]></de>
+            <en><![CDATA[Last total discount]]></en>
         </locale>
-        <locale name="control.edit.template.usageLastDiscountDesc">
-            <de><![CDATA[Keinen weiteren Rabatt nach diesem Rabatt anwenden.]]></de>
-            <en><![CDATA[Do not apply a further discount after this discount.]]></en>
+        <locale name="control.edit.template.usageLastSumDiscountDesc">
+            <de><![CDATA[Keinen weiteren Gesamtrabatt nach diesem Rabatt anwenden.]]></de>
+            <en><![CDATA[Do not apply a further total discount after this discount.]]></en>
+        </locale>
+
+        <locale name="control.edit.template.usageLastProductDiscount">
+            <de><![CDATA[Letzter Produktrabatt]]></de>
+            <en><![CDATA[Last product discount]]></en>
+        </locale>
+        <locale name="control.edit.template.usageLastProductDiscountDesc">
+            <de><![CDATA[Keinen weiteren Produktrabatt nach diesem Rabatt anwenden.]]></de>
+            <en><![CDATA[Do not apply a further product discount after this discount.]]></en>
         </locale>
 
         <locale name="control.edit.template.usageScope">

@@ -6,7 +6,6 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
-use QUI\ERP\Products\Utils\PriceFactors;
 use QUI\ERP\Products\Product\UniqueProduct;
 use QUI\ERP\Products\Utils\Calc;
 use QUI\ERP\Products\Product\ProductList;
@@ -59,6 +58,62 @@ class EventHandling
         return self::$userDiscounts[$User->getId()];
     }
 
+    /**
+     * Discount quantity check for usage
+     * - Einkaufsmengeprüfung
+     *
+     * @param Discount $Discount
+     * @param integer|double|float $quantity
+     * @return bool
+     */
+    protected static function isDiscountUsableWithQuantity(Discount $Discount, $quantity)
+    {
+        $purchaseQuantityFrom  = $Discount->getAttribute('purchase_quantity_from');
+        $purchaseQuantityUntil = $Discount->getAttribute('purchase_quantity_until');
+
+        if ($purchaseQuantityFrom === false && $purchaseQuantityUntil === false) {
+            return true;
+        }
+
+        if ($purchaseQuantityFrom > $quantity) {
+            return false;
+        }
+
+        if ($purchaseQuantityUntil < $quantity) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Discount pirchase value check for usage
+     * - Einkaufswertprüfung
+     *
+     * @param Discount $Discount
+     * @param integer|double|float $value
+     * @return bool
+     */
+    protected static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value)
+    {
+        $purchaseValueFrom  = $Discount->getAttribute('purchase_value_from');
+        $purchaseValueUntil = $Discount->getAttribute('purchase_value_until');
+
+        if ($purchaseValueFrom === false && $purchaseValueUntil === false) {
+            return true;
+        }
+
+        if ($purchaseValueFrom > $value) {
+            return false;
+        }
+
+        if ($purchaseValueUntil < $value) {
+            return false;
+        }
+
+        return true;
+    }
+
     // EVENTS
 
     /**
@@ -86,8 +141,24 @@ class EventHandling
             return;
         }
 
+        $attributes      = $Product->getAttributes();
+        $productQuantity = $Product->getQuantity();
+        $productNettoSum = $attributes['calculated_nettoSum'];
+
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
+            if ($Discount->getAttribute('lastProductDiscount')) {
+                return;
+            }
+
+            if (!self::isDiscountUsableWithQuantity($Discount, $productQuantity)) {
+                continue;
+            }
+
+            if (!self::isDiscountUsableWithPurchaseValue($Discount, $productNettoSum)) {
+                continue;
+            }
+
             $Product->getPriceFactors()->addToEnd(
                 $Discount->toPriceFactor(
                     $Calc->getUser()->getLocale()
@@ -101,10 +172,12 @@ class EventHandling
      *
      * @param Calc $Calc
      * @param ProductList $List
+     * @param integer|double|float $nettoSum
      */
     public static function onQuiqqerProductsCalcList(
         Calc $Calc,
-        ProductList $List
+        ProductList $List,
+        $nettoSum
     ) {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
@@ -121,8 +194,22 @@ class EventHandling
             return;
         }
 
+        $listQuantity = $List->getQuantity();
+
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
+            if ($Discount->getAttribute('lastSumDiscount')) {
+                return;
+            }
+
+            if (!self::isDiscountUsableWithQuantity($Discount, $listQuantity)) {
+                continue;
+            }
+
+            if (!self::isDiscountUsableWithPurchaseValue($Discount, $nettoSum)) {
+                continue;
+            }
+
             $List->getPriceFactors()->addToEnd(
                 $Discount->toPriceFactor(
                     $Calc->getUser()->getLocale()

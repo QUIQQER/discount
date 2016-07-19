@@ -126,7 +126,8 @@ class Handler extends QUI\CRUD\Factory
             'combined',
             'priority',
             'scope',
-            'lastDiscount'
+            'lastSumDiscount',
+            'lastProductDiscount'
         );
     }
 

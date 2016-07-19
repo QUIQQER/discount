@@ -246,6 +246,20 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
+        // usage definitions / limits
+        $dateFrom  = $this->getAttribute('date_from');
+        $dateUntil = $this->getAttribute('date_until');
+        $now       = time();
+
+        if ($dateFrom && strtotime($dateFrom) > $now) {
+            return false;
+        }
+
+        if ($dateUntil && strtotime($dateUntil) < $now) {
+            return false;
+        }
+
+        // assignment
         $userGroupValue = $this->getAttribute('user_groups');
         $areasValue     = $this->getAttribute('areas');
 
