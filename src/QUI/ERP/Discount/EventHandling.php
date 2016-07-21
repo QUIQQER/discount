@@ -75,11 +75,11 @@ class EventHandling
             return true;
         }
 
-        if ($purchaseQuantityFrom > $quantity) {
+        if (!empty($purchaseQuantityFrom) && $purchaseQuantityFrom > $quantity) {
             return false;
         }
 
-        if ($purchaseQuantityUntil < $quantity) {
+        if (!empty($purchaseQuantityUntil) && $purchaseQuantityUntil < $quantity) {
             return false;
         }
 
@@ -103,11 +103,11 @@ class EventHandling
             return true;
         }
 
-        if ($purchaseValueFrom > $value) {
+        if (!empty($purchaseValueFrom) && $purchaseValueFrom > $value) {
             return false;
         }
 
-        if ($purchaseValueUntil < $value) {
+        if (!empty($purchaseValueUntil) && $purchaseValueUntil < $value) {
             return false;
         }
 
@@ -147,10 +147,6 @@ class EventHandling
 
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
-            if ($Discount->getAttribute('lastProductDiscount')) {
-                return;
-            }
-
             if (!self::isDiscountUsableWithQuantity($Discount, $productQuantity)) {
                 continue;
             }
@@ -164,6 +160,10 @@ class EventHandling
                     $Calc->getUser()->getLocale()
                 )
             );
+
+            if ($Discount->getAttribute('lastProductDiscount')) {
+                return;
+            }
         }
     }
 
@@ -198,10 +198,6 @@ class EventHandling
 
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
-            if ($Discount->getAttribute('lastSumDiscount')) {
-                return;
-            }
-
             if (!self::isDiscountUsableWithQuantity($Discount, $listQuantity)) {
                 continue;
             }
@@ -209,12 +205,16 @@ class EventHandling
             if (!self::isDiscountUsableWithPurchaseValue($Discount, $nettoSum)) {
                 continue;
             }
-
+            
             $List->getPriceFactors()->addToEnd(
                 $Discount->toPriceFactor(
                     $Calc->getUser()->getLocale()
                 )
             );
+
+            if ($Discount->getAttribute('lastSumDiscount')) {
+                return;
+            }
         }
     }
 }
