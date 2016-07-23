@@ -20,7 +20,8 @@
     "php": ">=5.3",
     "quiqqer/quiqqer": "*@dev",
     "quiqqer/areas": "*",
-    "quiqqer/products": "*"
+    "quiqqer/products": "*",
+    "quiqqer/tax": "*"
   },
   "autoload": {
     "psr-4": {

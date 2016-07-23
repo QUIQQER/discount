@@ -41,6 +41,11 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_SCOPE_UNIQUE = 3;
 
     /**
+     * pricefactor discount type
+     */
+    const DISCOUNT_PRICEFACTOR_TYPE = 'DISCOUNT_PRICE_FACTOR';
+
+    /**
      * Handler constructor.
      */
     public function __construct()
@@ -127,7 +132,8 @@ class Handler extends QUI\CRUD\Factory
             'priority',
             'scope',
             'lastSumDiscount',
-            'lastProductDiscount'
+            'lastProductDiscount',
+            'vat'
         );
     }
 

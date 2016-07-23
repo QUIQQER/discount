@@ -17,6 +17,7 @@
             <field type="INT( 1 )">lastSumDiscount</field>
             <field type="INT( 1 )">lastProductDiscount</field>
             <field type="INT( 1 )">scope</field>
+            <field type="varchar(20)">vat</field>
 
             <field type="text">areas</field>
             <field type="text">articles</field>

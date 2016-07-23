@@ -34,6 +34,21 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         DISCOUNT_TYPE_CURRENCY: 2,
 
         /**
+         * discount scope -> discount is for every product
+         */
+        DISCOUNT_SCOPE_EVERY_PRODUCT: 1,
+
+        /**
+         * discount scope -> discount is for all products (for the complete order)
+         */
+        DISCOUNT_SCOPE_TOTAL: 2,
+
+        /**
+         * discount scope -> discount is for all products (for the complete order)
+         */
+        DISCOUNT_SCOPE_UNIQUE: 3,
+
+        /**
          * Search discounts
          *
          * @param {Object} [fields] - fields to search

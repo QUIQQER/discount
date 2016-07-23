@@ -106,6 +106,14 @@
             <de><![CDATA[Titel]]></de>
             <en><![CDATA[Title]]></en>
         </locale>
+        <locale name="control.edit.template.vat">
+            <de><![CDATA[MwSt.]]></de>
+            <en><![CDATA[VAT]]></en>
+        </locale>
+        <locale name="control.edit.template.vatDesc">
+            <de><![CDATA[Mehrwertsteuer Zuweisung]]></de>
+            <en><![CDATA[VAT assignment]]></en>
+        </locale>
         <locale name="control.edit.template.discount">
             <de><![CDATA[Rabatt]]></de>
             <en><![CDATA[Discount]]></en>

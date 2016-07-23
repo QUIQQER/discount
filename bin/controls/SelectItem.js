@@ -5,6 +5,7 @@
  *
  * @require qui/controls/Control
  * @require package/quiqqer/discount/bin/classes/Handler
+ * @require Locale
  * @require css!package/quiqqer/discount/bin/controls/SelectItem.css
  */
 define('package/quiqqer/discount/bin/controls/SelectItem', [

@@ -346,7 +346,7 @@ class Discount extends QUI\CRUD\Child
      * Parse the discount to a price factor
      *
      * @param null|QUI\Locale $Locale - optional, locale object
-     * @return QUI\ERP\Products\Utils\PriceFactor
+     * @return QUI\ERP\Products\Interfaces\PriceFactorWithVat|QUI\ERP\Products\Interfaces\PriceFactor
      */
     public function toPriceFactor($Locale = null)
     {
@@ -374,6 +374,19 @@ class Discount extends QUI\CRUD\Child
         $Config = $Plugin->getConfig();
 
         $hideDiscounts = (int)$Config->getValue('products', 'hideDiscounts');
+
+        if ($this->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL) {
+            return new PriceFactor(array(
+                'title'       => $this->getTitle($Locale),
+                'description' => '',
+                'priority'    => (int)$this->getAttribute('priority'),
+                'calculation' => $calculation,
+                'basis'       => $basis,
+                'value'       => $this->getAttribute('discount') * -1,
+                'visible'     => $hideDiscounts ? false : true,
+                'vat'         => $this->getAttribute('vat')
+            ));
+        }
 
         return new QUI\ERP\Products\Utils\PriceFactor(array(
             'title'       => $this->getTitle($Locale),

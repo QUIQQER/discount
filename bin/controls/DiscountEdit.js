@@ -6,10 +6,13 @@
  * @require qui/QUI
  * @require qui/controls/Control
  * @require qui/controls/buttons/Button
+ * @require qui/utils/Form
  * @require Locale
- * @require package/quiqqer/discount/bin/classes/Handler
+ * @require Mustache
+ * @require package/quiqqer/discount/bin/Discounts
  * @require package/quiqqer/translator/bin/controls/VariableTranslation
  * @require text!package/quiqqer/discount/bin/controls/DiscountEdit.html
+ * @require css!package/quiqqer/discount/bin/controls/DiscountEdit.css
  *
  * @event onLoaded
  */
@@ -21,19 +24,17 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
     'qui/utils/Form',
     'Locale',
     'Mustache',
-    'package/quiqqer/discount/bin/classes/Handler',
+    'package/quiqqer/discount/bin/Discounts',
     'package/quiqqer/translator/bin/controls/Update',
 
     'text!package/quiqqer/discount/bin/controls/DiscountEdit.html',
     'css!package/quiqqer/discount/bin/controls/DiscountEdit.css'
 
 ], function (QUI, QUIControl, QUIButton, QUIFormUtils, QUILocale,
-             Mustache, Handler, Translation, template) {
+             Mustache, Discounts, Translation, template) {
     "use strict";
 
     var lg = 'quiqqer/discount';
-
-    var Discounts = new Handler();
 
     return new Class({
 
@@ -71,6 +72,8 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 title                       : QUILocale.get(lg, 'control.edit.template.title'),
                 discount                    : QUILocale.get(lg, 'control.edit.template.discount'),
                 usageHeader                 : QUILocale.get(lg, 'control.edit.template.usage'),
+                usageVat                    : QUILocale.get(lg, 'control.edit.template.vat'),
+                usageVatDesc                : QUILocale.get(lg, 'control.edit.template.vatDesc'),
                 usageFrom                   : QUILocale.get(lg, 'control.edit.template.usage.from'),
                 usageTo                     : QUILocale.get(lg, 'control.edit.template.usage.to'),
                 usageAmountOf               : QUILocale.get(lg, 'control.edit.template.shopping.amount.of'),
@@ -163,6 +166,33 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     self.$Elm.setStyles({
                         overflow: null
                     });
+
+                    var Vat    = self.$Elm.getElement('[name="vat"]'),
+                        VatRow = Vat.getParent('tr'),
+                        Scope  = self.$Elm.getElement('[name="scope"]');
+
+                    var hideVatRow = function () {
+                        VatRow.setStyle('display', 'none');
+                    };
+
+                    var showVatRow = function () {
+                        VatRow.setStyle('display', null);
+                    };
+
+                    Scope.addEvent('change', function (event) {
+                        var value = event.target.value;
+
+                        if (parseInt(value) == Discounts.DISCOUNT_SCOPE_TOTAL) {
+                            showVatRow();
+                            return;
+                        }
+
+                        hideVatRow();
+                    });
+
+                    if (parseInt(Scope.value) !== Discounts.DISCOUNT_SCOPE_TOTAL) {
+                        hideVatRow();
+                    }
 
                     moofx(self.$Elm).animate({
                         opacity: 1

@@ -9,3 +9,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.discount-edit-vat {
+    height: 32px
+}
+
+.discount-edit-vat .field-container-field,
+.discount-edit-vat .field-container-item {
+    line-height: 30px;
+    padding: 0 0.75em;
+}
