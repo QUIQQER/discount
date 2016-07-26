@@ -195,6 +195,7 @@ class EventHandling
         }
 
         $listQuantity = $List->getQuantity();
+        $products     = $List->getProducts();
 
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
@@ -205,7 +206,63 @@ class EventHandling
             if (!self::isDiscountUsableWithPurchaseValue($Discount, $nettoSum)) {
                 continue;
             }
-            
+
+            // product list check
+            $productIds = $Discount->getAttribute('articles');
+
+            if ($productIds) {
+                $productIds = explode(',', $productIds);
+
+                // product id check
+                $existProductIdInList = function ($products, $productIds) {
+                    foreach ($products as $Product) {
+                        foreach ($productIds as $productId) {
+                            /* @var $Product UniqueProduct */
+                            if ($Product->getId() == $productId) {
+                                return true;
+                            }
+                        }
+                    }
+
+                    return false;
+                };
+
+                if (!$existProductIdInList($products, $productIds)) {
+                    continue;
+                }
+            }
+
+            // category list check
+            $categories = $Discount->getAttribute('categories');
+
+            if ($categories) {
+                $categories = explode(',', $categories);
+
+                // product category check
+                $existCategoryInList = function ($products, $categories) {
+                    foreach ($products as $Product) {
+                        /* @var $Product UniqueProduct */
+                        $productCategories = $Product->getCategories();
+
+                        foreach ($productCategories as $Category) {
+                            /* @var $Category QUI\ERP\Products\Category\Category */
+                            foreach ($categories as $categoryId) {
+                                if ($Category->getId() == $categoryId) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+
+                    return false;
+                };
+
+                if (!$existCategoryInList($products, $categories)) {
+                    continue;
+                }
+            }
+
+
             $List->getPriceFactors()->addToEnd(
                 $Discount->toPriceFactor(
                     $Calc->getUser()->getLocale()
