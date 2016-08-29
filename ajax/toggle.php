@@ -15,7 +15,7 @@ QUI::$Ajax->registerFunction(
         $Handler  = new QUI\ERP\Discount\Handler();
         $Discount = $Handler->getChild($discountId);
 
-        /* @var $Tax \QUI\ERP\Tax\TaxEntry */
+        /* @var $Discount \QUI\ERP\Discount\Discount */
         if ($Discount->isActive()) {
             $Discount->setAttribute('active', 0);
         } else {

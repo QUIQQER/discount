@@ -5,7 +5,7 @@
  */
 
 /**
- * Returns a discount
+ * Return a discount
  *
  * @param string $id - Discount-ID
  *
@@ -14,10 +14,11 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_get',
     function ($id) {
-        $Discounts = new QUI\ERP\Discount\Handler();
-        $Discount = $Discounts->getChild($id);
+        $Discounts  = new QUI\ERP\Discount\Handler();
+        $Discount   = $Discounts->getChild($id);
         $attributes = $Discount->getAttributes();
 
+        /* @var $Discount \QUI\ERP\Discount\Discount */
         $attributes['title'] = $Discount->getTitle();
 
         return $attributes;

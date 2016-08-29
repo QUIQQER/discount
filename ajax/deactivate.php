@@ -15,6 +15,7 @@ QUI::$Ajax->registerFunction(
         $Handler  = new QUI\ERP\Discount\Handler();
         $Discount = $Handler->getChild($discountId);
 
+        /* @var $Discount \QUI\ERP\Discount\Discount */
         $Discount->setAttribute('active', 0);
         $Discount->update();
 

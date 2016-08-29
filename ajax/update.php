@@ -5,7 +5,7 @@
  */
 
 /**
- * Returns discount list
+ * Update a discount
  *
  * @param string|int $discountId - Discount-ID
  * @param string $params - JSON Discount attributes

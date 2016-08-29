@@ -5,7 +5,7 @@
  */
 
 /**
- * Returns discount list
+ * Search for discounts
  *
  * @param string $params - JSON query params
  *
@@ -44,7 +44,7 @@ QUI::$Ajax->registerFunction(
             }
 
             $query['where_or'][$field] = array(
-                'type' => '%LIKE%',
+                'type'  => '%LIKE%',
                 'value' => $value
             );
         }

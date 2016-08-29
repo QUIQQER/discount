@@ -2,90 +2,48 @@
  * Discount entry for a discount select
  *
  * @module package/quiqqer/discount/bin/controls/SelectItem
+ * @author www.pcsg.de (Henning Leutz)
  *
  * @require qui/controls/Control
  * @require package/quiqqer/discount/bin/classes/Handler
  * @require Locale
- * @require css!package/quiqqer/discount/bin/controls/SelectItem.css
  */
 define('package/quiqqer/discount/bin/controls/SelectItem', [
 
-    'qui/controls/Control',
+    'qui/QUI',
+    'qui/controls/elements/SelectItem',
     'package/quiqqer/discount/bin/classes/Handler',
-    'Locale',
+    'Locale'
 
-    'css!package/quiqqer/discount/bin/controls/SelectItem.css'
-
-], function (QUIControl, Handler, QUILocale) {
+], function (QUI, QUISelectItem, Handler, QUILocale) {
     "use strict";
 
     var Discounts = new Handler();
 
     return new Class({
-        Extends: QUIControl,
+        Extends: QUISelectItem,
         Type   : 'package/quiqqer/discount/bin/controls/SelectItem',
 
         Binds: [
-            '$onInject'
+            'refresh'
         ],
-
-        options: {
-            id: false
-        },
 
         initialize: function (options) {
             this.parent(options);
-
-            this.$Icon    = null;
-            this.$Text    = null;
-            this.$Destroy = null;
-
-            this.addEvents({
-                onInject: this.$onInject
-            });
-        },
-
-        /**
-         * Return the DOMNode Element
-         *
-         * @returns {HTMLElement}
-         */
-        create: function () {
-            var self = this,
-                Elm  = this.parent();
-
-            Elm.set({
-                'class': 'quiqqer-discount-display smooth',
-                html   : '<span class="quiqqer-discount-display-icon fa fa-percent"></span>' +
-                         '<span class="quiqqer-discount-display-text">&nbsp;</span>' +
-                         '<span class="quiqqer-discount-display-destroy fa fa-remove"></span>'
-            });
-
-            this.$Icon    = Elm.getElement('.quiqqer-discount-display-icon');
-            this.$Text    = Elm.getElement('.quiqqer-discount-display-text');
-            this.$Destroy = Elm.getElement('.quiqqer-discount-display-destroy');
-
-            this.$Destroy.addEvent('click', function () {
-                self.destroy();
-            });
-
-            return Elm;
+            this.setAttribute('icon', 'fa fa-percent');
         },
 
         /**
          * event : on inject
          */
-        $onInject: function () {
+        refresh: function () {
             var self = this;
 
             this.$Text.set({
                 html: '<span class="fa fa-spinner fa-spin"></span>'
             });
 
-            Discounts.getChild(
-                this.getAttribute('id')
-            ).then(function (data) {
-
+            Discounts.getChild(this.getAttribute('id')).then(function (data) {
                 var locale = QUILocale.get(
                     'quiqqer/discount',
                     'discount.' + data.id + '.title'
