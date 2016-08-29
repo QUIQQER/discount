@@ -15,7 +15,7 @@
                     <span class="field-container-item">
                         {{id}}
                     </span>
-                    <div class="field-container-field field-id"></div>
+                    <span class="field-container-field field-id"></span>
                 </label>
             </td>
         </tr>
@@ -25,7 +25,7 @@
                     <span class="field-container-item">
                         {{title}}
                     </span>
-                    <div class="field-container-field discount-title"></div>
+                    <span class="field-container-field discount-title"></span>
                 </label>
             </td>
         </tr>
@@ -179,10 +179,10 @@
                     <span class="field-container-item" title="{{usageLastSumDiscountDesc}}">
                         {{usageLastSumDiscount}}
                     </span>
-                    <div class="field-container-field">
+                    <span class="field-container-field">
                         <input type="checkbox" name="lastSumDiscount"/>
                         {{usageLastSumDiscountDesc}}
-                    </div>
+                    </span>
                 </label>
             </td>
         </tr>
@@ -192,10 +192,10 @@
                     <span class="field-container-item" title="{{usageLastProductDiscountDesc}}">
                         {{usageLastProductDiscount}}
                     </span>
-                    <div class="field-container-field">
+                    <span class="field-container-field">
                         <input type="checkbox" name="lastProductDiscount"/>
                         {{usageLastProductDiscountDesc}}
-                    </div>
+                    </span>
                 </label>
             </td>
         </tr>
@@ -248,8 +248,7 @@
                     </span>
                     <span class="field-container-field field-container-field-no-padding">
                         <input type="text" name="user_groups"
-                               class="users_and_groups"
-                               data-qui="controls/usersAndGroups/Input"
+                               data-qui="controls/usersAndGroups/Select"
                         />
                     </span>
                 </label>

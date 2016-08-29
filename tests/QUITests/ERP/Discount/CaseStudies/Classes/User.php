@@ -17,11 +17,17 @@ class User extends QUI\Users\User
     public $lang = 'de';
     public $company = false;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->refresh();
     }
 
+    /**
+     * refreshing
+     */
     public function refresh()
     {
         $this->Locale = new QUI\Locale();
