@@ -4,8 +4,6 @@
  * @module package/quiqqer/discount/bin/controls/Select
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
  * @require qui/controls/elements/Select
  * @require package/quiqqer/discount/bin/controls/SelectItem
  * @require package/quiqqer/discount/bin/classes/Handler
@@ -84,10 +82,12 @@ define('package/quiqqer/discount/bin/controls/Select', [
         },
 
         /**
+         * event : on search button click
          *
-         * @param {Object} Btn
+         * @param {Object} self - select object
+         * @param {Object} Btn - button object
          */
-        $onSearchButtonClick: function (Btn) {
+        $onSearchButtonClick: function (self, Btn) {
             Btn.setAttribute('icon', 'fa fa-spinner fa-spin');
 
             require([
