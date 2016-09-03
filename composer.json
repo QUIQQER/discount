@@ -2,7 +2,7 @@
   "name": "quiqqer/discount",
   "type": "quiqqer-plugin",
   "description": "Discounts",
-  "version": "dev-master",
+  "version": "0.9.0",
   "license": "",
   "authors": [
     {
@@ -18,7 +18,7 @@
   },
   "require": {
     "php": ">=5.3",
-    "quiqqer/quiqqer": "*@dev",
+    "quiqqer/quiqqer": "*",
     "quiqqer/areas": "*",
     "quiqqer/products": "*",
     "quiqqer/tax": "*"
