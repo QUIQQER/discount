@@ -2,28 +2,28 @@
 <database>
     <global>
         <table name="discounts">
-            <field type="INT( 10 ) NOT NULL PRIMARY KEY">id</field>
-            <field type="INT( 1 )">active</field>
-            <field type="varchar( 255 )">discount</field>
-            <field type="int(2)">discount_type</field>
-            <field type="text">date_from</field>
-            <field type="text">date_until</field>
-            <field type="INT( 10 )">purchase_quantity_from</field>
-            <field type="INT( 10 )">purchase_quantity_until</field>
-            <field type="text">purchase_value_from</field>
-            <field type="text">purchase_value_until</field>
-            <field type="INT( 1 )">price_calculation_basis</field>
-            <field type="INT( 4 )">priority</field>
-            <field type="INT( 1 )">lastSumDiscount</field>
-            <field type="INT( 1 )">lastProductDiscount</field>
-            <field type="INT( 1 )">scope</field>
+            <field type="INT(10) NOT NULL PRIMARY KEY">id</field>
+            <field type="INT(1) DEFAULT 0">active</field>
+            <field type="varchar(255) NULL">discount</field>
+            <field type="int(2) NULL">discount_type</field>
+            <field type="text NULL">date_from</field>
+            <field type="text NULL">date_until</field>
+            <field type="INT(10) NULL">purchase_quantity_from</field>
+            <field type="INT(10) NULL">purchase_quantity_until</field>
+            <field type="text NULL">purchase_value_from</field>
+            <field type="text NULL">purchase_value_until</field>
+            <field type="INT(1) NULL">price_calculation_basis</field>
+            <field type="INT(4) NULL">priority</field>
+            <field type="INT(1) NULL">lastSumDiscount</field>
+            <field type="INT(1) NULL">lastProductDiscount</field>
+            <field type="INT(1) NULL">scope</field>
             <field type="varchar(20)">vat</field>
 
-            <field type="text">areas</field>
-            <field type="text">articles</field>
-            <field type="text">categories</field>
-            <field type="text">user_groups</field>
-            <field type="text">combined</field>
+            <field type="text NULL">areas</field>
+            <field type="text NULL">articles</field>
+            <field type="text NULL">categories</field>
+            <field type="text NULL">user_groups</field>
+            <field type="text NULL">combined</field>
 
             <auto_increment>id</auto_increment>
         </table>

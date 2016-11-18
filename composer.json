@@ -19,9 +19,9 @@
   "require": {
     "php": ">=5.3",
     "quiqqer/quiqqer": "*@dev",
-    "quiqqer/areas": "*",
-    "quiqqer/products": "*",
-    "quiqqer/tax": "*"
+    "quiqqer/areas": "*@dev",
+    "quiqqer/products": "*@dev",
+    "quiqqer/tax": "*@dev"
   },
   "autoload": {
     "psr-4": {
