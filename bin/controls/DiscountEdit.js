@@ -145,8 +145,9 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     QUIFormUtils.setDataToForm(data, Form);
 
                     self.$Translate = new Translation({
-                        'group': lg,
-                        'var'  : 'discount.' + data.id + '.title'
+                        'group'  : lg,
+                        'var'    : 'discount.' + data.id + '.title',
+                        'package': 'quiqqer/discount'
                     }).inject(
                         Elm.getElement('.discount-title')
                     );
