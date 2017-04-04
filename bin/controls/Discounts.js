@@ -96,7 +96,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
             });
 
             this.addButton({
-                type: 'seperator'
+                type: 'separator'
             });
 
             this.addButton({
