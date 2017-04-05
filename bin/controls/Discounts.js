@@ -397,10 +397,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                                 }).inject(Sheet.getContent());
 
                                 Sheet.addButton({
-                                    text     : QUILocale.get(
-                                        'quiqqer/system',
-                                        'save'
-                                    ),
+                                    text     : QUILocale.get('quiqqer/system', 'save'),
                                     textimage: 'fa fa-save',
                                     events   : {
                                         click: function () {
@@ -440,7 +437,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                     ids: str
                 }),
                 icon       : 'fa fa-trash',
-                textimage  : 'fa fa-trash',
+                texticon   : 'fa fa-trash',
                 maxHeight  : 300,
                 maxWidth   : 450,
                 autoclose  : false,

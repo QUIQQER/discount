@@ -14,7 +14,7 @@ use QUI;
  *
  * @package QUI\ERP\Discount
  */
-class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\Products\Interfaces\PriceFactorWithVat
+class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface
 {
     /**
      * @var string

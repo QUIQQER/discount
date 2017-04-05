@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\ERP\Discount\EventHandling
  */
+
 namespace QUI\ERP\Discount;
 
 use QUI;
