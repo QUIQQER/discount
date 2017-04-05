@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\ERP\Discount\Discount
  */
+
 namespace QUI\ERP\Discount;
 
 use QUI;
@@ -28,7 +29,7 @@ class Discount extends QUI\CRUD\Child
     public function __construct($id, Handler $Factory)
     {
         parent::__construct($id, $Factory);
-
+        parent::refresh();
 
         // attributes
         switch ($this->getAttribute('discount_type')) {
@@ -346,7 +347,7 @@ class Discount extends QUI\CRUD\Child
      * Parse the discount to a price factor
      *
      * @param null|QUI\Locale $Locale - optional, locale object
-     * @return QUI\ERP\Products\Interfaces\PriceFactorWithVat|QUI\ERP\Products\Interfaces\PriceFactor
+     * @return QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface|QUI\ERP\Products\Interfaces\PriceFactorInterface
      */
     public function toPriceFactor($Locale = null)
     {
