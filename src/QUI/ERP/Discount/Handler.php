@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\ERP\Discount\Handler
  */
+
 namespace QUI\ERP\Discount;
 
 use QUI;
@@ -76,7 +77,8 @@ class Handler extends QUI\CRUD\Factory
             try {
                 QUI\Translator::addUserVar('quiqqer/discount', $newVar, array(
                     $current   => $title,
-                    'datatype' => 'php,js'
+                    'datatype' => 'php,js',
+                    'package'  => 'quiqqer/discount'
                 ));
             } catch (QUI\Exception $Exception) {
                 QUI::getMessagesHandler()->addAttention(
