@@ -93,6 +93,14 @@
             <de><![CDATA[Priorität]]></de>
             <en><![CDATA[Priority]]></en>
         </locale>
+        <locale name="discount.grid.status.active">
+            <de><![CDATA[Rabatt ist aktiv. Klick um zu deaktivieren]]></de>
+            <en><![CDATA[Discount is active. Click to clear]]></en>
+        </locale>
+        <locale name="discount.grid.status.inactive">
+            <de><![CDATA[Rabatt ist inaktiv. Klick um zu aktivieren]]></de>
+            <en><![CDATA[Discount is inactive. Click to activate]]></en>
+        </locale>
 
         <locale name="control.edit.template.header">
             <de><![CDATA[Rabatt]]></de>

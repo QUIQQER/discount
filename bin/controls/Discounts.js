@@ -254,7 +254,6 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
          * @return {Promise}
          */
         refresh: function () {
-
             var self = this;
 
             this.Loader.show();
@@ -278,6 +277,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                         entry.status = {
                             icon      : 'fa fa-check',
                             discountId: entry.id,
+                            title     : QUILocale.get(lg, 'discount.grid.status.active'),
                             styles    : {
                                 lineHeight: 16
                             },
@@ -289,6 +289,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                         entry.status = {
                             icon      : 'fa fa-remove',
                             discountId: entry.id,
+                            title     : QUILocale.get(lg, 'discount.grid.status.inactive'),
                             styles    : {
                                 lineHeight: 16
                             },
@@ -300,7 +301,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
 
                     entry.discountTypeText = '%';
 
-                    if (parseInt(entry.discount_type) == Discounts.DISCOUNT_TYPE_CURRENCY) {
+                    if (parseInt(entry.discount_type) === Discounts.DISCOUNT_TYPE_CURRENCY) {
                         entry.discountTypeText = '€';
                     }
 
@@ -483,10 +484,12 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
         $setTaxEntryButtonStatus: function (Button, status) {
             if (status) {
                 Button.setAttribute('icon', 'fa fa-check');
+                Button.setAttribute('title', QUILocale.get(lg, 'discount.grid.status.active'));
                 return;
             }
 
             Button.setAttribute('icon', 'fa fa-remove');
+            Button.setAttribute('title', QUILocale.get(lg, 'discount.grid.status.inactive'));
         }
     });
 });
