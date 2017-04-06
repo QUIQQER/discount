@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locales>
     <groups name="quiqqer/discount" datatype="php,js">
+        <locale name="package.title">
+            <de><![CDATA[QUIQQER - Shop - Rabatte]]></de>
+            <en><![CDATA[QUIQQER - Shop - Discounts]]></en>
+        </locale>
+        <locale name="package.description" html="true">
+            <de><![CDATA[Rabatt Schnittstelle für die ERP Verwaltung.]]></de>
+            <en><![CDATA[Discount API for the ERP System.]]></en>
+        </locale>
         <locale name="menu.erp.title">
             <de><![CDATA[Shop]]></de>
             <en><![CDATA[Shop]]></en>
@@ -15,27 +23,27 @@
     <groups name="quiqqer/discount" datatype="php">
         <locale name="exception.discount.date_from.wrong">
             <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Nutzbar von' an]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Please enter a correct entry for 'Available from']]></en>
         </locale>
         <locale name="exception.discount.date_until.wrong">
             <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Nutzbar bis' an]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Please enter a correct entry for 'Available until']]></en>
         </locale>
         <locale name="exception.discount.purchase_quantity_from.wrong">
             <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufsmenge von' an]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Please enter a correct entry for 'Purchase quantity from']]></en>
         </locale>
         <locale name="exception.discount.purchase_quantity_until.wrong">
             <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufsmenge bis' an]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Please enter a correct entry for 'Purchase quantity until']]></en>
         </locale>
         <locale name="exception.discount.purchase_value_from.wrong">
             <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufswert von' an]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Please enter a correct entry for 'Purchase value from']]></en>
         </locale>
         <locale name="exception.discount.purchase_value_until.wrong">
             <de><![CDATA[Bitte geben Sie eine korrekte Angabe für 'Einkaufswert bis' an]]></de>
-            <en><![CDATA[]]></en>
+            <en><![CDATA[Please enter a correct entry for 'Purchase value until']]></en>
         </locale>
 
     </groups>
