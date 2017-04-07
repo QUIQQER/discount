@@ -9,6 +9,7 @@
             <de><![CDATA[Rabatt Schnittstelle für die ERP Verwaltung.]]></de>
             <en><![CDATA[Discount API for the ERP System.]]></en>
         </locale>
+
         <locale name="menu.erp.title">
             <de><![CDATA[Shop]]></de>
             <en><![CDATA[Shop]]></en>
@@ -17,6 +18,24 @@
             <de><![CDATA[Rabatte]]></de>
             <en><![CDATA[Discounts]]></en>
         </locale>
+
+        <locale name="permission.quiqqer.discount._header">
+            <de><![CDATA[Shop - Rabatte]]></de>
+            <en><![CDATA[Shop - Discounts]]></en>
+        </locale>
+        <locale name="permission.quiqqer.discount.edit">
+            <de><![CDATA[Darf Rabatte editieren.]]></de>
+            <en><![CDATA[Is allowed to edit discounts.]]></en>
+        </locale>
+        <locale name="permission.quiqqer.discount.create">
+            <de><![CDATA[Darf Rabatte erstellen.]]></de>
+            <en><![CDATA[Is allowed to create discounts.]]></en>
+        </locale>
+        <locale name="permission.quiqqer.discount.delete">
+            <de><![CDATA[Darf Rabatte löschen.]]></de>
+            <en><![CDATA[Is allowed to delete discounts.]]></en>
+        </locale>
+
     </groups>
 
 
