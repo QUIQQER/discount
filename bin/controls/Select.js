@@ -36,7 +36,8 @@ define('package/quiqqer/discount/bin/controls/Select', [
         Type   : 'package/quiqqer/discount/bin/controls/Select',
 
         Binds: [
-            'searchDiscounts'
+            'searchDiscounts',
+            '$onSearchButtonClick'
         ],
 
         initialize: function (options) {

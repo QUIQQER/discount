@@ -61,7 +61,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ',' . $cleanup . ',';
+            $cleanup = ','.$cleanup.',';
         }
 
         $this->setAttribute('user_groups', $cleanup);
@@ -72,7 +72,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ',' . $cleanup . ',';
+            $cleanup = ','.$cleanup.',';
         }
 
         $this->setAttribute('articles', $cleanup);
@@ -83,7 +83,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ',' . $cleanup . ',';
+            $cleanup = ','.$cleanup.',';
         }
 
         $this->setAttribute('user_groups', $cleanup);
@@ -94,7 +94,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ',' . $cleanup . ',';
+            $cleanup = ','.$cleanup.',';
         }
 
         $this->setAttribute('articles', $cleanup);
@@ -108,7 +108,7 @@ class Discount extends QUI\CRUD\Child
         $this->Events->addEvent('onDeleteEnd', function () {
             QUI\Translator::delete(
                 'quiqqer/discount',
-                'discount.' . $this->getId() . '.title'
+                'discount.'.$this->getId().'.title'
             );
         });
 
@@ -118,19 +118,19 @@ class Discount extends QUI\CRUD\Child
             if ($this->getAttribute('date_from')
                 && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_from'))
             ) {
-                throw new QUI\ERP\Discount\Exception(array(
+                throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.date_from.wrong'
-                ));
+                ]);
             }
 
             if ($this->getAttribute('date_until')
                 && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_until'))
             ) {
-                throw new QUI\ERP\Discount\Exception(array(
+                throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.date_until.wrong'
-                ));
+                ]);
             }
 
             $purchaseQuantityFrom  = $this->getAttribute('purchase_quantity_from');
@@ -139,43 +139,53 @@ class Discount extends QUI\CRUD\Child
             $purchaseValueUntil    = $this->getAttribute('purchase_value_until');
 
 
-            if ($purchaseQuantityFrom === false
-                || $purchaseQuantityFrom < 0
-            ) {
-                throw new QUI\ERP\Discount\Exception(array(
+            if ($purchaseQuantityFrom === false || $purchaseQuantityFrom < 0) {
+                throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_quantity_from.wrong'
-                ));
+                ]);
             }
 
 
-            if ($purchaseQuantityUntil === false
-                || $purchaseQuantityUntil < 0
-            ) {
-                throw new QUI\ERP\Discount\Exception(array(
+            if ($purchaseQuantityUntil === false || $purchaseQuantityUntil < 0) {
+                throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_quantity_until.wrong'
-                ));
+                ]);
             }
 
-            if ($purchaseValueFrom === false
-                || $purchaseValueFrom < 0
-            ) {
-                throw new QUI\ERP\Discount\Exception(array(
+            if ($purchaseValueFrom === false || $purchaseValueFrom < 0) {
+                throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_value_from.wrong'
-                ));
+                ]);
             }
 
-            if ($purchaseValueUntil === false
-                || $purchaseValueUntil < 0
-            ) {
-                throw new QUI\ERP\Discount\Exception(array(
+            if ($purchaseValueUntil === false || $purchaseValueUntil < 0) {
+                throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_value_until.wrong'
-                ));
+                ]);
             }
         });
+    }
+
+    /**
+     * @param string $key
+     * @param array|bool|object|string $value
+     * @return QUI\QDOM|void
+     */
+    public function setAttribute($key, $value)
+    {
+        if ($key === 'lastSumDiscount' && empty($value)) {
+            $value = null;
+        }
+
+        if ($key === 'lastProductDiscount' && empty($value)) {
+            $value = null;
+        }
+
+        parent::setAttribute($key, $value);
     }
 
     /**
@@ -192,7 +202,7 @@ class Discount extends QUI\CRUD\Child
 
         return $Locale->get(
             'quiqqer/discount',
-            'discount.' . $this->getId() . '.title'
+            'discount.'.$this->getId().'.title'
         );
     }
 
@@ -312,14 +322,14 @@ class Discount extends QUI\CRUD\Child
     public function verifyCombinationWith(Discount $Discount)
     {
         if ($this->canCombinedWith($Discount) === false) {
-            throw new QUI\ERP\Discount\Exception(array(
+            throw new QUI\ERP\Discount\Exception([
                 'quiqqer/discount',
                 'exception.discount.not.combinable',
-                array(
+                [
                     'id'         => $this->getId(),
                     'discountId' => $Discount->getId()
-                )
-            ));
+                ]
+            ]);
         }
     }
 
@@ -332,14 +342,14 @@ class Discount extends QUI\CRUD\Child
     public function verifyUser(User $User)
     {
         if ($this->canUsedBy($User) === false) {
-            throw new QUI\ERP\Discount\Exception(array(
+            throw new QUI\ERP\Discount\Exception([
                 'quiqqer/discount',
                 'exception.discount.user.cant.use.discount',
-                array(
+                [
                     'id'     => $this->getId(),
                     'userId' => $User->getId()
-                )
-            ));
+                ]
+            ]);
         }
     }
 
@@ -377,7 +387,7 @@ class Discount extends QUI\CRUD\Child
         $hideDiscounts = (int)$Config->getValue('products', 'hideDiscounts');
 
         if ($this->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL) {
-            return new PriceFactor(array(
+            return new PriceFactor([
                 'title'       => $this->getTitle($Locale),
                 'description' => '',
                 'priority'    => (int)$this->getAttribute('priority'),
@@ -386,10 +396,10 @@ class Discount extends QUI\CRUD\Child
                 'value'       => $this->getAttribute('discount') * -1,
                 'visible'     => $hideDiscounts ? false : true,
                 'vat'         => $this->getAttribute('vat')
-            ));
+            ]);
         }
 
-        return new QUI\ERP\Products\Utils\PriceFactor(array(
+        return new QUI\ERP\Products\Utils\PriceFactor([
             'title'       => $this->getTitle($Locale),
             'description' => '',
             'priority'    => (int)$this->getAttribute('priority'),
@@ -397,6 +407,6 @@ class Discount extends QUI\CRUD\Child
             'basis'       => $basis,
             'value'       => $this->getAttribute('discount') * -1,
             'visible'     => $hideDiscounts ? false : true
-        ));
+        ]);
     }
 }
