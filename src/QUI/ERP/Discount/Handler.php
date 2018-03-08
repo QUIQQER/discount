@@ -60,7 +60,7 @@ class Handler extends QUI\CRUD\Factory
         // create new translation var for the discount
         $this->Events->addEvent('onCreateEnd', function ($New, $data) {
             /* @var $New QUI\ERP\Discount\Discount */
-            $newVar  = 'discount.' . $New->getId() . '.title';
+            $newVar  = 'discount.'.$New->getId().'.title';
             $current = QUI::getLocale()->getCurrent();
 
             $title = $New->getAttribute('title');
@@ -75,11 +75,11 @@ class Handler extends QUI\CRUD\Factory
             }
 
             try {
-                QUI\Translator::addUserVar('quiqqer/discount', $newVar, array(
+                QUI\Translator::addUserVar('quiqqer/discount', $newVar, [
                     $current   => $title,
                     'datatype' => 'php,js',
                     'package'  => 'quiqqer/discount'
-                ));
+                ]);
             } catch (QUI\Exception $Exception) {
                 QUI::getMessagesHandler()->addAttention(
                     $Exception->getMessage()
@@ -115,7 +115,7 @@ class Handler extends QUI\CRUD\Factory
      */
     public function getChildAttributes()
     {
-        return array(
+        return [
             'active',
             'discount',
             'discount_type',
@@ -136,7 +136,7 @@ class Handler extends QUI\CRUD\Factory
             'lastSumDiscount',
             'lastProductDiscount',
             'vat'
-        );
+        ];
     }
 
     /**
@@ -146,7 +146,7 @@ class Handler extends QUI\CRUD\Factory
      * @param array $queryParams
      * @return array - [Child, Child, Child]
      */
-    public function getChildrenData($queryParams = array())
+    public function getChildrenData($queryParams = [])
     {
         if (!isset($queryParams['order'])) {
             $queryParams['order'] = 'priority ASC';

@@ -26,7 +26,7 @@ class EventHandling
     /**
      * @var array
      */
-    protected static $userDiscounts = array();
+    protected static $userDiscounts = [];
 
     /**
      * Return the global
@@ -142,7 +142,14 @@ class EventHandling
             return;
         }
 
-        $attributes      = $Product->getAttributes();
+        try {
+            $attributes = $Product->getAttributes();
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::writeDebugException($Exception);
+
+            return;
+        }
+
         $productQuantity = $Product->getQuantity();
         $productNettoSum = $attributes['calculated_nettoSum'];
 

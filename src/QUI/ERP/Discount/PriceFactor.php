@@ -43,6 +43,7 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\
      * Return the vat type of the discount price factor
      *
      * @return QUI\ERP\Tax\TaxType
+     * @throws QUI\Exception
      */
     public function getVatType()
     {
@@ -64,5 +65,17 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\
         }
 
         return QUI\ERP\Tax\Utils::getShopTaxType();
+    }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        $attributes = parent::toArray();
+
+        $attributes['vat'] = $this->vat;
+
+        return $attributes;
     }
 }
