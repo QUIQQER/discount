@@ -72,6 +72,10 @@ class EventHandling
         $purchaseQuantityFrom  = $Discount->getAttribute('purchase_quantity_from');
         $purchaseQuantityUntil = $Discount->getAttribute('purchase_quantity_until');
 
+        if ($quantity === 0) {
+            return false;
+        }
+
         if ($purchaseQuantityFrom === false && $purchaseQuantityUntil === false) {
             return true;
         }
@@ -99,6 +103,13 @@ class EventHandling
     {
         $purchaseValueFrom  = $Discount->getAttribute('purchase_value_from');
         $purchaseValueUntil = $Discount->getAttribute('purchase_value_until');
+
+        // wenn complement, z.B. 10€, muss geprüft werden
+        // ob meine value grösser ist als der gegebene value
+        if ((int)$Discount->getAttribute('discount_type') === Calc::CALCULATION_COMPLEMENT
+            && $Discount->getAttribute('discount') > $value) {
+            return false;
+        }
 
         if ($purchaseValueFrom === false && $purchaseValueUntil === false) {
             return true;
