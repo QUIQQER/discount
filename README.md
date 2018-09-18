@@ -1,27 +1,40 @@
-Rabatte
+QUIQQER Discounts
 ========
 
-Rabatt Schnittstelle für die ERP Verwaltung.
+![Discounts](bin/images/Readme.jpg)
 
+Create discounts for user groups, specific users as well as time controlled.
+With the QUIQQER discounts all this is no problem.
 
-Paketname:
+Package:
 
     quiqqer/discount
 
 
-Features (Funktionen)
+Features
 --------
 
-- Rabatt Verwaltung
-- Rabatt API
+- Discount management
+- Discount API
+- A number of allocations and constraints are available:
+    - Time-controlled from to
+    - Purchasing quantity
+    - Purchasing value
+    - Different discount scopes
+    - Single or multiple discount
+    - Product assignment
+    - Product category assignment
+    - User assignment
+    - Area assignment
+     
 
 Installation
 ------------
 
-Der Paketname ist: quiqqer/discount
+The package name is: quiqqer/discount
 
 
-Mitwirken
+Contribution
 ----------
 
 - Issue Tracker: https://dev.quiqqer.com/quiqqer/discount/issues
@@ -35,12 +48,6 @@ Falls Sie ein Fehler gefunden haben, oder Verbesserungen wünschen,
 dann können Sie gerne an support@pcsg.de eine E-Mail schreiben.
 
 
-Lizenz
+Licence
 -------
 
-
-
-Entwickler
---------
-
-Events
