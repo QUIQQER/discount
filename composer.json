@@ -3,7 +3,9 @@
   "type": "quiqqer-plugin",
   "description": "Discounts",
   "version": "dev-master",
-  "license": "",
+  "license": [
+    "PCSG QEL-1.0"
+  ],
   "authors": [
     {
       "name": "Henning Leutz",

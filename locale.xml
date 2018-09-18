@@ -6,8 +6,18 @@
             <en><![CDATA[QUIQQER - Shop - Discounts]]></en>
         </locale>
         <locale name="package.description" html="true">
-            <de><![CDATA[Rabatt Schnittstelle für die ERP Verwaltung.]]></de>
-            <en><![CDATA[Discount API for the ERP System.]]></en>
+            <de><![CDATA[
+            Erstelle Rabatte für Benutzergruppen, bestimmte Benutzer sowie zeitgesteuerte Rabatte.
+            Mit den QUIQQQER Rabatten ist das alles kein Problem.
+
+            QUIQQQER Rabatte ist eine Erweiterung für das QUIQQER ERP-System und funktioniert perfekt mit QUIQQER Coupons.
+            ]]></de>
+            <en><![CDATA[
+            Create discounts for user groups, specific users as well as time controlled.
+            With the QUIQQER discounts all this is no problem.
+
+            QUIQQER Discount is an extension for the QUIQQER ERP System and works perfectly with QUIQQER Coupons.
+            ]]></en>
         </locale>
 
         <locale name="menu.erp.title">
