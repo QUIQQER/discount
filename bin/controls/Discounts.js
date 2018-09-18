@@ -55,11 +55,11 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
          * event : on create
          */
         $onCreate: function () {
-
             var self = this;
 
             this.setAttributes({
-                title: QUILocale.get(lg, 'discount.panel.title')
+                title: QUILocale.get(lg, 'discount.panel.title'),
+                icon : 'fa fa-cart-arrow-down'
             });
 
             // buttons
@@ -311,7 +311,7 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                     if (parseInt(entry.discount_type) === Discounts.DISCOUNT_TYPE_CURRENCY) {
                         entry.discountTypeText = '€';
                     }
-                    
+
                     result.data[i] = entry;
                 }
 

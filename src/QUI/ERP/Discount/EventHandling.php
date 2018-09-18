@@ -146,6 +146,12 @@ class EventHandling
 
         $userDiscounts = array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
+
+            // don't use manuel usage type
+            if ((int)$Discount->getAttribute('usage_type') === Handler::DISCOUNT_USAGE_TYPE_MANUEL) {
+                return false;
+            }
+
             return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_EVERY_PRODUCT;
         });
 
@@ -206,6 +212,12 @@ class EventHandling
 
         $userDiscounts = array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
+
+            // don't use manuel usage type
+            if ((int)$Discount->getAttribute('usage_type') === Handler::DISCOUNT_USAGE_TYPE_MANUEL) {
+                return false;
+            }
+
             return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL;
         });
 
