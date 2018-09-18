@@ -5,6 +5,7 @@
             <field type="INT(10) NOT NULL PRIMARY KEY">id</field>
             <field type="INT(1) DEFAULT 0">active</field>
             <field type="varchar(255) NULL">discount</field>
+            <field type="int(2) NULL">usage_type</field>
             <field type="int(2) NULL">discount_type</field>
             <field type="text NULL">date_from</field>
             <field type="text NULL">date_until</field>

@@ -3,11 +3,6 @@
  *
  * @module package/quiqqer/discount/bin/controls/Select
  * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/controls/elements/Select
- * @require package/quiqqer/discount/bin/controls/SelectItem
- * @require package/quiqqer/discount/bin/classes/Handler
- * @require Locale
  */
 define('package/quiqqer/discount/bin/controls/Select', [
 

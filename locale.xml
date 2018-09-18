@@ -35,7 +35,6 @@
             <de><![CDATA[Darf Rabatte löschen.]]></de>
             <en><![CDATA[Is allowed to delete discounts.]]></en>
         </locale>
-
     </groups>
 
 
@@ -127,6 +126,10 @@
         <locale name="discount.grid.status.inactive">
             <de><![CDATA[Rabatt ist inaktiv. Klick um zu aktivieren]]></de>
             <en><![CDATA[Discount is inactive. Click to activate]]></en>
+        </locale>
+        <locale name="discount.grid.usage_type">
+            <de><![CDATA[Ausführung]]></de>
+            <en><![CDATA[Execution]]></en>
         </locale>
 
         <locale name="control.edit.template.header">
@@ -306,6 +309,30 @@
             <en><![CDATA[Edit discount [id]]]></en>
         </locale>
 
+        <locale name="discount.usage_type">
+            <de><![CDATA[Ausführung]]></de>
+            <en><![CDATA[Execution]]></en>
+        </locale>
+        <locale name="discount.usage_type.description">
+            <de><![CDATA[
+Manuell: Dieser Rabett kann nur manuell zu einer Bestellung hinzufügt werden. Zum Beispiel durch einen Gutschein-Code oder eine Erweiterung.
+
+Automatisch: Dieser Rabatt wird automatisch einer Bestellung hinzufügt wenn die Bedingungen zutreffen.
+            ]]></de>
+            <en><![CDATA[
+Manual: This discount can only be added manually to an order. For example, by a coupon code or an extension.
+
+Automatic: This discount is automatically added to an order if the conditions apply.
+            ]]></en>
+        </locale>
+        <locale name="discount.usage_type.manuel">
+            <de><![CDATA[Manuell hinzufügen (z.B.: Gutschein-Code)]]></de>
+            <en><![CDATA[Add manuel (eq: Coupon code)]]></en>
+        </locale>
+        <locale name="discount.usage_type.automatic">
+            <de><![CDATA[Automatisch hinzufügen]]></de>
+            <en><![CDATA[Add automatically]]></en>
+        </locale>
 
     </groups>
 

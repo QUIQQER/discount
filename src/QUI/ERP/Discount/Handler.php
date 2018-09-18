@@ -47,6 +47,17 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_PRICEFACTOR_TYPE = 'DISCOUNT_PRICE_FACTOR';
 
     /**
+     * discount usage type -> the discount will be used manuel
+     */
+    const DISCOUNT_USAGE_TYPE_MANUEL = 0;
+
+    /**
+     * discount usage type -> the discount will be used manuel
+     */
+    const DISCOUNT_USAGE_TYPE_AUTOMATIC = 1;
+
+
+    /**
      * Handler constructor.
      */
     public function __construct()
@@ -118,6 +129,7 @@ class Handler extends QUI\CRUD\Factory
         return [
             'active',
             'discount',
+            'usage_type',
             'discount_type',
             'date_from',
             'date_until',

@@ -49,6 +49,16 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         DISCOUNT_SCOPE_UNIQUE: 3,
 
         /**
+         * discount usage type -> the discount will be used manuel
+         */
+        DISCOUNT_USAGE_TYPE_MANUEL: 0,
+
+        /**
+         * discount usage type -> the discount will be used manuel
+         */
+        DISCOUNT_USAGE_TYPE_AUTOMATIC: 1,
+
+        /**
          * Search discounts
          *
          * @param {Object} [fields] - fields to search
