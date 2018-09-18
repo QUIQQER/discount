@@ -1,10 +1,13 @@
-QUIQQER Discounts
+QUIQQER Discount
 ========
 
 ![Discounts](bin/images/Readme.jpg)
 
 Create discounts for user groups, specific users as well as time controlled.
 With the QUIQQER discounts all this is no problem.
+
+QUIQQER Discount is an extension for the QUIQQER ERP System and 
+works perfectly with QUIQQER Coupons.
 
 Package:
 
