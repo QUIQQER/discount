@@ -7,7 +7,7 @@
         <description>
             <locale group="quiqqer/discount" var="package.title"/>
         </description>
-        
+
         <support>
             <email><![CDATA[support@pcsg.de]]></email>
             <forum><![CDATA[https://community.quiqqer.com]]></forum>
