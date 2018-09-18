@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\ERP\Discount\Exception
  */
+
 namespace QUI\ERP\Discount;
 
 use QUI;
@@ -13,5 +14,4 @@ use QUI;
  */
 class Exception extends QUI\Exception
 {
-
 }

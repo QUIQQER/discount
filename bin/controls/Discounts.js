@@ -4,15 +4,6 @@
  *
  * @author www.pcsg.de (Henning Leutz)
  * @module package/quiqqer/discount/bin/controls/Discounts
- *
- * @require qui/QUI
- * @require qui/controls/desktop/Panel
- * @require qui/controls/buttons/Button
- * @require qui/controls/windows/Confirm
- * @require qui/controls/windows/Prompt
- * @require controls/grid/Grid
- * @require Locale
- * @require package/quiqqer/discount/bin/classes/Handler
  */
 define('package/quiqqer/discount/bin/controls/Discounts', [
 
@@ -177,6 +168,11 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                     dataType : 'number',
                     width    : 100
                 }, {
+                    header   : QUILocale.get(lg, 'discount.grid.usage_type'),
+                    dataIndex: 'usageTypeText',
+                    dataType : 'string',
+                    width    : 100
+                }, {
                     header   : QUILocale.get(lg, 'discount.grid.areas'),
                     dataIndex: 'areas',
                     dataType : 'string',
@@ -265,13 +261,18 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                 perPage: this.$Grid.options.perPage,
                 page   : this.$Grid.options.page
             }).then(function (result) {
-                var i, len, active, entry, discountType;
+                var i, len, active, entry, discountType, usage_type;
 
                 for (i = 0, len = result.data.length; i < len; i++) {
                     entry  = result.data[i];
                     active = parseInt(result.data[i].active);
 
                     discountType = parseInt(result.data[i].discount_type);
+                    usage_type   = parseInt(result.data[i].usage_type);
+
+                    if (!usage_type) {
+                        usage_type = 0;
+                    }
 
                     if (active) {
                         entry.status = {
@@ -301,10 +302,16 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
 
                     entry.discountTypeText = '%';
 
+                    if (usage_type === 0) {
+                        entry.usageTypeText = QUILocale.get(lg, 'discount.usage_type.manuel');
+                    } else {
+                        entry.usageTypeText = QUILocale.get(lg, 'discount.usage_type.automatic');
+                    }
+
                     if (parseInt(entry.discount_type) === Discounts.DISCOUNT_TYPE_CURRENCY) {
                         entry.discountTypeText = '€';
                     }
-
+                    
                     result.data[i] = entry;
                 }
 

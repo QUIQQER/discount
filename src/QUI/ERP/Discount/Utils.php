@@ -3,6 +3,7 @@
 /**
  * This file contains QUI\ERP\Discount\Utils
  */
+
 namespace QUI\ERP\Discount;
 
 use QUI\ERP\Products\Product\Product;
@@ -25,25 +26,25 @@ class Utils
     public static function getUserDiscounts(UserInterface $User)
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ',' . str_replace(',', ',|,', $guString) . ',';
+        $guString = ','.str_replace(',', ',|,', $guString).',';
 
-        $result    = array();
+        $result    = [];
         $Discounts = new Handler();
 
-        $personalDiscounts = $Discounts->getChildren(array(
-            'where' => array(
-                'user_groups' => array(
+        $personalDiscounts = $Discounts->getChildren([
+            'where' => [
+                'user_groups' => [
                     'type'  => 'REGEXP',
                     'value' => $guString
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
-        $discounts = $Discounts->getChildren(array(
-            'where' => array(
+        $discounts = $Discounts->getChildren([
+            'where' => [
                 'user_groups' => ''
-            )
-        ));
+            ]
+        ]);
 
 
         if (!empty($personalDiscounts)) {
@@ -65,23 +66,23 @@ class Utils
      */
     public static function getProductDiscounts(Product $Product)
     {
-        $result    = array();
+        $result    = [];
         $Discounts = new Handler();
 
-        $productDiscounts = $Discounts->getChildren(array(
-            'where' => array(
-                'user_groups' => array(
+        $productDiscounts = $Discounts->getChildren([
+            'where' => [
+                'user_groups' => [
                     'type'  => 'REGEXP',
-                    'value' => ',' . $Product->getId() . ','
-                )
-            )
-        ));
+                    'value' => ','.$Product->getId().','
+                ]
+            ]
+        ]);
 
-        $discounts = $Discounts->getChildren(array(
-            'where' => array(
+        $discounts = $Discounts->getChildren([
+            'where' => [
                 'user_groups' => ''
-            )
-        ));
+            ]
+        ]);
 
 
         if (!empty($productDiscounts)) {
@@ -104,27 +105,27 @@ class Utils
     public static function getActiveUserDiscounts(UserInterface $User)
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ',' . str_replace(',', ',|,', $guString) . ',';
+        $guString = ','.str_replace(',', ',|,', $guString).',';
 
-        $result    = array();
+        $result    = [];
         $Discounts = new Handler();
 
-        $personalDiscounts = $Discounts->getChildren(array(
-            'where' => array(
+        $personalDiscounts = $Discounts->getChildren([
+            'where' => [
                 'active'      => 1,
-                'user_groups' => array(
+                'user_groups' => [
                     'type'  => 'REGEXP',
                     'value' => $guString
-                )
-            )
-        ));
+                ]
+            ]
+        ]);
 
-        $discounts = $Discounts->getChildren(array(
-            'where' => array(
+        $discounts = $Discounts->getChildren([
+            'where' => [
                 'active'      => 1,
                 'user_groups' => ''
-            )
-        ));
+            ]
+        ]);
 
 
         if (!empty($personalDiscounts)) {
@@ -147,7 +148,7 @@ class Utils
     public static function getUsableUserDiscounts(UserInterface $User)
     {
         $discounts = self::getActiveUserDiscounts($User);
-        $result    = array();
+        $result    = [];
 
         /* @var $Discount Discount */
         foreach ($discounts as $Discount) {

@@ -149,7 +149,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td>
                 <label class="field-container">
                     <span class="field-container-item" title="{{usageScope}}">
                         {{usageScope}}
@@ -159,6 +159,19 @@
                         <option value="1">{{usageScopeEvery}}</option>
                         <option value="2">{{usageScopeTotal}}</option>
                         <option value="3">{{usageScopeUnique}}</option>
+                    </select>
+                </label>
+            </td>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item">
+                        {{usageType}}
+                        <span class="field-container-item-help"
+                              title="{{usageTypeDescription}}"></span>
+                    </span>
+                    <select name="usage_type" class="field-container-field">
+                        <option value="0">{{usageTypeManuel}}</option>
+                        <option value="1">{{usageTypeAutomatic}}</option>
                     </select>
                 </label>
             </td>

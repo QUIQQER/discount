@@ -16,7 +16,7 @@ QUI::$Ajax->registerFunction(
     function ($params) {
         $Grid      = new QUI\Utils\Grid();
         $Discounts = new QUI\ERP\Discount\Handler();
-        $result    = array();
+        $result    = [];
         $Locale    = QUI::getLocale();
 
         // search
@@ -25,17 +25,18 @@ QUI::$Ajax->registerFunction(
         );
 
         foreach ($data as $entry) {
-            $entry['title'] = array(
+            $entry['title'] = [
                 'quiqqer/discount',
-                'discount.' . $entry['id'] . '.title'
-            );
+                'discount.'.$entry['id'].'.title'
+            ];
 
             $entry['text'] = $Locale->get(
                 'quiqqer/discount',
-                'discount.' . $entry['id'] . '.title'
+                'discount.'.$entry['id'].'.title'
             );
 
-            $type = (int)$entry['discount_type'];
+            $type      = (int)$entry['discount_type'];
+            $usageType = (int)$entry['usage_type'];
 
             // attributes
             switch ($type) {
@@ -48,11 +49,21 @@ QUI::$Ajax->registerFunction(
                     break;
             }
 
+            switch ($usageType) {
+                case QUI\ERP\Discount\Handler::DISCOUNT_USAGE_TYPE_MANUEL:
+                case QUI\ERP\Discount\Handler::DISCOUNT_USAGE_TYPE_AUTOMATIC:
+                    break;
+
+                default:
+                    $entry['usage_type'] = QUI\ERP\Discount\Handler::DISCOUNT_USAGE_TYPE_MANUEL;
+                    break;
+            }
+
             $result[] = $entry;
         }
 
         return $Grid->parseResult($result, $Discounts->countChildren());
     },
-    array('params'),
+    ['params'],
     'Permission::checkAdminUser'
 );

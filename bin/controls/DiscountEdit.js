@@ -3,17 +3,6 @@
  *
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
- * @require qui/utils/Form
- * @require Locale
- * @require Mustache
- * @require package/quiqqer/discount/bin/Discounts
- * @require package/quiqqer/translator/bin/controls/VariableTranslation
- * @require text!package/quiqqer/discount/bin/controls/DiscountEdit.html
- * @require css!package/quiqqer/discount/bin/controls/DiscountEdit.css
- *
  * @event onLoaded
  */
 define('package/quiqqer/discount/bin/controls/DiscountEdit', [
@@ -101,7 +90,12 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 usageAssignmentProduct : QUILocale.get(lg, 'control.edit.template.assignment.product'),
                 usageAssignmentCategory: QUILocale.get(lg, 'control.edit.template.assignment.category'),
                 usageAssignmentUser    : QUILocale.get(lg, 'control.edit.template.assignment.user'),
-                usageAssignmentCombine : QUILocale.get(lg, 'control.edit.template.assignment.combine')
+                usageAssignmentCombine : QUILocale.get(lg, 'control.edit.template.assignment.combine'),
+
+                usageType           : QUILocale.get(lg, 'discount.usage_type'),
+                usageTypeDescription: QUILocale.get(lg, 'discount.usage_type.description'),
+                usageTypeManuel     : QUILocale.get(lg, 'discount.usage_type.manuel'),
+                usageTypeAutomatic  : QUILocale.get(lg, 'discount.usage_type.automatic')
             }));
 
 
@@ -130,6 +124,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     self.getAttribute('discountId')
                 ).then(function (data) {
 
+                    data.usage_type    = parseInt(data.usage_type);
                     data.discount_type = parseInt(data.discount_type);
                     data.priority      = parseInt(data.priority);
 
@@ -140,6 +135,15 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
 
                         default:
                             data.discount_type = Discounts.DISCOUNT_TYPE_PERCENT;
+                    }
+
+                    switch (data.usage_type) {
+                        case Discounts.DISCOUNT_USAGE_TYPE_MANUEL:
+                        case Discounts.DISCOUNT_USAGE_TYPE_AUTOMATIC:
+                            break;
+
+                        default:
+                            data.usage_type = Discounts.DISCOUNT_USAGE_TYPE_MANUEL;
                     }
 
                     QUIFormUtils.setDataToForm(data, Form);
