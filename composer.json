@@ -2,7 +2,7 @@
   "name": "quiqqer/discount",
   "type": "quiqqer-plugin",
   "description": "Discounts",
-  "version": "dev-master",
+  "version": "dev-dev",
   "license": [
     "PCSG QEL-1.0"
   ],
