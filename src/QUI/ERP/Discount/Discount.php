@@ -362,23 +362,23 @@ class Discount extends QUI\CRUD\Child
     public function toPriceFactor($Locale = null)
     {
         switch ($this->getAttribute('discount_type')) {
-            case Calc::CALCULATION_PERCENTAGE:
-                $calculation = Calc::CALCULATION_PERCENTAGE;
+            case QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE:
+                $calculation = QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE;
                 break;
 
             default:
-            case Calc::CALCULATION_COMPLEMENT:
-                $calculation = Calc::CALCULATION_COMPLEMENT;
+            case QUI\ERP\Accounting\Calc::CALCULATION_COMPLEMENT:
+                $calculation = QUI\ERP\Accounting\Calc::CALCULATION_COMPLEMENT;
                 break;
         }
 
         switch ($this->getAttribute('price_calculation_basis')) {
-            case Calc::CALCULATION_BASIS_NETTO:
-                $basis = Calc::CALCULATION_BASIS_NETTO;
+            case QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO:
+                $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO;
                 break;
 
             default:
-                $basis = Calc::CALCULATION_BASIS_CURRENTPRICE;
+                $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_CURRENTPRICE;
         }
 
         $Plugin = QUI::getPackage('quiqqer/products');
