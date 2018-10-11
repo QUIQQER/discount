@@ -64,8 +64,52 @@ class Handler extends QUI\CRUD\Factory
     {
         parent::__construct();
 
-        $this->Events->addEvent('onCreateBegin', function () {
+        $this->Events->addEvent('onCreateBegin', function (&$childData) {
             Permission::checkPermission('quiqqer.discount.create');
+
+            if (empty($childData['usage_type'])) {
+                $childData['usage_type'] = self::DISCOUNT_USAGE_TYPE_MANUEL;
+            }
+
+            if (empty($childData['discount_type'])) {
+                $childData['discount_type'] = self::DISCOUNT_TYPE_CURRENCY;
+            }
+
+            if (empty($childData['active'])) {
+                $childData['active'] = 0;
+            }
+
+            if (empty($childData['price_calculation_basis'])) {
+                $childData['price_calculation_basis'] = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO;
+            }
+
+            $attributes = [
+                'discount',
+                'usage_type',
+                'discount_type',
+                'date_from',
+                'date_until',
+                'price_calculation_basis',
+                'purchase_quantity_from',
+                'purchase_quantity_until',
+                'purchase_value_from',
+                'purchase_value_until',
+                'areas',
+                'articles',
+                'categories',
+                'user_groups',
+                'combined',
+                'priority',
+                'scope',
+                'lastSumDiscount',
+                'lastProductDiscount',
+            ];
+
+            foreach ($attributes as $attribute) {
+                if (!isset($childData[$attribute]) || $childData[$attribute] === '') {
+                    $childData[$attribute] = null;
+                }
+            }
         });
 
         // create new translation var for the discount
