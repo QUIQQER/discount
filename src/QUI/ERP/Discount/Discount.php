@@ -146,7 +146,6 @@ class Discount extends QUI\CRUD\Child
                 ]);
             }
 
-
             if ($purchaseQuantityUntil === false || $purchaseQuantityUntil < 0) {
                 throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
@@ -166,6 +165,35 @@ class Discount extends QUI\CRUD\Child
                     'quiqqer/discount',
                     'exception.discount.purchase_value_until.wrong'
                 ]);
+            }
+
+            // default nulls
+            $attributes = [
+                'discount',
+                'usage_type',
+                'discount_type',
+                'date_from',
+                'date_until',
+                'price_calculation_basis',
+                'purchase_quantity_from',
+                'purchase_quantity_until',
+                'purchase_value_from',
+                'purchase_value_until',
+                'areas',
+                'articles',
+                'categories',
+                'user_groups',
+                'combined',
+                'priority',
+                'scope',
+                'lastSumDiscount',
+                'lastProductDiscount',
+            ];
+
+            foreach ($attributes as $attribute) {
+                if ($this->getAttribute($attribute) === '') {
+                    $this->setAttribute($attribute, null);
+                }
             }
         });
     }
