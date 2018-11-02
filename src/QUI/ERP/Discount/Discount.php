@@ -342,6 +342,51 @@ class Discount extends QUI\CRUD\Child
     }
 
     /**
+     * is the discount usable with this product?
+     *
+     * @param QUI\ERP\Products\Interfaces\ProductInterface $Product
+     * @return boolean
+     */
+    public function canUsedWith(QUI\ERP\Products\Interfaces\ProductInterface $Product)
+    {
+        if ($this->isActive() === false) {
+            return false;
+        }
+
+        $articles = $this->getAttribute('articles');
+        $articles = explode(',', $articles);
+
+        $categories = $this->getAttribute('categories');
+        $categories = explode(',', $categories);
+
+        // article / product check
+        if (empty($articles) && empty($categories)) {
+            return true;
+        }
+
+        // article / product check
+        foreach ($articles as $articleId) {
+            if ((int)$Product->getId() === (int)$articleId) {
+                return true;
+            }
+        }
+
+        // category check
+        foreach ($categories as $category) {
+            $productCategories = $Product->getCategories();
+
+            foreach ($productCategories as $Category) {
+                if ((int)$Category->getId() === (int)$category) {
+                    return true;
+                }
+            }
+        }
+
+
+        return false;
+    }
+
+    /**
      * Verify the combination between the discounts
      *
      * @param Discount $Discount
@@ -409,10 +454,15 @@ class Discount extends QUI\CRUD\Child
                 $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_CURRENTPRICE;
         }
 
-        $Plugin = QUI::getPackage('quiqqer/products');
-        $Config = $Plugin->getConfig();
+        try {
+            $Plugin = QUI::getPackage('quiqqer/products');
+            $Config = $Plugin->getConfig();
 
-        $hideDiscounts = (int)$Config->getValue('products', 'hideDiscounts');
+            $hideDiscounts = (int)$Config->getValue('products', 'hideDiscounts');
+        } catch (QUI\Exception $Exception) {
+            $hideDiscounts = false;
+        }
+
 
         if ($this->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL) {
             return new PriceFactor([
