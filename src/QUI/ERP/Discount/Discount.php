@@ -213,6 +213,13 @@ class Discount extends QUI\CRUD\Child
             $value = null;
         }
 
+        if ($key === 'scope' ||
+            $key === 'discount_type' ||
+            $key === 'usage_type'
+        ) {
+            $value = (int)$value;
+        }
+
         parent::setAttribute($key, $value);
     }
 
@@ -353,11 +360,22 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
-        $articles = $this->getAttribute('articles');
-        $articles = explode(',', $articles);
+        // coupon
+        if ($Product->getId() === '-') {
+            return false;
+        }
 
+        $articles   = $this->getAttribute('articles');
         $categories = $this->getAttribute('categories');
-        $categories = explode(',', $categories);
+
+        if (is_string($articles)) {
+            $articles = explode(',', $articles);
+        }
+
+        if (is_string($categories)) {
+            $categories = explode(',', $categories);
+        }
+
 
         // article / product check
         if (empty($articles) && empty($categories)) {
@@ -464,7 +482,7 @@ class Discount extends QUI\CRUD\Child
         }
 
 
-        if ($this->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL) {
+        if ($this->getAttribute('scope') === Handler::DISCOUNT_SCOPE_TOTAL) {
             return new PriceFactor([
                 'title'       => $this->getTitle($Locale),
                 'description' => '',
