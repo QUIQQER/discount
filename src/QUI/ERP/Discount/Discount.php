@@ -10,7 +10,6 @@ use QUI;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
-use QUI\ERP\Products\Utils\Calc;
 
 use QUI\ERP\Areas\Utils as AreaUtils;
 
@@ -390,10 +389,15 @@ class Discount extends QUI\CRUD\Child
         }
 
         // category check
+        if (empty($categories)) {
+            return true;
+        }
+        
         foreach ($categories as $category) {
             $productCategories = $Product->getCategories();
 
             foreach ($productCategories as $Category) {
+                /* @var $Category QUI\ERP\Products\Category\Category */
                 if ((int)$Category->getId() === (int)$category) {
                     return true;
                 }
