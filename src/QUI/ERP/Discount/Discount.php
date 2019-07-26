@@ -389,6 +389,10 @@ class Discount extends QUI\CRUD\Child
         }
 
         // category check
+        if (empty($categories)) {
+            return true;
+        }
+        
         foreach ($categories as $category) {
             $productCategories = $Product->getCategories();
 
