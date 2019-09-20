@@ -57,7 +57,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup user group save
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
-        $cleanup = implode(',', $cleanup);
+        $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ','.$cleanup.',';
@@ -68,7 +68,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup product(s)
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
-        $cleanup = implode(',', $cleanup);
+        $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ','.$cleanup.',';
@@ -79,7 +79,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup user group save
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
-        $cleanup = implode(',', $cleanup);
+        $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ','.$cleanup.',';
@@ -90,7 +90,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup product(s)
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
-        $cleanup = implode(',', $cleanup);
+        $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ','.$cleanup.',';
@@ -264,9 +264,9 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
-        $combine = implode($combine, ',');
+        $combine = \implode($combine, ',');
 
-        if (!is_array($combine)) {
+        if (!\is_array($combine)) {
             return false;
         }
 
@@ -294,13 +294,13 @@ class Discount extends QUI\CRUD\Child
         // usage definitions / limits
         $dateFrom  = $this->getAttribute('date_from');
         $dateUntil = $this->getAttribute('date_until');
-        $now       = time();
+        $now       = \time();
 
-        if ($dateFrom && strtotime($dateFrom) > $now) {
+        if ($dateFrom && \strtotime($dateFrom) > $now) {
             return false;
         }
 
-        if ($dateUntil && strtotime($dateUntil) < $now) {
+        if ($dateUntil && \strtotime($dateUntil) < $now) {
             return false;
         }
 
@@ -367,12 +367,12 @@ class Discount extends QUI\CRUD\Child
         $articles   = $this->getAttribute('articles');
         $categories = $this->getAttribute('categories');
 
-        if (is_string($articles)) {
-            $articles = explode(',', $articles);
+        if (\is_string($articles)) {
+            $articles = \explode(',', $articles);
         }
 
-        if (is_string($categories)) {
-            $categories = explode(',', $categories);
+        if (\is_string($categories)) {
+            $categories = \explode(',', $categories);
         }
 
 
@@ -392,7 +392,7 @@ class Discount extends QUI\CRUD\Child
         if (empty($categories)) {
             return true;
         }
-        
+
         foreach ($categories as $category) {
             $productCategories = $Product->getCategories();
 
