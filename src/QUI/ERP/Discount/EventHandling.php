@@ -35,7 +35,7 @@ class EventHandling
      */
     protected static function getHandler()
     {
-        if (is_null(self::$Handler)) {
+        if (self::$Handler === null) {
             self::$Handler = new Handler();
         }
 
@@ -140,11 +140,11 @@ class EventHandling
     ) {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
-        if (!is_array($userDiscounts)) {
+        if (!\is_array($userDiscounts) || empty($userDiscounts)) {
             return;
         }
 
-        $userDiscounts = array_filter($userDiscounts, function ($Discount) {
+        $userDiscounts = \array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
 
             // don't use manuel usage type
@@ -155,7 +155,7 @@ class EventHandling
             return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_EVERY_PRODUCT;
         });
 
-        if (!is_array($userDiscounts)) {
+        if (!\is_array($userDiscounts) || empty($userDiscounts)) {
             return;
         }
 
@@ -206,11 +206,11 @@ class EventHandling
     ) {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
-        if (!is_array($userDiscounts)) {
+        if (!\is_array($userDiscounts)) {
             return;
         }
 
-        $userDiscounts = array_filter($userDiscounts, function ($Discount) {
+        $userDiscounts = \array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
 
             // don't use manuel usage type
@@ -221,7 +221,7 @@ class EventHandling
             return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL;
         });
 
-        if (!is_array($userDiscounts)) {
+        if (!\is_array($userDiscounts)) {
             return;
         }
 
@@ -242,7 +242,7 @@ class EventHandling
             $productIds = $Discount->getAttribute('articles');
 
             if ($productIds) {
-                $productIds = explode(',', $productIds);
+                $productIds = \explode(',', $productIds);
 
                 // product id check
                 $existProductIdInList = function ($products, $productIds) {
@@ -267,7 +267,7 @@ class EventHandling
             $categories = $Discount->getAttribute('categories');
 
             if ($categories) {
-                $categories = explode(',', $categories);
+                $categories = \explode(',', $categories);
 
                 // product category check
                 $existCategoryInList = function ($products, $categories) {

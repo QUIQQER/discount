@@ -26,7 +26,7 @@ class Utils
     public static function getUserDiscounts(UserInterface $User)
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ','.str_replace(',', ',|,', $guString).',';
+        $guString = ','.\str_replace(',', ',|,', $guString).',';
 
         $result    = [];
         $Discounts = new Handler();
@@ -48,11 +48,11 @@ class Utils
 
 
         if (!empty($personalDiscounts)) {
-            $result = array_merge($personalDiscounts, $result);
+            $result = \array_merge($personalDiscounts, $result);
         }
 
         if (!empty($discounts)) {
-            $result = array_merge($discounts, $result);
+            $result = \array_merge($discounts, $result);
         }
 
         return $result;
@@ -86,11 +86,11 @@ class Utils
 
 
         if (!empty($productDiscounts)) {
-            $result = array_merge($productDiscounts, $result);
+            $result = \array_merge($productDiscounts, $result);
         }
 
         if (!empty($discounts)) {
-            $result = array_merge($discounts, $result);
+            $result = \array_merge($discounts, $result);
         }
 
         return $result;
@@ -105,7 +105,7 @@ class Utils
     public static function getActiveUserDiscounts(UserInterface $User)
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ','.str_replace(',', ',|,', $guString).',';
+        $guString = ','.\str_replace(',', ',|,', $guString).',';
 
         $result    = [];
         $Discounts = new Handler();
@@ -129,11 +129,11 @@ class Utils
 
 
         if (!empty($personalDiscounts)) {
-            $result = array_merge($personalDiscounts, $result);
+            $result = \array_merge($personalDiscounts, $result);
         }
 
         if (!empty($discounts)) {
-            $result = array_merge($discounts, $result);
+            $result = \array_merge($discounts, $result);
         }
 
         return $result;
