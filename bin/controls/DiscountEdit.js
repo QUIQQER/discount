@@ -87,6 +87,11 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 calculationBasisCalcBrutto: QUILocale.get(lg, 'control.edit.template.calculationBasis.calculationBasisCalcBrutto'),
                 calculationPriority       : QUILocale.get(lg, 'control.edit.template.calculationPriority'),
 
+                considerVat      : QUILocale.get(lg, 'control.edit.template.considerVat'),
+                considerVatAuto  : QUILocale.get(lg, 'control.edit.template.considerVat.auto'),
+                considerVatNetto : QUILocale.get(lg, 'control.edit.template.considerVat.netto'),
+                considerVatBrutto: QUILocale.get(lg, 'control.edit.template.considerVat.brutto'),
+
                 usageAssignmentProduct : QUILocale.get(lg, 'control.edit.template.assignment.product'),
                 usageAssignmentCategory: QUILocale.get(lg, 'control.edit.template.assignment.category'),
                 usageAssignmentUser    : QUILocale.get(lg, 'control.edit.template.assignment.user'),

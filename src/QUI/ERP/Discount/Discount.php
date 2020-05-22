@@ -41,6 +41,10 @@ class Discount extends QUI\CRUD\Child
                 break;
         }
 
+        if ($this->getAttribute('consider_vat') === false) {
+            $this->setAttribute('consider_vat', 'auto');
+        }
+
         $scope = (int)$this->getAttribute('scope');
 
         switch ($scope) {
@@ -452,9 +456,11 @@ class Discount extends QUI\CRUD\Child
      * Parse the discount to a price factor
      *
      * @param null|QUI\Locale $Locale - optional, locale object
+     * @param null|QUI\Interfaces\Users\User $Customer - optional,
+     *
      * @return QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface|QUI\ERP\Products\Interfaces\PriceFactorInterface
      */
-    public function toPriceFactor($Locale = null)
+    public function toPriceFactor($Locale = null, $Customer = null)
     {
         switch ($this->getAttribute('discount_type')) {
             case QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE:
@@ -474,6 +480,15 @@ class Discount extends QUI\CRUD\Child
 
             default:
                 $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_CURRENTPRICE;
+        }
+
+        // check calculation basis VAT
+        $useAuto = $this->getAttribute('consider_vat') === 'auto'
+                   && $Customer
+                   && QUI\ERP\Utils\User::isNettoUser($Customer) === false;
+
+        if ($useAuto || $this->getAttribute('consider_vat') === 'brutto') {
+            $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_VAT_BRUTTO;
         }
 
         try {

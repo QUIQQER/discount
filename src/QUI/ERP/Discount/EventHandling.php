@@ -7,6 +7,7 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
+use QUI\ERP\Accounting\Calc as ErpCalc;
 use QUI\ERP\Products\Product\UniqueProduct;
 use QUI\ERP\Products\Utils\Calc;
 use QUI\ERP\Products\Product\ProductList;
@@ -106,7 +107,7 @@ class EventHandling
 
         // wenn complement, z.B. 10€, muss geprüft werden
         // ob meine value grösser ist als der gegebene value
-        if ((int)$Discount->getAttribute('discount_type') === Calc::CALCULATION_COMPLEMENT
+        if ((int)$Discount->getAttribute('discount_type') === ErpCalc::CALCULATION_COMPLEMENT
             && $Discount->getAttribute('discount') > $value) {
             return false;
         }
@@ -182,7 +183,8 @@ class EventHandling
 
             $Product->getPriceFactors()->addToEnd(
                 $Discount->toPriceFactor(
-                    $Calc->getUser()->getLocale()
+                    $Calc->getUser()->getLocale(),
+                    $Calc->getUser()
                 )
             );
 
@@ -296,7 +298,8 @@ class EventHandling
 
             $List->getPriceFactors()->addToEnd(
                 $Discount->toPriceFactor(
-                    $Calc->getUser()->getLocale()
+                    $Calc->getUser()->getLocale(),
+                    $Calc->getUser()
                 )
             );
 

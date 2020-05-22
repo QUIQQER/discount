@@ -9,7 +9,7 @@
         </thead>
 
         <tbody>
-        <tr class="odd">
+        <tr>
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
@@ -19,7 +19,7 @@
                 </label>
             </td>
         </tr>
-        <tr class="even">
+        <tr>
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
@@ -29,7 +29,7 @@
                 </label>
             </td>
         </tr>
-        <tr class="even">
+        <tr>
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
@@ -46,7 +46,7 @@
                 </label>
             </td>
         </tr>
-        <tr class="even">
+        <tr>
             <td>
                 <label class="field-container">
                     <span class="field-container-item" title="{{calculationBasis}}">
@@ -57,6 +57,22 @@
                         <option value="1">{{calculationBasisNetto}}</option>
                         <option value="2">{{calculationBasisCalcPrice}}</option>
                         <option value="3">{{calculationBasisCalcBrutto}}</option>
+                    </select>
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="field-container">
+                    <span class="field-container-item" title="{{calculationBasis}}">
+                        {{considerVat}}
+                    </span>
+                    <select type="text" name="consider_vat"
+                            class="field-container-field" style="width: 100%"
+                    >
+                        <option value="auto">{{considerVatAuto}}</option>
+                        <option value="brutto">{{considerVatBrutto}}</option>
+                        <option value="netto">{{considerVatNetto}}</option>
                     </select>
                 </label>
             </td>
@@ -91,8 +107,7 @@
                         <span class="fa fa-calendar"></span>
                         {{usageFrom}}
                     </span>
-                    <input type="datetime" name="date_from"
-                           class="field-container-field"/>
+                    <input type="datetime" name="date_from" class="field-container-field"/>
                 </label>
             </td>
             <td>
@@ -101,8 +116,7 @@
                         <span class="fa fa-calendar"></span>
                         {{usageTo}}
                     </span>
-                    <input type="datetime" name="date_until"
-                           class="field-container-field"/>
+                    <input type="datetime" name="date_until" class="field-container-field"/>
                 </label>
             </td>
         </tr>
@@ -112,8 +126,7 @@
                     <span class="field-container-item">
                         {{usageAmountOf}}
                     </span>
-                    <input type="number" min="0" name="purchase_quantity_from"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_quantity_from" class="field-container-field"/>
                 </label>
             </td>
             <td>
@@ -121,8 +134,7 @@
                     <span class="field-container-item">
                         {{usageAmountTo}}
                     </span>
-                    <input type="number" min="0" name="purchase_quantity_until"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_quantity_until" class="field-container-field"/>
                 </label>
             </td>
         </tr>
@@ -133,8 +145,7 @@
                         <span class="fa fa-money"></span>
                         {{usageValueOf}}
                     </span>
-                    <input type="number" min="0" name="purchase_value_from"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_value_from" class="field-container-field"/>
                 </label>
             </td>
             <td>
@@ -143,8 +154,7 @@
                         <span class="fa fa-money"></span>
                         {{usageValueTo}}
                     </span>
-                    <input type="number" min="0" name="purchase_value_until"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_value_until" class="field-container-field"/>
                 </label>
             </td>
         </tr>

@@ -278,6 +278,22 @@
             <de><![CDATA[Zonen]]></de>
             <en><![CDATA[Areas]]></en>
         </locale>
+        <locale name="control.edit.template.considerVat">
+            <de><![CDATA[MwSt. beachten]]></de>
+            <en><![CDATA[Consider VAT]]></en>
+        </locale>
+        <locale name="control.edit.template.considerVat.auto">
+            <de><![CDATA[automatisch]]></de>
+            <en><![CDATA[automatic]]></en>
+        </locale>
+        <locale name="control.edit.template.considerVat.netto">
+            <de><![CDATA[netto]]></de>
+            <en><![CDATA[net]]></en>
+        </locale>
+        <locale name="control.edit.template.considerVat.brutto">
+            <de><![CDATA[brutto]]></de>
+            <en><![CDATA[gross]]></en>
+        </locale>
 
         <locale name="control.select.search.placeholder">
             <de><![CDATA[Suche nach einem Rabatt ...]]></de>
