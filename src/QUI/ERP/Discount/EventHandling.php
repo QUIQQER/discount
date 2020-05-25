@@ -68,7 +68,7 @@ class EventHandling
      * @param integer|double|float $quantity
      * @return bool
      */
-    protected static function isDiscountUsableWithQuantity(Discount $Discount, $quantity)
+    public static function isDiscountUsableWithQuantity(Discount $Discount, $quantity)
     {
         $purchaseQuantityFrom  = $Discount->getAttribute('purchase_quantity_from');
         $purchaseQuantityUntil = $Discount->getAttribute('purchase_quantity_until');
@@ -100,7 +100,7 @@ class EventHandling
      * @param integer|double|float $value
      * @return bool
      */
-    protected static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value)
+    public static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value)
     {
         $purchaseValueFrom  = $Discount->getAttribute('purchase_value_from');
         $purchaseValueUntil = $Discount->getAttribute('purchase_value_until');
