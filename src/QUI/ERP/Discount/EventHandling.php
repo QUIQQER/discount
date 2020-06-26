@@ -153,7 +153,7 @@ class EventHandling
                 return false;
             }
 
-            return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_EVERY_PRODUCT;
+            return (int)$Discount->getAttribute('scope') === Handler::DISCOUNT_SCOPE_EVERY_PRODUCT;
         });
 
         if (!\is_array($userDiscounts) || empty($userDiscounts)) {
@@ -168,6 +168,7 @@ class EventHandling
             return;
         }
 
+        $PriceFactors    = $Product->getPriceFactors();
         $productQuantity = $Product->getQuantity();
         $productNettoSum = $attributes['calculated_nettoSum'];
 
@@ -181,12 +182,20 @@ class EventHandling
                 continue;
             }
 
-            $Product->getPriceFactors()->addToEnd(
-                $Discount->toPriceFactor(
-                    $Calc->getUser()->getLocale(),
-                    $Calc->getUser()
-                )
+            // check if Pricefactor is already in
+            $factors = $PriceFactors->toArray();
+            $Factor  = $Discount->toPriceFactor(
+                $Calc->getUser()->getLocale(),
+                $Calc->getUser()
             );
+
+            foreach ($factors['end'] as $factor) {
+                if ($factor['identifier'] === $Factor->getIdentifier()) {
+                    continue 2;
+                }
+            }
+
+            $PriceFactors->addToEnd($Factor);
 
             if ($Discount->getAttribute('lastProductDiscount')) {
                 return;
@@ -220,7 +229,7 @@ class EventHandling
                 return false;
             }
 
-            return $Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL;
+            return (int)$Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL;
         });
 
         if (!\is_array($userDiscounts)) {
@@ -229,6 +238,7 @@ class EventHandling
 
         $listQuantity = $List->getQuantity();
         $products     = $List->getProducts();
+        $PriceFactors = $List->getPriceFactors();
 
         /* @var $Discount Discount */
         foreach ($userDiscounts as $Discount) {
@@ -295,13 +305,20 @@ class EventHandling
                 }
             }
 
-
-            $List->getPriceFactors()->addToEnd(
-                $Discount->toPriceFactor(
-                    $Calc->getUser()->getLocale(),
-                    $Calc->getUser()
-                )
+            // check if Pricefactor is already in
+            $factors = $PriceFactors->toArray();
+            $Factor  = $Discount->toPriceFactor(
+                $Calc->getUser()->getLocale(),
+                $Calc->getUser()
             );
+
+            foreach ($factors['end'] as $factor) {
+                if ($factor['identifier'] === $Factor->getIdentifier()) {
+                    continue 2;
+                }
+            }
+
+            $PriceFactors->addToEnd($Factor);
 
             if ($Discount->getAttribute('lastSumDiscount')) {
                 return;

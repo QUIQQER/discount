@@ -127,6 +127,14 @@ class Utils
             ]
         ]);
 
+        $discountsNULL = $Discounts->getChildren([
+            'where' => [
+                'active'      => 1,
+                'user_groups' => null
+            ]
+        ]);
+
+        $discounts = \array_merge($discounts, $discountsNULL);
 
         if (!empty($personalDiscounts)) {
             $result = \array_merge($personalDiscounts, $result);
@@ -135,6 +143,22 @@ class Utils
         if (!empty($discounts)) {
             $result = \array_merge($discounts, $result);
         }
+
+        $alreadyAttached = [];
+
+        $result = \array_filter($result, function ($Discount) use (&$alreadyAttached) {
+            /* @var $Discount Discount */
+            $id = $Discount->getId();
+
+            if (isset($alreadyAttached[$id])) {
+                return false;
+            }
+
+            $alreadyAttached[$id] = true;
+
+            return true;
+        });
+
 
         return $result;
     }

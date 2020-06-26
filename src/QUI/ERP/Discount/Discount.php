@@ -503,6 +503,7 @@ class Discount extends QUI\CRUD\Child
 
         if ($this->getAttribute('scope') === Handler::DISCOUNT_SCOPE_TOTAL) {
             return new PriceFactor([
+                'identifier'  => 'discount-'.$this->getId(),
                 'title'       => $this->getTitle($Locale),
                 'description' => '',
                 'priority'    => (int)$this->getAttribute('priority'),
@@ -515,6 +516,7 @@ class Discount extends QUI\CRUD\Child
         }
 
         return new QUI\ERP\Products\Utils\PriceFactor([
+            'identifier'  => 'discount-'.$this->getId(),
             'title'       => $this->getTitle($Locale),
             'description' => '',
             'priority'    => (int)$this->getAttribute('priority'),
