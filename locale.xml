@@ -230,8 +230,8 @@
             <en><![CDATA[For each product]]></en>
         </locale>
         <locale name="control.edit.template.usageScopeTotal">
-            <de><![CDATA[Gesamt]]></de>
-            <en><![CDATA[Total]]></en>
+            <de><![CDATA[Von Zwischensumme]]></de>
+            <en><![CDATA[From subtotal]]></en>
         </locale>
         <locale name="control.edit.template.usageScopeUnique">
             <de><![CDATA[Einmalig]]></de>
