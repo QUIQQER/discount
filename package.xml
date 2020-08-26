@@ -8,6 +8,13 @@
             <locale group="quiqqer/discount" var="package.title"/>
         </description>
 
+        <image src="URL_OPT_DIR/quiqqer/discount/bin/images/Logo.jpg"/>
+
+        <preview>
+            <image src="URL_OPT_DIR/quiqqer/discount/bin/images/preview/1.png"/>
+            <image src="URL_OPT_DIR/quiqqer/discount/bin/images/preview/2.png"/>
+        </preview>
+
         <support>
             <email><![CDATA[support@pcsg.de]]></email>
             <forum><![CDATA[https://community.quiqqer.com]]></forum>

@@ -54,3 +54,4 @@ then you are welcome to send an e-mail to support@pcsg.de .
 Licence
 -------
 
+- PCSG QEL-1.0
