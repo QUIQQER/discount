@@ -7,6 +7,7 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
+use QUI\ERP\Order\OrderInterface;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
@@ -393,8 +394,12 @@ class Discount extends QUI\CRUD\Child
         }
 
         // category check
-        if (empty($categories)) {
+        if (empty($articles) && empty($categories)) {
             return true;
+        }
+
+        if (!\is_array($categories)) {
+            return false;
         }
 
         foreach ($categories as $category) {
@@ -408,6 +413,40 @@ class Discount extends QUI\CRUD\Child
             }
         }
 
+
+        return false;
+    }
+
+    /**
+     * @param OrderInterface $Order
+     * @return bool
+     */
+    public function canUsedInOrder(OrderInterface $Order)
+    {
+        if ($this->isActive() === false) {
+            return false;
+        }
+
+        $Articles = $Order->getArticles();
+
+        foreach ($Articles as $Article) {
+            /* @var $Article QUI\ERP\Accounting\Article */
+            $id = $Article->getId();
+
+            if (!\is_numeric($id)) {
+                continue;
+            }
+
+            try {
+                $Product = QUI\ERP\Products\Handler\Products::getProduct($id);
+
+                if ($this->canUsedWith($Product)) {
+                    return true;
+                }
+            } catch (QUI\Exception $Exception) {
+                continue;
+            }
+        }
 
         return false;
     }
