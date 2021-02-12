@@ -282,6 +282,12 @@
             <de><![CDATA[MwSt. beachten]]></de>
             <en><![CDATA[Consider VAT]]></en>
         </locale>
+        <locale name="control.edit.template.considerVat.description">
+            <de><![CDATA[
+            automatisch = Das System bestimmt selbst welche Berechnungs-Grundlage für den Benutzer passt
+            ]]></de>
+            <en><![CDATA[]]></en>
+        </locale>
         <locale name="control.edit.template.considerVat.auto">
             <de><![CDATA[automatisch]]></de>
             <en><![CDATA[automatic]]></en>
