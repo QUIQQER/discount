@@ -234,8 +234,8 @@
             <en><![CDATA[From subtotal]]></en>
         </locale>
         <locale name="control.edit.template.usageScopeUnique">
-            <de><![CDATA[Einmalig]]></de>
-            <en><![CDATA[Unique]]></en>
+            <de><![CDATA[Auf ein Produkt (Einmalig)]]></de>
+            <en><![CDATA[On one product (Unique)]]></en>
         </locale>
 
         <locale name="control.edit.template.shopping.amount.of">
