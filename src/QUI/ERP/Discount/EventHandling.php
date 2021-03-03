@@ -34,7 +34,7 @@ class EventHandling
      *
      * @return Handler
      */
-    protected static function getHandler()
+    protected static function getHandler(): ?Handler
     {
         if (self::$Handler === null) {
             self::$Handler = new Handler();
@@ -49,7 +49,7 @@ class EventHandling
      * @param QUI\Interfaces\Users\User $User
      * @return array
      */
-    protected static function getUserDiscounts(QUI\Interfaces\Users\User $User)
+    protected static function getUserDiscounts(QUI\Interfaces\Users\User $User): array
     {
         if (isset(self::$userDiscounts[$User->getId()])) {
             return self::$userDiscounts[$User->getId()];
@@ -65,10 +65,10 @@ class EventHandling
      * - Einkaufsmengeprüfung
      *
      * @param Discount $Discount
-     * @param integer|double|float $quantity
+     * @param integer|double $quantity
      * @return bool
      */
-    public static function isDiscountUsableWithQuantity(Discount $Discount, $quantity)
+    public static function isDiscountUsableWithQuantity(Discount $Discount, $quantity): bool
     {
         $purchaseQuantityFrom  = $Discount->getAttribute('purchase_quantity_from');
         $purchaseQuantityUntil = $Discount->getAttribute('purchase_quantity_until');
@@ -97,10 +97,10 @@ class EventHandling
      * - Einkaufswertprüfung
      *
      * @param Discount $Discount
-     * @param integer|double|float $value
+     * @param integer|double $value
      * @return bool
      */
-    public static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value)
+    public static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value): bool
     {
         $purchaseValueFrom  = $Discount->getAttribute('purchase_value_from');
         $purchaseValueUntil = $Discount->getAttribute('purchase_value_until');
@@ -208,7 +208,7 @@ class EventHandling
      *
      * @param Calc $Calc
      * @param ProductList $List
-     * @param integer|double|float $nettoSum
+     * @param integer|double $nettoSum
      */
     public static function onQuiqqerProductsCalcList(
         Calc $Calc,
