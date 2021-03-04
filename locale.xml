@@ -374,6 +374,15 @@ Automatic: This discount is automatically added to an order if the conditions ap
             <en><![CDATA[Add automatically]]></en>
         </locale>
 
+        <locale name="window.discount.search.title">
+            <de><![CDATA[Rabattsuche]]></de>
+            <en><![CDATA[Discount search]]></en>
+        </locale>
+        <locale name="control.search.title">
+            <de><![CDATA[Rabatt]]></de>
+            <en><![CDATA[Discount]]></en>
+        </locale>
+
     </groups>
 
 </locales>

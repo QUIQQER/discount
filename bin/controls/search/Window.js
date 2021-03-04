@@ -31,7 +31,7 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
             maxHeight: 600,
             maxWidth : 800,
             icon     : 'fa fa-percent',
-            title    : 'Rabattsuche', // #locale
+            title    : QUILocale.get(lg, 'window.discount.search.title'),
             autoclose: false,
 
             cancel_button: {
@@ -73,7 +73,11 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
             Content.addClass('discount-search');
 
             this.$SearchContainer = new Element('div', {
-                'class': 'discount-search-searchContainer'
+                'class': 'discount-search-searchContainer',
+                style  : {
+                    display: 'none',
+                    opacity: 0
+                }
             }).inject(Content);
 
             this.$ResultContainer = new Element('div', {
@@ -91,7 +95,6 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
             this.$ButtonCancel = this.getButton('cancel');
 
             this.$ButtonSubmit.removeEvents('click');
-
             this.$ButtonSubmit.addEvent('click', function () {
                 self.showResults();
             });
@@ -100,7 +103,6 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
                 'package/quiqqer/discount/bin/controls/search/Search',
                 'package/quiqqer/discount/bin/controls/search/Result'
             ], function (Search, Result) {
-
                 self.$Search = new Search({
                     events: {
                         onLoaded: function () {
@@ -122,6 +124,7 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
                 }).inject(self.$ResultContainer);
 
                 self.$Result.resize();
+                self.showResults();
             });
         },
 
@@ -133,10 +136,7 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
                 return;
             }
 
-            this.fireEvent(
-                'submit',
-                [this, this.$Result.getSelected()]
-            );
+            this.fireEvent('submit', [this, this.$Result.getSelected()]);
 
             if (this.getAttribute('autoclose')) {
                 this.close();
@@ -159,7 +159,6 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
             }, {
                 duration: 200,
                 callback: function () {
-
                     self.$ResultContainer.setStyle('display', 'none');
 
                     self.$SC_FX.animate({
@@ -214,7 +213,6 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
                 }, {
                     duration: 200,
                     callback: function () {
-
                         self.$SearchContainer.setStyle('display', 'none');
 
                         self.$ResultContainer.setStyles({

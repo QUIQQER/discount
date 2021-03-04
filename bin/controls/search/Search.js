@@ -12,13 +12,16 @@ define('package/quiqqer/discount/bin/controls/search/Search', [
     'qui/controls/buttons/Button',
     'qui/utils/Form',
     'package/quiqqer/discount/bin/classes/Handler',
+    'Locale',
+    'Mustache',
 
     'text!package/quiqqer/discount/bin/controls/search/Search.html'
 
-], function (QUI, QUIControl, QUIButton, QUIFormUtils, Handler, template) {
+], function (QUI, QUIControl, QUIButton, QUIFormUtils, Handler, QUILocale, Mustache, template) {
     "use strict";
 
     var Discounts = new Handler();
+    var lg        = 'quiqqer/discount';
 
     return new Class({
         Extends: QUIControl,
@@ -45,7 +48,27 @@ define('package/quiqqer/discount/bin/controls/search/Search', [
         create: function () {
             var Elm = this.parent();
 
-            Elm.set('html', template);
+            Elm.set('html', Mustache.render(template, {
+                header                      : QUILocale.get(lg, 'control.search.title'),
+                id                          : QUILocale.get(lg, 'control.edit.template.id'),
+                title                       : QUILocale.get(lg, 'control.edit.template.title'),
+                discount                    : QUILocale.get(lg, 'control.edit.template.discount'),
+                usageHeader                 : QUILocale.get(lg, 'control.edit.template.usage'),
+                usageVat                    : QUILocale.get(lg, 'control.edit.template.vat'),
+                usageVatDesc                : QUILocale.get(lg, 'control.edit.template.vatDesc'),
+                usageFrom                   : QUILocale.get(lg, 'control.edit.template.usage.from'),
+                usageTo                     : QUILocale.get(lg, 'control.edit.template.usage.to'),
+                usageAmountOf               : QUILocale.get(lg, 'control.edit.template.shopping.amount.of'),
+                usageAmountTo               : QUILocale.get(lg, 'control.edit.template.shopping.amount.to'),
+                usageValueOf                : QUILocale.get(lg, 'control.edit.template.purchase.value.of'),
+                usageValueTo                : QUILocale.get(lg, 'control.edit.template.purchase.value.to'),
+                usageAssignment             : QUILocale.get(lg, 'control.edit.template.assignment'),
+                usageAssignmentAreas        : QUILocale.get(lg, 'control.edit.template.areas'),
+                usageLastSumDiscount        : QUILocale.get(lg, 'control.edit.template.usageLastSumDiscount'),
+                usageLastSumDiscountDesc    : QUILocale.get(lg, 'control.edit.template.usageLastSumDiscountDesc'),
+                usageLastProductDiscount    : QUILocale.get(lg, 'control.edit.template.usageLastProductDiscount'),
+                usageLastProductDiscountDesc: QUILocale.get(lg, 'control.edit.template.usageLastProductDiscountDesc')
+            }));
 
             Elm.setStyles({
                 'float': 'left',

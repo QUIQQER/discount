@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th colspan="2">
-                Rabatt
+                {{header}}
             </th>
         </tr>
         </thead>
@@ -13,7 +13,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        ID
+                        {{id}}
                     </span>
                     <input type="text" name="id"
                            class="field-container-field"/>
@@ -24,7 +24,7 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Rabatt
+                        {{title}}
                     </span>
                     <input type="text" name="discount"
                            class="field-container-field"/>
@@ -45,7 +45,7 @@
         <thead>
         <tr>
             <th colspan="2">
-                Nutzung definieren
+                {{usageHeader}}
             </th>
         </tr>
         </thead>
@@ -56,20 +56,18 @@
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-calendar"></span>
-                        Nutzbar von
+                        {{usageFrom}}
                     </span>
-                    <input type="datetime" name="date_from"
-                           class="field-container-field"/>
+                    <input type="datetime" name="date_from" class="field-container-field"/>
                 </label>
             </td>
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-calendar"></span>
-                        Nutzbar bis
+                        {{usageTo}}
                     </span>
-                    <input type="datetime" name="date_until"
-                           class="field-container-field"/>
+                    <input type="datetime" name="date_until" class="field-container-field"/>
                 </label>
             </td>
         </tr>
@@ -77,19 +75,17 @@
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Einkaufsmenge von
+                         {{usageAmountOf}}
                     </span>
-                    <input type="number" min="0" name="purchase_quantity_from"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_quantity_from" class="field-container-field"/>
                 </label>
             </td>
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
-                        Einkaufsmenge bis
+                        {{usageAmountTo}}
                     </span>
-                    <input type="number" min="0" name="purchase_quantity_until"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_quantity_until" class="field-container-field"/>
                 </label>
             </td>
         </tr>
@@ -98,20 +94,18 @@
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-money"></span>
-                        Einkaufswert von
+                         {{usageValueOf}}
                     </span>
-                    <input type="number" min="0" name="purchase_value_from"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_value_from" class="field-container-field"/>
                 </label>
             </td>
             <td>
                 <label class="field-container">
                     <span class="field-container-item">
                         <span class="fa fa-money"></span>
-                        Einkaufswert bis
+                        {{usageValueTo}}
                     </span>
-                    <input type="number" min="0" name="purchase_value_until"
-                           class="field-container-field"/>
+                    <input type="number" min="0" name="purchase_value_until" class="field-container-field"/>
                 </label>
             </td>
         </tr>
