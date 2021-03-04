@@ -237,6 +237,14 @@
             <de><![CDATA[Auf ein Produkt (Einmalig)]]></de>
             <en><![CDATA[On one product (Unique)]]></en>
         </locale>
+        <locale name="control.edit.template.usage.description">
+            <de><![CDATA[
+            'Für jedes Produkt' und 'Auf ein Produkt (Einmalig)' wird auf den Einzelpreis des Produktes angewendet.
+            ]]></de>
+            <en><![CDATA[
+            'For each product' and 'On one product (Unique)' is applied to the single price of the product.
+            ]]></en>
+        </locale>
 
         <locale name="control.edit.template.shopping.amount.of">
             <de><![CDATA[Einkaufsmenge von]]></de>

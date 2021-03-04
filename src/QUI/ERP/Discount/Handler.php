@@ -79,6 +79,10 @@ class Handler extends QUI\CRUD\Factory
                 $childData['active'] = 0;
             }
 
+            if (empty($childData['scope'])) {
+                $childData['scope'] = self::DISCOUNT_SCOPE_TOTAL;
+            }
+
             if (empty($childData['price_calculation_basis'])) {
                 $childData['price_calculation_basis'] = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO;
             }

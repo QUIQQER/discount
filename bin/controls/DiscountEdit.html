@@ -38,7 +38,7 @@
                     <input type="text" name="discount" class="field-container-field"/>
                     <select name="discount_type"
                             class="field-container-item"
-                            style="width: 100px;"
+                            style="width: 50px;"
                     >
                         <option value="1">%</option>
                         <option value="2">€</option>
@@ -165,6 +165,9 @@
                 <label class="field-container">
                     <span class="field-container-item" title="{{usageScope}}">
                         {{usageScope}}
+
+                        <span class="field-container-item-help"
+                              title="{{scopeDescription}}"></span>
                     </span>
 
                     <select name="scope" class="field-container-field">

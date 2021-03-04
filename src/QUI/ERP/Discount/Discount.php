@@ -56,7 +56,7 @@ class Discount extends QUI\CRUD\Child
                 break;
 
             default:
-                $this->setAttribute('scope', 0);
+                $this->setAttribute('scope', Handler::DISCOUNT_SCOPE_TOTAL);
         }
 
 
@@ -539,11 +539,17 @@ class Discount extends QUI\CRUD\Child
             $hideDiscounts = false;
         }
 
-
         if ($this->getAttribute('scope') === Handler::DISCOUNT_SCOPE_TOTAL) {
+            if ($this->getAttribute('discount_type') === QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE) {
+                $valueText = false;
+            } else {
+                $valueText = $this->getTitle($Locale);
+            }
+
             return new PriceFactor([
                 'identifier'  => 'discount-'.$this->getId(),
                 'title'       => $this->getTitle($Locale),
+                'valueText'   => $valueText,
                 'description' => '',
                 'priority'    => (int)$this->getAttribute('priority'),
                 'calculation' => $calculation,
@@ -554,9 +560,11 @@ class Discount extends QUI\CRUD\Child
             ]);
         }
 
+        // to product
         return new QUI\ERP\Products\Utils\PriceFactor([
             'identifier'  => 'discount-'.$this->getId(),
             'title'       => $this->getTitle($Locale),
+//            'valueText'   => $this->getTitle($Locale),
             'description' => '',
             'priority'    => (int)$this->getAttribute('priority'),
             'calculation' => $calculation,

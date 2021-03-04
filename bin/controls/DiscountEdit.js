@@ -80,6 +80,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 usageScopeEvery : QUILocale.get(lg, 'control.edit.template.usageScopeEvery'),
                 usageScopeTotal : QUILocale.get(lg, 'control.edit.template.usageScopeTotal'),
                 usageScopeUnique: QUILocale.get(lg, 'control.edit.template.usageScopeUnique'),
+                scopeDescription: QUILocale.get(lg, 'control.edit.template.usage.description'),
 
                 calculationBasis          : QUILocale.get(lg, 'control.edit.template.calculationBasis'),
                 calculationBasisNetto     : QUILocale.get(lg, 'control.edit.template.calculationBasis.netto'),
