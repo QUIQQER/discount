@@ -1,6 +1,7 @@
 /**
  * Discount edit control
  *
+ * @module package/quiqqer/discount/bin/controls/DiscountEdit
  * @author www.pcsg.de (Henning Leutz)
  *
  * @event onLoaded
@@ -123,7 +124,6 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
             var self = this;
 
             require(['utils/Controls'], function (Utils) {
-
                 var Elm  = self.getElm(),
                     Form = Elm.getElement('form');
 
@@ -194,7 +194,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     Scope.addEvent('change', function (event) {
                         var value = event.target.value;
 
-                        if (parseInt(value) == Discounts.DISCOUNT_SCOPE_TOTAL) {
+                        if (parseInt(value) === Discounts.DISCOUNT_SCOPE_TOTAL) {
                             showVatRow();
                             return;
                         }

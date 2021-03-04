@@ -3,11 +3,6 @@
  * @module package/quiqqer/discount/bin/controls/search/Search
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
- * @require package/quiqqer/discount/bin/classes/Handler
- *
  * @event onLoaded
  */
 define('package/quiqqer/discount/bin/controls/search/Search', [
@@ -73,7 +68,6 @@ define('package/quiqqer/discount/bin/controls/search/Search', [
          * @return {Promise}
          */
         search: function () {
-
             var Form = this.getElm().getElement('form');
 
             var data = Object.filter(QUIFormUtils.getFormData(Form), function (value) {
@@ -81,13 +75,7 @@ define('package/quiqqer/discount/bin/controls/search/Search', [
             });
 
             return new Promise(function (resolve, reject) {
-
-                Discounts.search(data).then(function (result) {
-
-                    resolve(result);
-
-                }).catch(reject);
-
+                Discounts.search(data).then(resolve).catch(reject);
             });
         }
     });

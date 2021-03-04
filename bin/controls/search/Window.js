@@ -2,11 +2,6 @@
  *
  * @module package/quiqqer/discount/bin/controls/search/Search
  * @author www.pcsg.de (Henning Leutz)
- *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/windows/Confirm
- * @require package/quiqqer/discount/bin/classes/Handler
  */
 define('package/quiqqer/discount/bin/controls/search/Window', [
 
@@ -207,7 +202,6 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
 
             this.Loader.show();
             this.$Search.search().then(function (result) {
-
                 self.Loader.hide();
 
                 self.$Result.setData({
@@ -259,7 +253,6 @@ define('package/quiqqer/discount/bin/controls/search/Window', [
                                 self.$Result.resize();
                             }
                         });
-
                     }
                 });
             });

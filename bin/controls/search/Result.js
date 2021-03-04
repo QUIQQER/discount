@@ -3,11 +3,6 @@
  * @module package/quiqqer/discount/bin/controls/search/Search
  * @author www.pcsg.de (Henning Leutz)
  *
- * @require qui/QUI
- * @require qui/controls/Control
- * @require qui/controls/buttons/Button
- * @require package/quiqqer/discount/bin/classes/Handler
- *
  * @event onLoaded
  * @event onDblClick [self]
  */
@@ -144,7 +139,6 @@ define('package/quiqqer/discount/bin/controls/search/Result', [
          * event : on inject
          */
         $onInject: function () {
-
             this.fireEvent('loaded');
         },
 
