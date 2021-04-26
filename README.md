@@ -1,7 +1,7 @@
 QUIQQER Discount
 ========
 
-![Discounts](bin/images/Readme.jpg)
+![Discounts](bin/images/Readme_EN.png)
 
 Create discounts for user groups, specific users as well as time controlled.
 With the QUIQQER discounts all this is no problem.

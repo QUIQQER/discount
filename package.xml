@@ -8,7 +8,7 @@
             <locale group="quiqqer/discount" var="package.title"/>
         </description>
 
-        <image src="URL_OPT_DIR/quiqqer/discount/bin/images/Logo.jpg"/>
+        <image src="URL_OPT_DIR/quiqqer/discount/bin/images/Logo.png"/>
 
         <preview>
             <image src="URL_OPT_DIR/quiqqer/discount/bin/images/preview/1.png"/>
