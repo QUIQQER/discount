@@ -77,6 +77,12 @@
     </groups>
 
     <groups name="quiqqer/discount" datatype="js">
+
+        <locale name="control.SelectItem.inactive">
+            <de><![CDATA[(inaktiv)]]></de>
+            <en><![CDATA[(inactive)]]></en>
+        </locale>
+
         <locale name="discount.panel.title">
             <de><![CDATA[Rabatte]]></de>
             <en><![CDATA[Discounts]]></en>
