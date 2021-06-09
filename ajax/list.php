@@ -20,9 +20,13 @@ QUI::$Ajax->registerFunction(
         $Locale    = QUI::getLocale();
 
         // search
-        $data = $Discounts->getChildrenData(
-            $Grid->parseDBParams(json_decode($params, true))
-        );
+        $params = $Grid->parseDBParams(\json_decode($params, true));
+
+        $params['where'] = [
+            'hidden' => 0
+        ];
+
+        $data = $Discounts->getChildrenData($params);
 
         foreach ($data as $entry) {
             $entry['title'] = [
@@ -62,7 +66,7 @@ QUI::$Ajax->registerFunction(
             $result[] = $entry;
         }
 
-        return $Grid->parseResult($result, $Discounts->countChildren());
+        return $Grid->parseResult($result, $Discounts->countChildren(['where' => ['hidden' => 0]]));
     },
     ['params'],
     'Permission::checkAdminUser'
