@@ -315,6 +315,15 @@
             <en><![CDATA[gross]]></en>
         </locale>
 
+        <locale name="control.edit.btn.active.status_on">
+            <de><![CDATA[aktiv]]></de>
+            <en><![CDATA[active]]></en>
+        </locale>
+        <locale name="control.edit.btn.active.status_off">
+            <de><![CDATA[inaktiv]]></de>
+            <en><![CDATA[inactive]]></en>
+        </locale>
+
         <locale name="control.select.search.placeholder">
             <de><![CDATA[Suche nach einem Rabatt ...]]></de>
             <en><![CDATA[Search for a discount ...]]></en>

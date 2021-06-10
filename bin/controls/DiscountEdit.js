@@ -11,6 +11,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
     'qui/QUI',
     'qui/controls/Control',
     'qui/controls/buttons/Button',
+    'qui/controls/buttons/ButtonSwitch',
     'qui/utils/Form',
     'Locale',
     'Mustache',
@@ -20,7 +21,7 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
     'text!package/quiqqer/discount/bin/controls/DiscountEdit.html',
     'css!package/quiqqer/discount/bin/controls/DiscountEdit.css'
 
-], function (QUI, QUIControl, QUIButton, QUIFormUtils, QUILocale,
+], function (QUI, QUIControl, QUIButton, QUIButtonSwitch, QUIFormUtils, QUILocale,
              Mustache, Discounts, Translation, template) {
     "use strict";
 
@@ -32,7 +33,8 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
         Type   : 'package/quiqqer/discount/bin/controls/DiscountEdit',
 
         Binds: [
-            '$onInject'
+            '$onInject',
+            '$onActiveStatusChange'
         ],
 
         options: {
@@ -41,6 +43,8 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
 
         initialize: function (options) {
             this.parent(options);
+
+            this.$ActiveSwitch = null;
 
             this.addEvents({
                 onInject: this.$onInject
@@ -114,6 +118,14 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                 opacity : 0
             });
 
+            this.$ActiveSwitch = new QUIButtonSwitch({
+                status: false,
+                text  : QUILocale.get(lg, 'control.edit.btn.active.status_off'),
+                events: {
+                    onChange: this.$onActiveStatusChange
+                }
+            }).inject(this.$Elm.getElement('.quiqqer-discount-entry-edit-buttons'));
+
             return this.$Elm;
         },
 
@@ -167,6 +179,11 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                         'html',
                         '#' + self.getAttribute('discountId')
                     );
+
+                    if (parseInt(data.active)) {
+                        self.$ActiveSwitch.setAttribute('text', QUILocale.get(lg, 'control.edit.btn.active.status_on'));
+                        self.$ActiveSwitch.setSilentOn();
+                    }
                 }).then(function () {
                     return QUI.parse(self.$Elm);
 
@@ -242,6 +259,40 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
 
                 }).catch(reject);
 
+            });
+        },
+
+        /**
+         * If active switch is triggered
+         */
+        $onActiveStatusChange: function () {
+            this.$ActiveSwitch.disable();
+
+            let Promise;
+            const targetStatus = this.$ActiveSwitch.getStatus();
+
+            if (targetStatus) {
+                Promise = Discounts.activate(this.getAttribute('discountId'));
+            } else {
+                Promise = Discounts.deactivate(this.getAttribute('discountId'));
+            }
+
+            Promise.then((activeStatus) => {
+                this.$ActiveSwitch.enable();
+
+                if (!!activeStatus !== !!targetStatus) {
+                    return;
+                }
+
+                this.fireEvent('activeStatusChange', [activeStatus, this]);
+
+                if (activeStatus) {
+                    this.$ActiveSwitch.setAttribute('text', QUILocale.get(lg, 'control.edit.btn.active.status_on'));
+                    this.$ActiveSwitch.setSilentOn();
+                } else {
+                    this.$ActiveSwitch.setAttribute('text', QUILocale.get(lg, 'control.edit.btn.active.status_off'));
+                    this.$ActiveSwitch.setSilentOff();
+                }
             });
         }
     });

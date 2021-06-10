@@ -396,9 +396,12 @@ define('package/quiqqer/discount/bin/controls/Discounts', [
                                 var Discount = new DiscountEdit({
                                     discountId: discountId,
                                     events    : {
-                                        onLoaded: function () {
+                                        onLoaded            : function () {
                                             self.Loader.hide();
                                             resolve();
+                                        },
+                                        onActiveStatusChange: () => {
+                                            self.refresh();
                                         }
                                     }
                                 }).inject(Sheet.getContent());

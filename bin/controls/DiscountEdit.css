@@ -19,3 +19,18 @@
     line-height: 30px;
     padding: 0 0.75em;
 }
+
+.quiqqer-discount-entry-edit-buttons {
+    float: left;
+    height: 40px;
+    width: 100%;
+}
+
+.quiqqer-discount-entry-edit-buttons .qui-button-switch {
+    background: #ededed !important;
+    color: black;
+}
+
+.quiqqer-discount-entry-edit-buttons .qui-button-switch:hover {
+    color: #6a6a6a;
+}
