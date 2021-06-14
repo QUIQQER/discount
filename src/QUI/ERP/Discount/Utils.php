@@ -22,8 +22,10 @@ class Utils
      *
      * @param \QUI\Interfaces\Users\User $User
      * @return array
+     *
+     * @throws \QUI\Database\Exception
      */
-    public static function getUserDiscounts(UserInterface $User)
+    public static function getUserDiscounts(UserInterface $User): array
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
         $guString = ','.\str_replace(',', ',|,', $guString).',';
@@ -63,8 +65,10 @@ class Utils
      *
      * @param Product $Product
      * @return array
+     *
+     * @throws \QUI\Database\Exception
      */
-    public static function getProductDiscounts(Product $Product)
+    public static function getProductDiscounts(Product $Product): array
     {
         $result    = [];
         $Discounts = new Handler();
@@ -101,8 +105,10 @@ class Utils
      *
      * @param \QUI\Interfaces\Users\User $User
      * @return array
+     *
+     * @throws \QUI\Database\Exception
      */
-    public static function getActiveUserDiscounts(UserInterface $User)
+    public static function getActiveUserDiscounts(UserInterface $User): array
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
         $guString = ','.\str_replace(',', ',|,', $guString).',';
@@ -168,8 +174,10 @@ class Utils
      *
      * @param \QUI\Interfaces\Users\User $User
      * @return array
+     *
+     * @throws \QUI\Database\Exception
      */
-    public static function getUsableUserDiscounts(UserInterface $User)
+    public static function getUsableUserDiscounts(UserInterface $User): array
     {
         $discounts = self::getActiveUserDiscounts($User);
         $result    = [];

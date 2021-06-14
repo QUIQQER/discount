@@ -23,6 +23,6 @@ QUI::$Ajax->registerFunction(
 
         return $Discount->getId();
     },
-    array('params'),
+    ['params'],
     'Permission::checkAdminUser'
 );

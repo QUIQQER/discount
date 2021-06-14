@@ -18,6 +18,6 @@ QUI::$Ajax->registerFunction(
         $Discount  = $Discounts->getChild($discountId);
         $Discount->delete();
     },
-    array('discountId'),
+    ['discountId'],
     'Permission::checkAdminUser'
 );

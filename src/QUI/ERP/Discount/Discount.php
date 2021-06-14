@@ -530,6 +530,10 @@ class Discount extends QUI\CRUD\Child
             $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_VAT_BRUTTO;
         }
 
+        if ($this->getAttribute('scope') === Handler::DISCOUNT_SCOPE_GRAND_TOTAL) {
+            $basis = QUI\ERP\Accounting\Calc::CALCULATION_GRAND_TOTAL;
+        }
+
         try {
             $Plugin = QUI::getPackage('quiqqer/products');
             $Config = $Plugin->getConfig();

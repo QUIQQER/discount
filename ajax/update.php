@@ -22,6 +22,6 @@ QUI::$Ajax->registerFunction(
         $Discount->setAttributes($params);
         $Discount->update();
     },
-    array('discountId', 'params'),
+    ['discountId', 'params'],
     'Permission::checkAdminUser'
 );

@@ -26,6 +26,6 @@ QUI::$Ajax->registerFunction(
 
         return $Discount->isActive();
     },
-    array('discountId'),
+    ['discountId'],
     'Permission::checkAdminUser'
 );

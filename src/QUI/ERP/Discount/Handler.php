@@ -42,6 +42,13 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_SCOPE_UNIQUE = 3;
 
     /**
+     * discount scope -> grand total
+     * - ignoring vat calc
+     * - deduct from grand total
+     */
+    const DISCOUNT_SCOPE_GRAND_TOTAL = 4;
+
+    /**
      * pricefactor discount type
      */
     const DISCOUNT_PRICEFACTOR_TYPE = 'DISCOUNT_PRICE_FACTOR';

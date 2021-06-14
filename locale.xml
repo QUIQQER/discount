@@ -245,6 +245,10 @@
             'For each product' and 'On one product (Unique)' is applied to the single price of the product.
             ]]></en>
         </locale>
+        <locale name="control.edit.template.usageScopeGrandTotal">
+            <de><![CDATA[Von Gesamtsumme abziehen]]></de>
+            <en><![CDATA[Deduct from grand total]]></en>
+        </locale>
 
         <locale name="control.edit.template.shopping.amount.of">
             <de><![CDATA[Einkaufsmenge von]]></de>

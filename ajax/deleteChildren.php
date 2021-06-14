@@ -31,6 +31,6 @@ QUI::$Ajax->registerFunction(
             throw new $ExceptionStack();
         }
     },
-    array('discountIds'),
+    ['discountIds'],
     'Permission::checkAdminUser'
 );
