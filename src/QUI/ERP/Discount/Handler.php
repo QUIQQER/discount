@@ -86,6 +86,10 @@ class Handler extends QUI\CRUD\Factory
                 $childData['active'] = 0;
             }
 
+            if (empty($childData['hidden'])) {
+                $childData['hidden'] = 0;
+            }
+
             if (empty($childData['scope'])) {
                 $childData['scope'] = self::DISCOUNT_SCOPE_TOTAL;
             }
