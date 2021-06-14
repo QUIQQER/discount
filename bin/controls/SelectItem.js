@@ -9,7 +9,9 @@ define('package/quiqqer/discount/bin/controls/SelectItem', [
     'qui/QUI',
     'qui/controls/elements/SelectItem',
     'package/quiqqer/discount/bin/classes/Handler',
-    'Locale'
+    'Locale',
+
+    'css!package/quiqqer/discount/bin/controls/SelectItem.css'
 
 ], function (QUI, QUISelectItem, Handler, QUILocale) {
     "use strict";
@@ -45,8 +47,16 @@ define('package/quiqqer/discount/bin/controls/SelectItem', [
                     'discount.' + data.id + '.title'
                 );
 
+                let entryTitle = '#' + data.id + ' - ' + locale;
+
+                if (!parseInt(data.active)) {
+                    entryTitle += ' <span class="quiqqer-discount-SelectItem-inactive">' +
+                        QUILocale.get('quiqqer/discount', 'control.SelectItem.inactive') +
+                        '</span>';
+                }
+
                 self.$Text.set({
-                    html: '#' + data.id + ' - ' + locale
+                    html: entryTitle
                 });
 
             }).catch(function () {

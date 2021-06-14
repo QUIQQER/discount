@@ -202,7 +202,8 @@ class Handler extends QUI\CRUD\Factory
             'scope',
             'lastSumDiscount',
             'lastProductDiscount',
-            'vat'
+            'vat',
+            'hidden'
         ];
     }
 
