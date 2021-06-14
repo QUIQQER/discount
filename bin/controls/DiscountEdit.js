@@ -192,14 +192,17 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     return Utils.parse(self.$Elm);
 
                 }).then(function () {
-
                     self.$Elm.setStyles({
                         overflow: null
                     });
 
-                    var Vat    = self.$Elm.getElement('[name="vat"]'),
-                        VatRow = Vat.getParent('tr'),
-                        Scope  = self.$Elm.getElement('[name="scope"]');
+                    var Vat          = self.$Elm.getElement('[name="vat"]'),
+                        VatRow       = Vat.getParent('tr'),
+                        Scope        = self.$Elm.getElement('[name="scope"]'),
+                        CalcBasis    = self.$Elm.getElement('[name="price_calculation_basis"]'),
+                        DiscountType = self.$Elm.getElement('[name="discount_type"]'),
+                        ConsiderVat  = self.$Elm.getElement('[name="consider_vat"]')
+                    ;
 
                     var hideVatRow = function () {
                         VatRow.setStyle('display', 'none');
@@ -212,6 +215,20 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
                     Scope.addEvent('change', function (event) {
                         var value = event.target.value;
 
+                        if (parseInt(value) === Discounts.DISCOUNT_SCOPE_GRAND_TOTAL) {
+                            CalcBasis.disabled = true;
+
+                            DiscountType.value    = 2;
+                            DiscountType.disabled = true;
+
+                            ConsiderVat.value    = 'auto';
+                            ConsiderVat.disabled = true;
+                        } else {
+                            CalcBasis.disabled    = false;
+                            DiscountType.disabled = false;
+                            ConsiderVat.disabled  = false;
+                        }
+
                         if (parseInt(value) === Discounts.DISCOUNT_SCOPE_TOTAL) {
                             showVatRow();
                             return;
@@ -222,6 +239,16 @@ define('package/quiqqer/discount/bin/controls/DiscountEdit', [
 
                     if (parseInt(Scope.value) !== Discounts.DISCOUNT_SCOPE_TOTAL) {
                         hideVatRow();
+                    }
+
+                    if (parseInt(Scope.value) === Discounts.DISCOUNT_SCOPE_GRAND_TOTAL) {
+                        CalcBasis.disabled = true;
+
+                        DiscountType.value    = 2;
+                        DiscountType.disabled = true;
+
+                        ConsiderVat.value    = 'auto';
+                        ConsiderVat.disabled = true;
                     }
 
                     moofx(self.$Elm).animate({

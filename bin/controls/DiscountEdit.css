@@ -1,4 +1,13 @@
 
+.discount-edit form {
+    display: inline-block;
+    width: 100%;
+}
+
+.discount-edit form table.data-table:last-child {
+    margin-bottom: 0;
+}
+
 .discount-edit td {
     width: 50%;
 }

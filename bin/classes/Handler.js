@@ -45,6 +45,11 @@ define('package/quiqqer/discount/bin/classes/Handler', [
         DISCOUNT_SCOPE_UNIQUE: 3,
 
         /**
+         * discount scope -> discount scope -> grand total
+         */
+        DISCOUNT_SCOPE_GRAND_TOTAL: 4,
+
+        /**
          * discount usage type -> the discount will be used manuel
          */
         DISCOUNT_USAGE_TYPE_MANUEL: 0,
