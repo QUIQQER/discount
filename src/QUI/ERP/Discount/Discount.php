@@ -387,9 +387,11 @@ class Discount extends QUI\CRUD\Child
         }
 
         // article / product check
-        foreach ($articles as $articleId) {
-            if ((int)$Product->getId() === (int)$articleId) {
-                return true;
+        if (\is_array($articles)) {
+            foreach ($articles as $articleId) {
+                if ((int)$Product->getId() === (int)$articleId) {
+                    return true;
+                }
             }
         }
 
