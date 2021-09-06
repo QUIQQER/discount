@@ -396,7 +396,7 @@ class Discount extends QUI\CRUD\Child
         }
 
         // category check
-        if (empty($articles) && empty($categories)) {
+        if (empty($categories)) {
             return true;
         }
 
