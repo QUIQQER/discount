@@ -579,4 +579,45 @@ class Discount extends QUI\CRUD\Child
             'visible'     => $hideDiscounts ? false : true
         ]);
     }
+
+    /**
+     * Update the CRUD child
+     *
+     * @throws QUI\ExceptionStack|QUI\Exception
+     */
+    public function update()
+    {
+        $this->Events->fireEvent('saveBegin');
+        $this->Events->fireEvent('updateBegin');
+
+        $needles   = $this->Factory->getChildAttributes();
+        $savedData = [];
+
+        foreach ($needles as $needle) {
+            if (!\array_key_exists($needle, $this->attributes)) {
+                continue;
+            }
+
+            $value = $this->getAttribute($needle);
+
+            switch ($needle) {
+                case 'user_groups':
+                    if (!empty($value)) {
+                        $value = ','.$value.',';
+                    }
+                    break;
+            }
+
+            $savedData[$needle] = $value;
+        }
+
+        QUI::getDataBase()->update(
+            $this->Factory->getDataBaseTableName(),
+            $savedData,
+            ['id' => $this->getId()]
+        );
+
+        $this->Events->fireEvent('saveEnd');
+        $this->Events->fireEvent('updateEnd');
+    }
 }
