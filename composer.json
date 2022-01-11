@@ -21,7 +21,7 @@
     "php": ">=5.3",
     "quiqqer\/quiqqer": "*@dev",
     "quiqqer\/areas": "*@dev",
-    "quiqqer\/products": "*@dev",
+    "quiqqer\/products": "^1.6|*@dev",
     "quiqqer\/tax": "*@dev"
   },
   "autoload": {

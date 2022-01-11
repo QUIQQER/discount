@@ -19,7 +19,7 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\
     /**
      * @var string
      */
-    protected $type = Handler::DISCOUNT_PRICEFACTOR_TYPE;
+    protected string $type = Handler::DISCOUNT_PRICEFACTOR_TYPE;
 
     /**
      * @var string|null
@@ -70,7 +70,7 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\
     /**
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $attributes = parent::toArray();
 
