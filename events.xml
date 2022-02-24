@@ -2,4 +2,5 @@
 <events>
     <event on="onQuiqqerProductsCalcListProduct" fire="\QUI\ERP\Discount\EventHandling::onQuiqqerProductsCalcListProduct"/>
     <event on="onQuiqqerProductsCalcList" fire="\QUI\ERP\Discount\EventHandling::onQuiqqerProductsCalcList"/>
+    <event on="onQuiqqerProductsCalcProduct" fire="\QUI\ERP\Discount\EventHandling::onQuiqqerProductsCalcListProduct"/>
 </events>
