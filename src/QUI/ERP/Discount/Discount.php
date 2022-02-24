@@ -142,29 +142,28 @@ class Discount extends QUI\CRUD\Child
             $purchaseValueFrom     = $this->getAttribute('purchase_value_from');
             $purchaseValueUntil    = $this->getAttribute('purchase_value_until');
 
-
-            if ($purchaseQuantityFrom === false || $purchaseQuantityFrom < 0) {
+            if ($purchaseQuantityFrom !== '' && ($purchaseQuantityFrom === false || $purchaseQuantityFrom < 0)) {
                 throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_quantity_from.wrong'
                 ]);
             }
 
-            if ($purchaseQuantityUntil === false || $purchaseQuantityUntil < 0) {
+            if ($purchaseQuantityUntil !== '' && ($purchaseQuantityUntil === false || $purchaseQuantityUntil < 0)) {
                 throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_quantity_until.wrong'
                 ]);
             }
 
-            if ($purchaseValueFrom === false || $purchaseValueFrom < 0) {
+            if ($purchaseValueFrom !== '' && ($purchaseValueFrom === false || $purchaseValueFrom < 0)) {
                 throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_value_from.wrong'
                 ]);
             }
 
-            if ($purchaseValueUntil === false || $purchaseValueUntil < 0) {
+            if ($purchaseValueUntil !== '' && ($purchaseValueUntil === false || $purchaseValueUntil < 0)) {
                 throw new QUI\ERP\Discount\Exception([
                     'quiqqer/discount',
                     'exception.discount.purchase_value_until.wrong'
