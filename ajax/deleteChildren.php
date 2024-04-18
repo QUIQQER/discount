@@ -14,8 +14,8 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_deleteChildren',
     function ($discountIds) {
-        $discountIds    = json_decode($discountIds, true);
-        $Discounts      = new QUI\ERP\Discount\Handler();
+        $discountIds = json_decode($discountIds, true);
+        $Discounts = new QUI\ERP\Discount\Handler();
         $ExceptionStack = new QUI\ExceptionStack();
 
         foreach ($discountIds as $discountId) {

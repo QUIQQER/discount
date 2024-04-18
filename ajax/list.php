@@ -14,13 +14,13 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_list',
     function ($params) {
-        $Grid      = new QUI\Utils\Grid();
+        $Grid = new QUI\Utils\Grid();
         $Discounts = new QUI\ERP\Discount\Handler();
-        $result    = [];
-        $Locale    = QUI::getLocale();
+        $result = [];
+        $Locale = QUI::getLocale();
 
         // search
-        $params = $Grid->parseDBParams(\json_decode($params, true));
+        $params = $Grid->parseDBParams(json_decode($params, true));
 
         $params['where'] = [
             'hidden' => 0
@@ -31,15 +31,15 @@ QUI::$Ajax->registerFunction(
         foreach ($data as $entry) {
             $entry['title'] = [
                 'quiqqer/discount',
-                'discount.'.$entry['id'].'.title'
+                'discount.' . $entry['id'] . '.title'
             ];
 
             $entry['text'] = $Locale->get(
                 'quiqqer/discount',
-                'discount.'.$entry['id'].'.title'
+                'discount.' . $entry['id'] . '.title'
             );
 
-            $type      = (int)$entry['discount_type'];
+            $type = (int)$entry['discount_type'];
             $usageType = (int)$entry['usage_type'];
 
             // attributes

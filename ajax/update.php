@@ -16,8 +16,8 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_update',
     function ($discountId, $params) {
         $Discounts = new QUI\ERP\Discount\Handler();
-        $Discount  = $Discounts->getChild($discountId);
-        $params    = json_decode($params, true);
+        $Discount = $Discounts->getChild($discountId);
+        $params = json_decode($params, true);
 
         $Discount->setAttributes($params);
         $Discount->update();

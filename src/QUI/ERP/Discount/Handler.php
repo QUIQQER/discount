@@ -7,6 +7,7 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
+use QUI\Database\Exception;
 use QUI\Permissions\Permission;
 
 /**
@@ -130,7 +131,7 @@ class Handler extends QUI\CRUD\Factory
         // create new translation var for the discount
         $this->Events->addEvent('onCreateEnd', function ($New, $data) {
             /* @var $New QUI\ERP\Discount\Discount */
-            $newVar  = 'discount.'.$New->getId().'.title';
+            $newVar = 'discount.' . $New->getId() . '.title';
             $current = QUI::getLocale()->getCurrent();
 
             $title = $New->getAttribute('title');
@@ -146,9 +147,9 @@ class Handler extends QUI\CRUD\Factory
 
             try {
                 QUI\Translator::addUserVar('quiqqer/discount', $newVar, [
-                    $current   => $title,
+                    $current => $title,
                     'datatype' => 'php,js',
-                    'package'  => 'quiqqer/discount'
+                    'package' => 'quiqqer/discount'
                 ]);
             } catch (QUI\Exception $Exception) {
                 QUI::getMessagesHandler()->addAttention(
@@ -163,7 +164,7 @@ class Handler extends QUI\CRUD\Factory
      *
      * @return string
      */
-    public function getDataBaseTableName()
+    public function getDataBaseTableName(): string
     {
         return QUI::getDBTableName('discounts');
     }
@@ -173,7 +174,7 @@ class Handler extends QUI\CRUD\Factory
      *
      * @return string
      */
-    public function getChildClass()
+    public function getChildClass(): string
     {
         return 'QUI\ERP\Discount\Discount';
     }
@@ -183,7 +184,7 @@ class Handler extends QUI\CRUD\Factory
      *
      * @return array
      */
-    public function getChildAttributes()
+    public function getChildAttributes(): array
     {
         return [
             'active',
@@ -217,8 +218,9 @@ class Handler extends QUI\CRUD\Factory
      *
      * @param array $queryParams
      * @return array - [Child, Child, Child]
+     * @throws Exception
      */
-    public function getChildrenData($queryParams = [])
+    public function getChildrenData(array $queryParams = []): array
     {
         if (!isset($queryParams['order'])) {
             $queryParams['order'] = 'priority ASC';

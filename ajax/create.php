@@ -12,7 +12,7 @@
 QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_create',
     function ($params) {
-        $params    = json_decode($params, true);
+        $params = json_decode($params, true);
         $Discounts = new QUI\ERP\Discount\Handler();
 
         if (!isset($params['active'])) {
