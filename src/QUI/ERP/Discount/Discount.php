@@ -65,7 +65,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ','.$cleanup.',';
+            $cleanup = ',' . $cleanup . ',';
         }
 
         $this->setAttribute('user_groups', $cleanup);
@@ -76,7 +76,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ','.$cleanup.',';
+            $cleanup = ',' . $cleanup . ',';
         }
 
         $this->setAttribute('articles', $cleanup);
@@ -87,7 +87,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ','.$cleanup.',';
+            $cleanup = ',' . $cleanup . ',';
         }
 
         $this->setAttribute('user_groups', $cleanup);
@@ -98,7 +98,7 @@ class Discount extends QUI\CRUD\Child
         $cleanup = \implode(',', $cleanup);
 
         if (!empty($cleanup)) {
-            $cleanup = ','.$cleanup.',';
+            $cleanup = ',' . $cleanup . ',';
         }
 
         $this->setAttribute('articles', $cleanup);
@@ -112,14 +112,15 @@ class Discount extends QUI\CRUD\Child
         $this->Events->addEvent('onDeleteEnd', function () {
             QUI\Translator::delete(
                 'quiqqer/discount',
-                'discount.'.$this->getId().'.title'
+                'discount.' . $this->getId() . '.title'
             );
         });
 
         $this->Events->addEvent('onSaveBegin', function () {
             Permission::checkPermission('quiqqer.areas.area.edit');
 
-            if ($this->getAttribute('date_from')
+            if (
+                $this->getAttribute('date_from')
                 && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_from'))
             ) {
                 throw new QUI\ERP\Discount\Exception([
@@ -128,7 +129,8 @@ class Discount extends QUI\CRUD\Child
                 ]);
             }
 
-            if ($this->getAttribute('date_until')
+            if (
+                $this->getAttribute('date_until')
                 && !Orthos::checkMySqlDatetimeSyntax($this->getAttribute('date_until'))
             ) {
                 throw new QUI\ERP\Discount\Exception([
@@ -137,10 +139,10 @@ class Discount extends QUI\CRUD\Child
                 ]);
             }
 
-            $purchaseQuantityFrom  = $this->getAttribute('purchase_quantity_from');
+            $purchaseQuantityFrom = $this->getAttribute('purchase_quantity_from');
             $purchaseQuantityUntil = $this->getAttribute('purchase_quantity_until');
-            $purchaseValueFrom     = $this->getAttribute('purchase_value_from');
-            $purchaseValueUntil    = $this->getAttribute('purchase_value_until');
+            $purchaseValueFrom = $this->getAttribute('purchase_value_from');
+            $purchaseValueUntil = $this->getAttribute('purchase_value_until');
 
             if ($purchaseQuantityFrom !== '' && ($purchaseQuantityFrom === false || $purchaseQuantityFrom < 0)) {
                 throw new QUI\ERP\Discount\Exception([
@@ -216,7 +218,8 @@ class Discount extends QUI\CRUD\Child
             $value = null;
         }
 
-        if ($key === 'scope' ||
+        if (
+            $key === 'scope' ||
             $key === 'discount_type' ||
             $key === 'usage_type'
         ) {
@@ -240,7 +243,7 @@ class Discount extends QUI\CRUD\Child
 
         return $Locale->get(
             'quiqqer/discount',
-            'discount.'.$this->getId().'.title'
+            'discount.' . $this->getId() . '.title'
         );
     }
 
@@ -296,9 +299,9 @@ class Discount extends QUI\CRUD\Child
         }
 
         // usage definitions / limits
-        $dateFrom  = $this->getAttribute('date_from');
+        $dateFrom = $this->getAttribute('date_from');
         $dateUntil = $this->getAttribute('date_until');
-        $now       = \time();
+        $now = \time();
 
         if ($dateFrom && \strtotime($dateFrom) > $now) {
             return false;
@@ -310,7 +313,7 @@ class Discount extends QUI\CRUD\Child
 
         // assignment
         $userGroupValue = $this->getAttribute('user_groups');
-        $areasValue     = $this->getAttribute('areas');
+        $areasValue = $this->getAttribute('areas');
 
         // if groups and areas are empty, everbody is allowed
         if (empty($userGroupValue) && empty($areasValue)) {
@@ -326,7 +329,7 @@ class Discount extends QUI\CRUD\Child
             $this->getAttribute('user_groups')
         );
 
-        $discountUsers  = $userGroups['users'];
+        $discountUsers = $userGroups['users'];
         $discountGroups = $userGroups['groups'];
 
         // user checking
@@ -368,7 +371,7 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
-        $articles   = $this->getAttribute('articles');
+        $articles = $this->getAttribute('articles');
         $categories = $this->getAttribute('categories');
 
         if (\is_string($articles)) {
@@ -465,7 +468,7 @@ class Discount extends QUI\CRUD\Child
                 'quiqqer/discount',
                 'exception.discount.not.combinable',
                 [
-                    'id'         => $this->getId(),
+                    'id' => $this->getId(),
                     'discountId' => $Discount->getId()
                 ]
             ]);
@@ -485,7 +488,7 @@ class Discount extends QUI\CRUD\Child
                 'quiqqer/discount',
                 'exception.discount.user.cant.use.discount',
                 [
-                    'id'     => $this->getId(),
+                    'id' => $this->getId(),
                     'userId' => $User->getId()
                 ]
             ]);
@@ -524,8 +527,8 @@ class Discount extends QUI\CRUD\Child
 
         // check calculation basis VAT
         $useAuto = $this->getAttribute('consider_vat') === 'auto'
-                   && $Customer
-                   && QUI\ERP\Utils\User::isNettoUser($Customer) === false;
+            && $Customer
+            && QUI\ERP\Utils\User::isNettoUser($Customer) === false;
 
         if ($useAuto || $this->getAttribute('consider_vat') === 'brutto') {
             $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_VAT_BRUTTO;
@@ -552,30 +555,30 @@ class Discount extends QUI\CRUD\Child
             }
 
             return new PriceFactor([
-                'identifier'  => 'discount-'.$this->getId(),
-                'title'       => $this->getTitle($Locale),
-                'valueText'   => $valueText,
+                'identifier' => 'discount-' . $this->getId(),
+                'title' => $this->getTitle($Locale),
+                'valueText' => $valueText,
                 'description' => '',
-                'priority'    => (int)$this->getAttribute('priority'),
+                'priority' => (int)$this->getAttribute('priority'),
                 'calculation' => $calculation,
-                'basis'       => $basis,
-                'value'       => $this->getAttribute('discount') * -1,
-                'visible'     => $hideDiscounts ? false : true,
-                'vat'         => $this->getAttribute('vat')
+                'basis' => $basis,
+                'value' => $this->getAttribute('discount') * -1,
+                'visible' => $hideDiscounts ? false : true,
+                'vat' => $this->getAttribute('vat')
             ]);
         }
 
         // to product
         return new QUI\ERP\Products\Utils\PriceFactor([
-            'identifier'  => 'discount-'.$this->getId(),
-            'title'       => $this->getTitle($Locale),
+            'identifier' => 'discount-' . $this->getId(),
+            'title' => $this->getTitle($Locale),
 //            'valueText'   => $this->getTitle($Locale),
             'description' => '',
-            'priority'    => (int)$this->getAttribute('priority'),
+            'priority' => (int)$this->getAttribute('priority'),
             'calculation' => $calculation,
-            'basis'       => $basis,
-            'value'       => $this->getAttribute('discount') * -1,
-            'visible'     => $hideDiscounts ? false : true
+            'basis' => $basis,
+            'value' => $this->getAttribute('discount') * -1,
+            'visible' => $hideDiscounts ? false : true
         ]);
     }
 
@@ -589,7 +592,7 @@ class Discount extends QUI\CRUD\Child
         $this->Events->fireEvent('saveBegin');
         $this->Events->fireEvent('updateBegin');
 
-        $needles   = $this->Factory->getChildAttributes();
+        $needles = $this->Factory->getChildAttributes();
         $savedData = [];
 
         foreach ($needles as $needle) {
@@ -602,7 +605,7 @@ class Discount extends QUI\CRUD\Child
             switch ($needle) {
                 case 'user_groups':
                     if (!empty($value)) {
-                        $value = ','.$value.',';
+                        $value = ',' . $value . ',';
                     }
                     break;
             }
