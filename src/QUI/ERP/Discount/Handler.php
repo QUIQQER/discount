@@ -22,7 +22,7 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_TYPE_PERCENT = 1;
 
     /**
-     * discount type -> crrency
+     * discount type -> currency
      */
     const DISCOUNT_TYPE_CURRENCY = 2;
 
@@ -130,7 +130,7 @@ class Handler extends QUI\CRUD\Factory
         // create new translation var for the discount
         $this->Events->addEvent('onCreateEnd', function ($New, $data) {
             /* @var $New QUI\ERP\Discount\Discount */
-            $newVar  = 'discount.'.$New->getId().'.title';
+            $newVar = 'discount.' . $New->getId() . '.title';
             $current = QUI::getLocale()->getCurrent();
 
             $title = $New->getAttribute('title');
@@ -146,9 +146,9 @@ class Handler extends QUI\CRUD\Factory
 
             try {
                 QUI\Translator::addUserVar('quiqqer/discount', $newVar, [
-                    $current   => $title,
+                    $current => $title,
                     'datatype' => 'php,js',
-                    'package'  => 'quiqqer/discount'
+                    'package' => 'quiqqer/discount'
                 ]);
             } catch (QUI\Exception $Exception) {
                 QUI::getMessagesHandler()->addAttention(

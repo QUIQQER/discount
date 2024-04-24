@@ -11,7 +11,6 @@ use QUI\ERP\Order\OrderInterface;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
-
 use QUI\ERP\Areas\Utils as AreaUtils;
 
 /**
