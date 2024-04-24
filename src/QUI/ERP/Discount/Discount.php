@@ -15,7 +15,6 @@ use QUI\ERP\Products\Utils\PriceFactor;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
-
 use QUI\ERP\Areas\Utils as AreaUtils;
 
 use function array_key_exists;
@@ -592,7 +591,6 @@ class Discount extends QUI\CRUD\Child
             'calculation' => $calculation,
             'basis' => $basis,
             'value' => $this->getAttribute('discount') * -1,
-            'visible' => !$hideDiscounts
         ]);
     }
 
