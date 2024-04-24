@@ -28,15 +28,15 @@ class Utils
     public static function getUserDiscounts(UserInterface $User): array
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ','.\str_replace(',', ',|,', $guString).',';
+        $guString = ',' . \str_replace(',', ',|,', $guString) . ',';
 
-        $result    = [];
+        $result = [];
         $Discounts = new Handler();
 
         $personalDiscounts = $Discounts->getChildren([
             'where' => [
                 'user_groups' => [
-                    'type'  => 'REGEXP',
+                    'type' => 'REGEXP',
                     'value' => $guString
                 ]
             ]
@@ -70,14 +70,14 @@ class Utils
      */
     public static function getProductDiscounts(Product $Product): array
     {
-        $result    = [];
+        $result = [];
         $Discounts = new Handler();
 
         $productDiscounts = $Discounts->getChildren([
             'where' => [
                 'user_groups' => [
-                    'type'  => 'REGEXP',
-                    'value' => ','.$Product->getId().','
+                    'type' => 'REGEXP',
+                    'value' => ',' . $Product->getId() . ','
                 ]
             ]
         ]);
@@ -111,16 +111,16 @@ class Utils
     public static function getActiveUserDiscounts(UserInterface $User): array
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ','.\str_replace(',', ',|,', $guString).',';
+        $guString = ',' . \str_replace(',', ',|,', $guString) . ',';
 
-        $result    = [];
+        $result = [];
         $Discounts = new Handler();
 
         $personalDiscounts = $Discounts->getChildren([
             'where' => [
-                'active'      => 1,
+                'active' => 1,
                 'user_groups' => [
-                    'type'  => 'REGEXP',
+                    'type' => 'REGEXP',
                     'value' => $guString
                 ]
             ]
@@ -128,14 +128,14 @@ class Utils
 
         $discounts = $Discounts->getChildren([
             'where' => [
-                'active'      => 1,
+                'active' => 1,
                 'user_groups' => ''
             ]
         ]);
 
         $discountsNULL = $Discounts->getChildren([
             'where' => [
-                'active'      => 1,
+                'active' => 1,
                 'user_groups' => null
             ]
         ]);
@@ -180,7 +180,7 @@ class Utils
     public static function getUsableUserDiscounts(UserInterface $User): array
     {
         $discounts = self::getActiveUserDiscounts($User);
-        $result    = [];
+        $result = [];
 
         /* @var $Discount Discount */
         foreach ($discounts as $Discount) {
