@@ -15,12 +15,12 @@ QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_search',
     function ($fields, $params) {
         $Discounts = new QUI\ERP\Discount\Handler();
-        $result    = [];
-        $Locale    = QUI::getLocale();
+        $result = [];
+        $Locale = QUI::getLocale();
 
         $allowedFields = $Discounts->getChildAttributes();
 
-        $query  = [];
+        $query = [];
         $params = json_decode($params, true);
         $fields = json_decode($fields, true);
 
@@ -44,7 +44,7 @@ QUI::$Ajax->registerFunction(
             }
 
             $query['where_or'][$field] = [
-                'type'  => '%LIKE%',
+                'type' => '%LIKE%',
                 'value' => $value
             ];
         }
@@ -55,12 +55,12 @@ QUI::$Ajax->registerFunction(
         foreach ($data as $entry) {
             $entry['title'] = [
                 'quiqqer/discount',
-                'discount.'.$entry['id'].'.title'
+                'discount.' . $entry['id'] . '.title'
             ];
 
             $entry['text'] = $Locale->get(
                 'quiqqer/discount',
-                'discount.'.$entry['id'].'.title'
+                'discount.' . $entry['id'] . '.title'
             );
 
             $result[] = $entry;

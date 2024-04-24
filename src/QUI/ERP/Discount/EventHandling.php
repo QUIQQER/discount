@@ -70,7 +70,7 @@ class EventHandling
      */
     public static function isDiscountUsableWithQuantity(Discount $Discount, $quantity): bool
     {
-        $purchaseQuantityFrom  = $Discount->getAttribute('purchase_quantity_from');
+        $purchaseQuantityFrom = $Discount->getAttribute('purchase_quantity_from');
         $purchaseQuantityUntil = $Discount->getAttribute('purchase_quantity_until');
 
         if ($quantity === 0) {
@@ -102,13 +102,15 @@ class EventHandling
      */
     public static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value): bool
     {
-        $purchaseValueFrom  = $Discount->getAttribute('purchase_value_from');
+        $purchaseValueFrom = $Discount->getAttribute('purchase_value_from');
         $purchaseValueUntil = $Discount->getAttribute('purchase_value_until');
 
         // wenn complement, z.B. 10€, muss geprüft werden
         // ob meine value grösser ist als der gegebene value
-        if ((int)$Discount->getAttribute('discount_type') === ErpCalc::CALCULATION_COMPLEMENT
-            && $Discount->getAttribute('discount') > $value) {
+        if (
+            (int)$Discount->getAttribute('discount_type') === ErpCalc::CALCULATION_COMPLEMENT
+            && $Discount->getAttribute('discount') > $value
+        ) {
             return false;
         }
 
@@ -168,7 +170,7 @@ class EventHandling
             return;
         }
 
-        $PriceFactors    = $Product->getPriceFactors();
+        $PriceFactors = $Product->getPriceFactors();
         $productQuantity = $Product->getQuantity();
         $productNettoSum = $attributes['calculated_nettoSum'];
 
@@ -184,7 +186,7 @@ class EventHandling
 
             // check if Pricefactor is already in
             $factors = $PriceFactors->toArray();
-            $Factor  = $Discount->toPriceFactor(
+            $Factor = $Discount->toPriceFactor(
                 $Calc->getUser()->getLocale(),
                 $Calc->getUser()
             );
@@ -237,7 +239,7 @@ class EventHandling
         }
 
         $listQuantity = $List->getQuantity();
-        $products     = $List->getProducts();
+        $products = $List->getProducts();
         $PriceFactors = $List->getPriceFactors();
 
         /* @var $Discount Discount */
@@ -307,7 +309,7 @@ class EventHandling
 
             // check if Pricefactor is already in
             $factors = $PriceFactors->toArray();
-            $Factor  = $Discount->toPriceFactor(
+            $Factor = $Discount->toPriceFactor(
                 $Calc->getUser()->getLocale(),
                 $Calc->getUser()
             );
