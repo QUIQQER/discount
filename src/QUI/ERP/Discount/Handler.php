@@ -23,7 +23,7 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_TYPE_PERCENT = 1;
 
     /**
-     * discount type -> crrency
+     * discount type -> currency
      */
     const DISCOUNT_TYPE_CURRENCY = 2;
 
@@ -50,7 +50,7 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_SCOPE_GRAND_TOTAL = 4;
 
     /**
-     * pricefactor discount type
+     * price factor discount type
      */
     const DISCOUNT_PRICEFACTOR_TYPE = 'DISCOUNT_PRICE_FACTOR';
 

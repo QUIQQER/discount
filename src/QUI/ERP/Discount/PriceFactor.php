@@ -23,11 +23,6 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements
     protected string $type = Handler::DISCOUNT_PRICEFACTOR_TYPE;
 
     /**
-     * @var string|null
-     */
-    protected $vat = null;
-
-    /**
      * PriceFactor constructor.
      * @param array $params
      */

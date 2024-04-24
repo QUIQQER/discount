@@ -219,17 +219,17 @@ class Discount extends QUI\CRUD\Child
 
     /**
      * @param string $name
-     * @param mixed $val
+     * @param mixed $value
      * @return void
      */
-    public function setAttribute(string $name, mixed $val): void
+    public function setAttribute(string $name, mixed $value): void
     {
-        if ($name === 'lastSumDiscount' && empty($val)) {
-            $val = null;
+        if ($name === 'lastSumDiscount' && empty($value)) {
+            $value = null;
         }
 
-        if ($name === 'lastProductDiscount' && empty($val)) {
-            $val = null;
+        if ($name === 'lastProductDiscount' && empty($value)) {
+            $value = null;
         }
 
         if (
@@ -237,10 +237,10 @@ class Discount extends QUI\CRUD\Child
             $name === 'discount_type' ||
             $name === 'usage_type'
         ) {
-            $val = (int)$val;
+            $value = (int)$value;
         }
 
-        parent::setAttribute($name, $val);
+        parent::setAttribute($name, $value);
     }
 
     /**
@@ -357,7 +357,7 @@ class Discount extends QUI\CRUD\Child
         /* @var $Group QUI\Groups\Group */
         foreach ($discountGroups as $gid) {
             foreach ($groupsOfUser as $Group) {
-                if ($Group->getId() == $gid) {
+                if ($Group->getUsers() == $gid) {
                     return true;
                 }
 
@@ -383,7 +383,7 @@ class Discount extends QUI\CRUD\Child
         }
 
         // coupon
-        if ($Product->getId() === '-') {
+        if ($Product->getId() === -1) {
             return false;
         }
 

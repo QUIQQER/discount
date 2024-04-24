@@ -168,14 +168,7 @@ class EventHandling
             return;
         }
 
-        try {
-            $attributes = $Product->getAttributes();
-        } catch (QUI\Exception $Exception) {
-            QUI\System\Log::writeDebugException($Exception);
-
-            return;
-        }
-
+        $attributes = $Product->getAttributes();
         $PriceFactors = $Product->getPriceFactors();
         $productQuantity = $Product->getQuantity();
         $productNettoSum = $attributes['calculated_nettoSum'];
@@ -190,7 +183,7 @@ class EventHandling
                 continue;
             }
 
-            // check if Pricefactor is already in
+            // check if price factor is already in
             $factors = $PriceFactors->toArray();
             $Factor = $Discount->toPriceFactor(
                 $Calc->getUser()->getLocale(),

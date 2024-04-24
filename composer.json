@@ -18,11 +18,11 @@
     "url": "http:\/\/www.pcsg.de"
   },
   "require": {
-    "php": ">=5.3",
-    "quiqqer\/quiqqer": "*@dev",
-    "quiqqer\/areas": "*@dev",
-    "quiqqer\/products": "^1.6|*@dev",
-    "quiqqer\/tax": "*@dev"
+    "php": "^8.2",
+    "quiqqer\/quiqqer": "^2",
+    "quiqqer\/areas": "^1",
+    "quiqqer\/products": "^2",
+    "quiqqer\/tax": "^1"
   },
   "autoload": {
     "psr-4": {
