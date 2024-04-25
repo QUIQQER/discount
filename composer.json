@@ -19,7 +19,7 @@
   },
   "require": {
     "php": "^8.2",
-    "quiqqer\/quiqqer": "^2",
+    "quiqqer\/core": "^2",
     "quiqqer\/areas": "^1",
     "quiqqer\/products": "^2",
     "quiqqer\/tax": "^1"
