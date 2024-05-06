@@ -56,13 +56,13 @@ class EventHandling
      */
     protected static function getUserDiscounts(QUI\Interfaces\Users\User $User): array
     {
-        if (isset(self::$userDiscounts[$User->getId()])) {
-            return self::$userDiscounts[$User->getId()];
+        if (isset(self::$userDiscounts[$User->getUUID()])) {
+            return self::$userDiscounts[$User->getUUID()];
         }
 
-        self::$userDiscounts[$User->getId()] = Utils::getActiveUserDiscounts($User);
+        self::$userDiscounts[$User->getUUID()] = Utils::getActiveUserDiscounts($User);
 
-        return self::$userDiscounts[$User->getId()];
+        return self::$userDiscounts[$User->getUUID()];
     }
 
     /**
