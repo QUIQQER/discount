@@ -9,13 +9,16 @@
  *
  * @param integer $discountId - Discount-ID
  */
+
+use QUI\ERP\Discount\Discount;
+
 QUI::$Ajax->registerFunction(
     'package_quiqqer_discount_ajax_activate',
     function ($discountId) {
-        $Handler  = new QUI\ERP\Discount\Handler();
+        $Handler = new QUI\ERP\Discount\Handler();
         $Discount = $Handler->getChild($discountId);
 
-        /* @var $Discount \QUI\ERP\Discount\Discount */
+        /* @var $Discount Discount */
         $Discount->setAttribute('active', 1);
         $Discount->update();
 

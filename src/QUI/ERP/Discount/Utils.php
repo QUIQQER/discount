@@ -10,6 +10,10 @@ use QUI\ERP\Products\Product\Product;
 use QUI\Utils\UserGroups;
 use QUI\Interfaces\Users\User as UserInterface;
 
+use function array_filter;
+use function array_merge;
+use function str_replace;
+
 /**
  * Class Utils
  *
@@ -20,7 +24,7 @@ class Utils
     /**
      * Return all discounts which are usable by the user
      *
-     * @param \QUI\Interfaces\Users\User $User
+     * @param UserInterface $User
      * @return array
      *
      * @throws \QUI\Database\Exception
@@ -28,7 +32,7 @@ class Utils
     public static function getUserDiscounts(UserInterface $User): array
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ',' . \str_replace(',', ',|,', $guString) . ',';
+        $guString = ',' . str_replace(',', ',|,', $guString) . ',';
 
         $result = [];
         $Discounts = new Handler();
@@ -50,11 +54,11 @@ class Utils
 
 
         if (!empty($personalDiscounts)) {
-            $result = \array_merge($personalDiscounts, $result);
+            $result = array_merge($personalDiscounts, $result);
         }
 
         if (!empty($discounts)) {
-            $result = \array_merge($discounts, $result);
+            $result = array_merge($discounts, $result);
         }
 
         return $result;
@@ -90,11 +94,11 @@ class Utils
 
 
         if (!empty($productDiscounts)) {
-            $result = \array_merge($productDiscounts, $result);
+            $result = array_merge($productDiscounts, $result);
         }
 
         if (!empty($discounts)) {
-            $result = \array_merge($discounts, $result);
+            $result = array_merge($discounts, $result);
         }
 
         return $result;
@@ -103,7 +107,7 @@ class Utils
     /**
      * Return all active discounts which are usable by the user
      *
-     * @param \QUI\Interfaces\Users\User $User
+     * @param UserInterface $User
      * @return array
      *
      * @throws \QUI\Database\Exception
@@ -111,7 +115,7 @@ class Utils
     public static function getActiveUserDiscounts(UserInterface $User): array
     {
         $guString = UserGroups::getUserGroupStringFromUser($User);
-        $guString = ',' . \str_replace(',', ',|,', $guString) . ',';
+        $guString = ',' . str_replace(',', ',|,', $guString) . ',';
 
         $result = [];
         $Discounts = new Handler();
@@ -140,19 +144,19 @@ class Utils
             ]
         ]);
 
-        $discounts = \array_merge($discounts, $discountsNULL);
+        $discounts = array_merge($discounts, $discountsNULL);
 
         if (!empty($personalDiscounts)) {
-            $result = \array_merge($personalDiscounts, $result);
+            $result = array_merge($personalDiscounts, $result);
         }
 
         if (!empty($discounts)) {
-            $result = \array_merge($discounts, $result);
+            $result = array_merge($discounts, $result);
         }
 
         $alreadyAttached = [];
 
-        $result = \array_filter($result, function ($Discount) use (&$alreadyAttached) {
+        return array_filter($result, function ($Discount) use (&$alreadyAttached) {
             /* @var $Discount Discount */
             $id = $Discount->getId();
 
@@ -164,15 +168,12 @@ class Utils
 
             return true;
         });
-
-
-        return $result;
     }
 
     /**
      * Return all active and usable discounts which are usable by the user
      *
-     * @param \QUI\Interfaces\Users\User $User
+     * @param UserInterface $User
      * @return array
      *
      * @throws \QUI\Database\Exception

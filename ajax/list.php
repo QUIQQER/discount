@@ -20,7 +20,7 @@ QUI::$Ajax->registerFunction(
         $Locale = QUI::getLocale();
 
         // search
-        $params = $Grid->parseDBParams(\json_decode($params, true));
+        $params = $Grid->parseDBParams(json_decode($params, true));
 
         $params['where'] = [
             'hidden' => 0

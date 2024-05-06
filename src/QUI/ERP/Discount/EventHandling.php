@@ -7,10 +7,14 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
+use QUI\Database\Exception;
 use QUI\ERP\Accounting\Calc as ErpCalc;
 use QUI\ERP\Products\Product\UniqueProduct;
 use QUI\ERP\Products\Utils\Calc;
 use QUI\ERP\Products\Product\ProductList;
+
+use function array_filter;
+use function explode;
 
 /**
  * Class EventHandling
@@ -20,19 +24,19 @@ use QUI\ERP\Products\Product\ProductList;
 class EventHandling
 {
     /**
-     * @var null
+     * @var Handler|null
      */
-    protected static $Handler = null;
+    protected static ?Handler $Handler = null;
 
     /**
      * @var array
      */
-    protected static $userDiscounts = [];
+    protected static array $userDiscounts = [];
 
     /**
      * Return the global
      *
-     * @return Handler
+     * @return Handler|null
      */
     protected static function getHandler(): ?Handler
     {
@@ -48,16 +52,17 @@ class EventHandling
      *
      * @param QUI\Interfaces\Users\User $User
      * @return array
+     * @throws Exception
      */
     protected static function getUserDiscounts(QUI\Interfaces\Users\User $User): array
     {
-        if (isset(self::$userDiscounts[$User->getId()])) {
-            return self::$userDiscounts[$User->getId()];
+        if (isset(self::$userDiscounts[$User->getUUID()])) {
+            return self::$userDiscounts[$User->getUUID()];
         }
 
-        self::$userDiscounts[$User->getId()] = Utils::getActiveUserDiscounts($User);
+        self::$userDiscounts[$User->getUUID()] = Utils::getActiveUserDiscounts($User);
 
-        return self::$userDiscounts[$User->getId()];
+        return self::$userDiscounts[$User->getUUID()];
     }
 
     /**
@@ -65,10 +70,10 @@ class EventHandling
      * - Einkaufsmengeprüfung
      *
      * @param Discount $Discount
-     * @param integer|double $quantity
+     * @param double|integer $quantity
      * @return bool
      */
-    public static function isDiscountUsableWithQuantity(Discount $Discount, $quantity): bool
+    public static function isDiscountUsableWithQuantity(Discount $Discount, float|int $quantity): bool
     {
         $purchaseQuantityFrom = $Discount->getAttribute('purchase_quantity_from');
         $purchaseQuantityUntil = $Discount->getAttribute('purchase_quantity_until');
@@ -93,14 +98,14 @@ class EventHandling
     }
 
     /**
-     * Discount pirchase value check for usage
+     * Discount purchase value check for usage
      * - Einkaufswertprüfung
      *
      * @param Discount $Discount
-     * @param integer|double $value
+     * @param float|integer $value
      * @return bool
      */
-    public static function isDiscountUsableWithPurchaseValue(Discount $Discount, $value): bool
+    public static function isDiscountUsableWithPurchaseValue(Discount $Discount, float|int $value): bool
     {
         $purchaseValueFrom = $Discount->getAttribute('purchase_value_from');
         $purchaseValueUntil = $Discount->getAttribute('purchase_value_until');
@@ -136,18 +141,19 @@ class EventHandling
      *
      * @param QUI\ERP\Products\Utils\Calc $Calc
      * @param UniqueProduct $Product
+     * @throws Exception
      */
     public static function onQuiqqerProductsCalcListProduct(
         Calc $Calc,
         UniqueProduct $Product
-    ) {
+    ): void {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
-        if (!\is_array($userDiscounts) || empty($userDiscounts)) {
+        if (empty($userDiscounts)) {
             return;
         }
 
-        $userDiscounts = \array_filter($userDiscounts, function ($Discount) {
+        $userDiscounts = array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
 
             // don't use manuel usage type
@@ -158,18 +164,11 @@ class EventHandling
             return (int)$Discount->getAttribute('scope') === Handler::DISCOUNT_SCOPE_EVERY_PRODUCT;
         });
 
-        if (!\is_array($userDiscounts) || empty($userDiscounts)) {
+        if (empty($userDiscounts)) {
             return;
         }
 
-        try {
-            $attributes = $Product->getAttributes();
-        } catch (QUI\Exception $Exception) {
-            QUI\System\Log::writeDebugException($Exception);
-
-            return;
-        }
-
+        $attributes = $Product->getAttributes();
         $PriceFactors = $Product->getPriceFactors();
         $productQuantity = $Product->getQuantity();
         $productNettoSum = $attributes['calculated_nettoSum'];
@@ -184,7 +183,7 @@ class EventHandling
                 continue;
             }
 
-            // check if Pricefactor is already in
+            // check if price factor is already in
             $factors = $PriceFactors->toArray();
             $Factor = $Discount->toPriceFactor(
                 $Calc->getUser()->getLocale(),
@@ -210,20 +209,17 @@ class EventHandling
      *
      * @param Calc $Calc
      * @param ProductList $List
-     * @param integer|double $nettoSum
+     * @param float|integer $nettoSum
+     * @throws Exception
      */
     public static function onQuiqqerProductsCalcList(
         Calc $Calc,
         ProductList $List,
-        $nettoSum
-    ) {
+        float|int $nettoSum
+    ): void {
         $userDiscounts = self::getUserDiscounts($Calc->getUser());
 
-        if (!\is_array($userDiscounts)) {
-            return;
-        }
-
-        $userDiscounts = \array_filter($userDiscounts, function ($Discount) {
+        $userDiscounts = array_filter($userDiscounts, function ($Discount) {
             /* @var $Discount Discount */
 
             // don't use manuel usage type
@@ -233,10 +229,6 @@ class EventHandling
 
             return (int)$Discount->getAttribute('scope') == Handler::DISCOUNT_SCOPE_TOTAL;
         });
-
-        if (!\is_array($userDiscounts)) {
-            return;
-        }
 
         $listQuantity = $List->getQuantity();
         $products = $List->getProducts();
@@ -256,7 +248,7 @@ class EventHandling
             $productIds = $Discount->getAttribute('articles');
 
             if ($productIds) {
-                $productIds = \explode(',', $productIds);
+                $productIds = explode(',', $productIds);
 
                 // product id check
                 $existProductIdInList = function ($products, $productIds) {
@@ -281,7 +273,7 @@ class EventHandling
             $categories = $Discount->getAttribute('categories');
 
             if ($categories) {
-                $categories = \explode(',', $categories);
+                $categories = explode(',', $categories);
 
                 // product category check
                 $existCategoryInList = function ($products, $categories) {
