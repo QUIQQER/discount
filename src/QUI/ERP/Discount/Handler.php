@@ -7,6 +7,7 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
+use QUI\Database\Exception;
 use QUI\Permissions\Permission;
 
 /**
@@ -49,7 +50,7 @@ class Handler extends QUI\CRUD\Factory
     const DISCOUNT_SCOPE_GRAND_TOTAL = 4;
 
     /**
-     * pricefactor discount type
+     * price factor discount type
      */
     const DISCOUNT_PRICEFACTOR_TYPE = 'DISCOUNT_PRICE_FACTOR';
 
@@ -163,7 +164,7 @@ class Handler extends QUI\CRUD\Factory
      *
      * @return string
      */
-    public function getDataBaseTableName()
+    public function getDataBaseTableName(): string
     {
         return QUI::getDBTableName('discounts');
     }
@@ -173,7 +174,7 @@ class Handler extends QUI\CRUD\Factory
      *
      * @return string
      */
-    public function getChildClass()
+    public function getChildClass(): string
     {
         return 'QUI\ERP\Discount\Discount';
     }
@@ -183,7 +184,7 @@ class Handler extends QUI\CRUD\Factory
      *
      * @return array
      */
-    public function getChildAttributes()
+    public function getChildAttributes(): array
     {
         return [
             'active',
@@ -217,8 +218,9 @@ class Handler extends QUI\CRUD\Factory
      *
      * @param array $queryParams
      * @return array - [Child, Child, Child]
+     * @throws Exception
      */
-    public function getChildrenData($queryParams = [])
+    public function getChildrenData(array $queryParams = []): array
     {
         if (!isset($queryParams['order'])) {
             $queryParams['order'] = 'priority ASC';
