@@ -7,11 +7,24 @@
 namespace QUI\ERP\Discount;
 
 use QUI;
+use QUI\Database\Exception;
 use QUI\ERP\Order\OrderInterface;
+use QUI\ERP\Products\Interfaces\PriceFactorInterface;
+use QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface;
+use QUI\ERP\Products\Utils\PriceFactor;
 use QUI\Users\User;
 use QUI\Permissions\Permission;
 use QUI\Utils\Security\Orthos;
 use QUI\ERP\Areas\Utils as AreaUtils;
+
+use function array_key_exists;
+use function explode;
+use function implode;
+use function is_array;
+use function is_numeric;
+use function is_string;
+use function strtotime;
+use function time;
 
 /**
  * Class Discount
@@ -24,6 +37,7 @@ class Discount extends QUI\CRUD\Child
      *
      * @param int $id
      * @param Handler $Factory
+     * @throws Exception
      */
     public function __construct($id, Handler $Factory)
     {
@@ -61,7 +75,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup user group save
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
-        $cleanup = \implode(',', $cleanup);
+        $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ',' . $cleanup . ',';
@@ -72,7 +86,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup product(s)
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
-        $cleanup = \implode(',', $cleanup);
+        $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ',' . $cleanup . ',';
@@ -83,7 +97,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup user group save
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('user_groups'));
-        $cleanup = \implode(',', $cleanup);
+        $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ',' . $cleanup . ',';
@@ -94,7 +108,7 @@ class Discount extends QUI\CRUD\Child
 
         // cleanup product(s)
         $cleanup = QUI\Utils\ArrayHelper::cleanup($this->getAttribute('articles'));
-        $cleanup = \implode(',', $cleanup);
+        $cleanup = implode(',', $cleanup);
 
         if (!empty($cleanup)) {
             $cleanup = ',' . $cleanup . ',';
@@ -203,29 +217,29 @@ class Discount extends QUI\CRUD\Child
     }
 
     /**
-     * @param string $key
-     * @param array|bool|object|string $value
-     * @return QUI\QDOM|void
+     * @param string $name
+     * @param mixed $value
+     * @return void
      */
-    public function setAttribute($key, $value)
+    public function setAttribute(string $name, mixed $value): void
     {
-        if ($key === 'lastSumDiscount' && empty($value)) {
+        if ($name === 'lastSumDiscount' && empty($value)) {
             $value = null;
         }
 
-        if ($key === 'lastProductDiscount' && empty($value)) {
+        if ($name === 'lastProductDiscount' && empty($value)) {
             $value = null;
         }
 
         if (
-            $key === 'scope' ||
-            $key === 'discount_type' ||
-            $key === 'usage_type'
+            $name === 'scope' ||
+            $name === 'discount_type' ||
+            $name === 'usage_type'
         ) {
             $value = (int)$value;
         }
 
-        parent::setAttribute($key, $value);
+        parent::setAttribute($name, $value);
     }
 
     /**
@@ -234,7 +248,7 @@ class Discount extends QUI\CRUD\Child
      * @param null|QUI\Locale $Locale - optional, locale object
      * @return string
      */
-    public function getTitle($Locale = null)
+    public function getTitle(QUI\Locale $Locale = null): string
     {
         if (!$Locale) {
             $Locale = QUI::getLocale();
@@ -251,9 +265,9 @@ class Discount extends QUI\CRUD\Child
      *
      * @return boolean
      */
-    public function isActive()
+    public function isActive(): bool
     {
-        return $this->getAttribute('active') ? true : false;
+        return (bool)$this->getAttribute('active');
     }
 
     /**
@@ -262,7 +276,7 @@ class Discount extends QUI\CRUD\Child
      * @param Discount $Discount
      * @return bool
      */
-    public function canCombinedWith(Discount $Discount)
+    public function canCombinedWith(Discount $Discount): bool
     {
         $combine = $this->getAttribute('combine');
 
@@ -270,16 +284,10 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
-        $combine = \implode($combine, ',');
+        $combine = implode($combine, ',');
 
-        if (!\is_array($combine)) {
-            return false;
-        }
-
-        foreach ($combine as $combineId) {
-            if ($Discount->getId() == $combineId) {
-                return true;
-            }
+        if (in_array($Discount->getId(), (array)$combine)) {
+            return true;
         }
 
         return false;
@@ -291,7 +299,7 @@ class Discount extends QUI\CRUD\Child
      * @param QUI\Interfaces\Users\User $User
      * @return boolean
      */
-    public function canUsedBy(QUI\Interfaces\Users\User $User)
+    public function canUsedBy(QUI\Interfaces\Users\User $User): bool
     {
         if ($this->isActive() === false) {
             return false;
@@ -300,13 +308,13 @@ class Discount extends QUI\CRUD\Child
         // usage definitions / limits
         $dateFrom = $this->getAttribute('date_from');
         $dateUntil = $this->getAttribute('date_until');
-        $now = \time();
+        $now = time();
 
-        if ($dateFrom && \strtotime($dateFrom) > $now) {
+        if ($dateFrom && strtotime($dateFrom) > $now) {
             return false;
         }
 
-        if ($dateUntil && \strtotime($dateUntil) < $now) {
+        if ($dateUntil && strtotime($dateUntil) < $now) {
             return false;
         }
 
@@ -314,7 +322,7 @@ class Discount extends QUI\CRUD\Child
         $userGroupValue = $this->getAttribute('user_groups');
         $areasValue = $this->getAttribute('areas');
 
-        // if groups and areas are empty, everbody is allowed
+        // if groups and areas are empty, everybody is allowed
         if (empty($userGroupValue) && empty($areasValue)) {
             return true;
         }
@@ -336,6 +344,10 @@ class Discount extends QUI\CRUD\Child
             if ($User->getId() == $uid) {
                 return true;
             }
+
+            if ($User->getUUID() == $uid) {
+                return true;
+            }
         }
 
         // group checking
@@ -344,7 +356,11 @@ class Discount extends QUI\CRUD\Child
         /* @var $Group QUI\Groups\Group */
         foreach ($discountGroups as $gid) {
             foreach ($groupsOfUser as $Group) {
-                if ($Group->getId() == $gid) {
+                if ($Group->getUsers() == $gid) {
+                    return true;
+                }
+
+                if ($Group->getUUID() == $gid) {
                     return true;
                 }
             }
@@ -359,26 +375,26 @@ class Discount extends QUI\CRUD\Child
      * @param QUI\ERP\Products\Interfaces\ProductInterface $Product
      * @return boolean
      */
-    public function canUsedWith(QUI\ERP\Products\Interfaces\ProductInterface $Product)
+    public function canUsedWith(QUI\ERP\Products\Interfaces\ProductInterface $Product): bool
     {
         if ($this->isActive() === false) {
             return false;
         }
 
         // coupon
-        if ($Product->getId() === '-') {
+        if ($Product->getId() === -1) {
             return false;
         }
 
         $articles = $this->getAttribute('articles');
         $categories = $this->getAttribute('categories');
 
-        if (\is_string($articles)) {
-            $articles = \explode(',', $articles);
+        if (is_string($articles)) {
+            $articles = explode(',', $articles);
         }
 
-        if (\is_string($categories)) {
-            $categories = \explode(',', $categories);
+        if (is_string($categories)) {
+            $categories = explode(',', $categories);
         }
 
 
@@ -388,9 +404,9 @@ class Discount extends QUI\CRUD\Child
         }
 
         // article / product check
-        if (\is_array($articles)) {
+        if (is_array($articles)) {
             foreach ($articles as $articleId) {
-                if ((int)$Product->getId() === (int)$articleId) {
+                if ($Product->getId() === (int)$articleId) {
                     return true;
                 }
             }
@@ -401,7 +417,7 @@ class Discount extends QUI\CRUD\Child
             return true;
         }
 
-        if (!\is_array($categories)) {
+        if (!is_array($categories)) {
             return false;
         }
 
@@ -410,7 +426,7 @@ class Discount extends QUI\CRUD\Child
 
             foreach ($productCategories as $Category) {
                 /* @var $Category QUI\ERP\Products\Category\Category */
-                if ((int)$Category->getId() === (int)$category) {
+                if ($Category->getId() === (int)$category) {
                     return true;
                 }
             }
@@ -424,7 +440,7 @@ class Discount extends QUI\CRUD\Child
      * @param OrderInterface $Order
      * @return bool
      */
-    public function canUsedInOrder(OrderInterface $Order)
+    public function canUsedInOrder(OrderInterface $Order): bool
     {
         if ($this->isActive() === false) {
             return false;
@@ -436,7 +452,7 @@ class Discount extends QUI\CRUD\Child
             /* @var $Article QUI\ERP\Accounting\Article */
             $id = $Article->getId();
 
-            if (!\is_numeric($id)) {
+            if (!is_numeric($id)) {
                 continue;
             }
 
@@ -446,7 +462,7 @@ class Discount extends QUI\CRUD\Child
                 if ($this->canUsedWith($Product)) {
                     return true;
                 }
-            } catch (QUI\Exception $Exception) {
+            } catch (QUI\Exception) {
                 continue;
             }
         }
@@ -460,7 +476,7 @@ class Discount extends QUI\CRUD\Child
      * @param Discount $Discount
      * @throws QUI\ERP\Discount\Exception
      */
-    public function verifyCombinationWith(Discount $Discount)
+    public function verifyCombinationWith(Discount $Discount): void
     {
         if ($this->canCombinedWith($Discount) === false) {
             throw new QUI\ERP\Discount\Exception([
@@ -480,7 +496,7 @@ class Discount extends QUI\CRUD\Child
      * @param User $User
      * @throws QUI\ERP\Discount\Exception
      */
-    public function verifyUser(User $User)
+    public function verifyUser(User $User): void
     {
         if ($this->canUsedBy($User) === false) {
             throw new QUI\ERP\Discount\Exception([
@@ -488,7 +504,7 @@ class Discount extends QUI\CRUD\Child
                 'exception.discount.user.cant.use.discount',
                 [
                     'id' => $this->getId(),
-                    'userId' => $User->getId()
+                    'userId' => $User->getUUID()
                 ]
             ]);
         }
@@ -497,13 +513,15 @@ class Discount extends QUI\CRUD\Child
     /**
      * Parse the discount to a price factor
      *
-     * @param null|QUI\Locale $Locale - optional, locale object
-     * @param null|QUI\Interfaces\Users\User $Customer - optional,
+     * @param null $Locale - optional, locale object
+     * @param null $Customer - optional,
      *
-     * @return QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface|QUI\ERP\Products\Interfaces\PriceFactorInterface
+     * @return PriceFactorInterface|PriceFactorWithVatInterface|PriceFactor
      */
-    public function toPriceFactor($Locale = null, $Customer = null)
-    {
+    public function toPriceFactor(
+        $Locale = null,
+        $Customer = null
+    ): QUI\ERP\Products\Interfaces\PriceFactorInterface|QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface|QUI\ERP\Products\Utils\PriceFactor {
         switch ($this->getAttribute('discount_type')) {
             case QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE:
                 $calculation = QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE;
@@ -515,14 +533,10 @@ class Discount extends QUI\CRUD\Child
                 break;
         }
 
-        switch ($this->getAttribute('price_calculation_basis')) {
-            case QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO:
-                $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO;
-                break;
-
-            default:
-                $basis = QUI\ERP\Accounting\Calc::CALCULATION_BASIS_CURRENTPRICE;
-        }
+        $basis = match ($this->getAttribute('price_calculation_basis')) {
+            QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO => QUI\ERP\Accounting\Calc::CALCULATION_BASIS_NETTO,
+            default => QUI\ERP\Accounting\Calc::CALCULATION_BASIS_CURRENTPRICE,
+        };
 
         // check calculation basis VAT
         $useAuto = $this->getAttribute('consider_vat') === 'auto'
@@ -542,7 +556,7 @@ class Discount extends QUI\CRUD\Child
             $Config = $Plugin->getConfig();
 
             $hideDiscounts = (int)$Config->getValue('products', 'hideDiscounts');
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
             $hideDiscounts = false;
         }
 
@@ -562,7 +576,7 @@ class Discount extends QUI\CRUD\Child
                 'calculation' => $calculation,
                 'basis' => $basis,
                 'value' => $this->getAttribute('discount') * -1,
-                'visible' => $hideDiscounts ? false : true,
+                'visible' => !$hideDiscounts,
                 'vat' => $this->getAttribute('vat')
             ]);
         }
@@ -577,7 +591,6 @@ class Discount extends QUI\CRUD\Child
             'calculation' => $calculation,
             'basis' => $basis,
             'value' => $this->getAttribute('discount') * -1,
-            'visible' => $hideDiscounts ? false : true
         ]);
     }
 
@@ -586,7 +599,7 @@ class Discount extends QUI\CRUD\Child
      *
      * @throws QUI\ExceptionStack|QUI\Exception
      */
-    public function update()
+    public function update(): void
     {
         $this->Events->fireEvent('saveBegin');
         $this->Events->fireEvent('updateBegin');
@@ -595,18 +608,16 @@ class Discount extends QUI\CRUD\Child
         $savedData = [];
 
         foreach ($needles as $needle) {
-            if (!\array_key_exists($needle, $this->attributes)) {
+            if (!array_key_exists($needle, $this->attributes)) {
                 continue;
             }
 
             $value = $this->getAttribute($needle);
 
-            switch ($needle) {
-                case 'user_groups':
-                    if (!empty($value)) {
-                        $value = ',' . $value . ',';
-                    }
-                    break;
+            if ($needle == 'user_groups') {
+                if (!empty($value)) {
+                    $value = ',' . $value . ',';
+                }
             }
 
             $savedData[$needle] = $value;

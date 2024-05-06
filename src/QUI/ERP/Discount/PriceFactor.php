@@ -10,21 +10,17 @@ use QUI;
 
 /**
  * Class PriceFactor
- * This pricefactors is used by Handler::DISCOUNT_SCOPE_TOTAL
+ * This price factor is used by Handler::DISCOUNT_SCOPE_TOTAL
  *
  * @package QUI\ERP\Discount
  */
-class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface
+class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements
+    QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface
 {
     /**
      * @var string
      */
     protected string $type = Handler::DISCOUNT_PRICEFACTOR_TYPE;
-
-    /**
-     * @var string|null
-     */
-    protected $vat = null;
 
     /**
      * PriceFactor constructor.
@@ -45,7 +41,7 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\
      * @return QUI\ERP\Tax\TaxType
      * @throws QUI\Exception
      */
-    public function getVatType()
+    public function getVatType(): QUI\ERP\Tax\TaxType
     {
         if (!$this->vat) {
             return QUI\ERP\Tax\Utils::getShopTaxType();
@@ -61,7 +57,7 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements QUI\ERP\
             $Handler = new QUI\ERP\Tax\Handler();
 
             return $Handler->getTaxType($standardTax[1]);
-        } catch (QUI\Exception $Exception) {
+        } catch (QUI\Exception) {
         }
 
         return QUI\ERP\Tax\Utils::getShopTaxType();
