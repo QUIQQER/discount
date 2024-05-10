@@ -13,6 +13,8 @@ use QUI\ERP\Products\Product\UniqueProduct;
 use QUI\ERP\Products\Utils\Calc;
 use QUI\ERP\Products\Product\ProductList;
 
+use QUI\System\Console\Tools\MigrationV2;
+
 use function array_filter;
 use function explode;
 
@@ -318,5 +320,16 @@ class EventHandling
                 return;
             }
         }
+    }
+
+
+    public static function onQuiqqerMigrationV2(MigrationV2 $Console): void
+    {
+        $Console->writeLn('- Migrate discounts');
+
+        QUI\Utils\MigrationV1ToV2::migrateUserGroupField(
+            QUI::getDBTableName('discounts'),
+            'user_groups'
+        );
     }
 }
