@@ -12,7 +12,6 @@ use QUI\ERP\Accounting\Calc as ErpCalc;
 use QUI\ERP\Products\Product\UniqueProduct;
 use QUI\ERP\Products\Utils\Calc;
 use QUI\ERP\Products\Product\ProductList;
-
 use QUI\System\Console\Tools\MigrationV2;
 
 use function array_filter;
