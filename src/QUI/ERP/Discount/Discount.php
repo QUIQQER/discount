@@ -356,7 +356,7 @@ class Discount extends QUI\CRUD\Child
         /* @var $Group QUI\Groups\Group */
         foreach ($discountGroups as $gid) {
             foreach ($groupsOfUser as $Group) {
-                if ($Group->getUsers() == $gid) {
+                if ($Group->getId() == $gid) {
                     return true;
                 }
 
