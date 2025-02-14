@@ -437,12 +437,20 @@ class Discount extends QUI\CRUD\Child
     }
 
     /**
-     * @param OrderInterface $Order
+     * @param QUI\ERP\ErpEntityInterface $Order
      * @return bool
      */
-    public function canUsedInOrder(OrderInterface $Order): bool
+    public function canUsedInOrder(QUI\ERP\ErpEntityInterface $Order): bool
     {
         if ($this->isActive() === false) {
+            return false;
+        }
+
+        if (!interface_exists('QUI\ERP\Order\OrderInterface')) {
+            return false;
+        }
+
+        if (!($Order instanceof QUI\ERP\Order\OrderInterface)) {
             return false;
         }
 
