@@ -22,7 +22,7 @@ QUI::$Ajax->registerFunction(
         $Discount->setAttribute('active', 0);
         $Discount->update();
 
-        return $Discount->isActive();
+        return method_exists($Discount, 'isActive') ? $Discount->isActive() : false;
     },
     ['discountId'],
     'Permission::checkAdminUser'

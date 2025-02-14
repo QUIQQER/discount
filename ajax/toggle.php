@@ -19,6 +19,10 @@ QUI::$Ajax->registerFunction(
         $Discount = $Handler->getChild($discountId);
 
         /* @var $Discount Discount */
+        if (!method_exists($Discount, 'isActive')) {
+            return false;
+        }
+
         if ($Discount->isActive()) {
             $Discount->setAttribute('active', 0);
         } else {

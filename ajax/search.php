@@ -67,7 +67,7 @@ QUI::$Ajax->registerFunction(
         }
 
         usort($result, function ($a, $b) {
-            return $a['text'] > $b['text'];
+            return strcmp($a['text'], $b['text']);
         });
 
         return $result;
