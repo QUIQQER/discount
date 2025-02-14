@@ -248,7 +248,7 @@ class Discount extends QUI\CRUD\Child
      * @param null|QUI\Locale $Locale - optional, locale object
      * @return string
      */
-    public function getTitle(QUI\Locale $Locale = null): string
+    public function getTitle(null | QUI\Locale $Locale = null): string
     {
         if (!$Locale) {
             $Locale = QUI::getLocale();
@@ -284,7 +284,7 @@ class Discount extends QUI\CRUD\Child
             return false;
         }
 
-        $combine = implode($combine, ',');
+        $combine = implode(',', $combine);
 
         if (in_array($Discount->getId(), (array)$combine)) {
             return true;
@@ -521,7 +521,7 @@ class Discount extends QUI\CRUD\Child
     public function toPriceFactor(
         $Locale = null,
         $Customer = null
-    ): QUI\ERP\Products\Interfaces\PriceFactorInterface|QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface|QUI\ERP\Products\Utils\PriceFactor {
+    ): QUI\ERP\Products\Interfaces\PriceFactorInterface | QUI\ERP\Products\Interfaces\PriceFactorWithVatInterface | QUI\ERP\Products\Utils\PriceFactor {
         switch ($this->getAttribute('discount_type')) {
             case QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE:
                 $calculation = QUI\ERP\Accounting\Calc::CALCULATION_PERCENTAGE;

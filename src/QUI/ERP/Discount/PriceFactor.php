@@ -47,7 +47,7 @@ class PriceFactor extends QUI\ERP\Products\Utils\PriceFactor implements
             return QUI\ERP\Tax\Utils::getShopTaxType();
         }
 
-        $standardTax = explode(':', $this->vat);
+        $standardTax = explode(':', (string)$this->vat);
 
         if (!isset($standardTax[1])) {
             return QUI\ERP\Tax\Utils::getShopTaxType();
