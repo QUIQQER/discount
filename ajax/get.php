@@ -22,7 +22,7 @@ QUI::$Ajax->registerFunction(
         $attributes = $Discount->getAttributes();
 
         /* @var $Discount Discount */
-        $attributes['title'] = $Discount->getTitle();
+        $attributes['title'] = method_exists($Discount, 'getTitle') ? $Discount->getTitle() : '';
 
         return $attributes;
     },
